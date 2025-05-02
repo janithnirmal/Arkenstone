@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import DefaultTable, { SearchComponent } from '@/components/custom/tables/default-table';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select';
-import { Roles } from '@/enum/Roles';
+import { Roles } from '@/core/enum/Roles';
 import { apiGet, apiPut } from '@/lib/custom/api';
 import { Role, User } from '@/types';
 import { ColumnDef } from '@tanstack/react-table';

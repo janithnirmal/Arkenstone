@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Enum\AdminRoles;
+use App\Enum\Roles;
 use App\Helpers\ResponseProtocol;
 use App\Mail\AdminInviteEmail;
 use App\Models\User;
@@ -39,7 +39,7 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'role' => 'required|string|in:' . implode(',', array_map(fn($role) => $role->value, AdminRoles::cases())),
+            'role' => 'required|string|in:' . implode(',', array_map(fn($role) => $role->value, Roles::cases())),
         ]);
 
         $tempPassword = Str::random(10);
@@ -83,7 +83,7 @@ class AdminController extends Controller
             'id' => 'required|exists:users,id',
             'name' => 'string|max:255',
             'email' => 'string|email|max:255|unique:users,email,' . $request->id,
-            'role' => 'string|in:' . implode(',', array_map(fn($role) => $role->value, AdminRoles::cases())),
+            'role' => 'string|in:' . implode(',', array_map(fn($role) => $role->value, Roles::cases())),
         ]);
 
         $user = User::find($request->id);
