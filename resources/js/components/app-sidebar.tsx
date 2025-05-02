@@ -3,7 +3,7 @@ import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { Roles } from '@/core/enum/Roles';
-import usePermission from '@/hooks/use-permission';
+import usePermission from '@/core/hooks/use-permission';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
 import { Building, FolderClosed, LayoutGrid, Shield } from 'lucide-react';

@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogT
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Roles } from '@/core/enum/Roles';
-import { apiPost } from '@/core/lib/custom/api';
+import { apiPost } from '@/lib/custom/api';
 import { AdminUser } from '@/types';
 import { Label } from '@radix-ui/react-dropdown-menu';
 import { useState } from 'react';

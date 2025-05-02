@@ -44,7 +44,7 @@ export interface User {
     [key: string]: unknown; // This allows for additional properties...
 }
 
-export interface AdminUser extends User {}
+export interface AdminUser extends User {}a
 
 
 export interface Role {
