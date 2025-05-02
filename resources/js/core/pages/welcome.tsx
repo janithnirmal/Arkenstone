@@ -1,10 +1,12 @@
 import { type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Arkenstone, ArkenstoneLogo } from './dashboard';
+import Config from '../config';
 
 export default function Welcome() {
     const { auth } = usePage<SharedData>().props;
+    const [isFullScreen, setIsFullScreen] = useState(false);
 
     useEffect(() => {
         fetch('/api/auth-test', {
@@ -18,6 +20,16 @@ export default function Welcome() {
                 console.log(data);
             });
     }, []);
+
+    function toggleFullScreen() {
+        if (document.fullscreenElement) {
+            document.exitFullscreen();
+            setIsFullScreen(false);
+        } else {
+            document.documentElement.requestFullscreen();
+            setIsFullScreen(true);
+        }
+    }
 
     return (
         <>
@@ -73,13 +85,21 @@ export default function Welcome() {
                             >
                                 Walk In
                             </Link>
-                            <p className="text-center text-sm text-neutral-800 dark:text-neutral-200">Version (Beta) 0.0.3</p>
+                            <p className="text-center text-sm text-neutral-800 dark:text-neutral-200">Version (Beta) {Config.appVersion}</p>
                             <p className="text-center text-sm text-neutral-800 dark:text-neutral-200">
                                 Developed by{' '}
-                                <Link href="https://github.com/janithnirmal" className="text-primary">
-                                    Janith Nirmal
+                                <Link href={Config.appAuthorUrl} className="text-primary">
+                                    {Config.appAuthor}
                                 </Link>
                             </p>
+                            <hr className="w-full my-5" />
+                            <button
+                                type="button"
+                                onClick={toggleFullScreen}
+                                className="text-center text-sm text-neutral-800 dark:text-neutral-200"
+                            >
+                                {isFullScreen ? 'Exit Fullscreen' : 'Fullscreen'}
+                            </button>
                         </main>
                     </div>
                     <div className="hidden h-14.5 lg:block"></div>
