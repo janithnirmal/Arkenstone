@@ -21,6 +21,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('admins', function () {
         return Inertia::render('admins');
     })->name('admins');
+
+    Route::get('test', function () {
+        return Inertia::render('test');
+    })->name('test');
 });
 
 

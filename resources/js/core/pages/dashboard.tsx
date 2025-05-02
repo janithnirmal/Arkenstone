@@ -4,6 +4,7 @@ import { Head, Link, usePage } from '@inertiajs/react';
 import AdminTable from '@/core/components/tables/admin-table';
 import { BreadcrumbItem } from '@/types';
 import { cn } from '@/lib/utils';
+import Config from '../config';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -24,7 +25,7 @@ export default function Dashboard() {
                         <div className="bg-secondary border-sidebar-border/70 dark:border-sidebar-border relative flex min-h-[100vh] w-full flex-1 flex-col items-center justify-center gap-4 overflow-hidden rounded-xl border p-5 md:min-h-min">
                             <ArkenstoneLogo />
                             <Arkenstone />
-                            <p className="text-center text-sm text-neutral-800 dark:text-neutral-400">Mae govannen na i ven e-Commerce.</p>
+                            <p className="text-center text-sm text-neutral-800 dark:text-neutral-400">{Config.appDescription}</p>
                         </div>
                     </div>
 
@@ -35,11 +36,11 @@ export default function Dashboard() {
                 </div>
                 <p className="text-center text-xs text-neutral-400">
                     Developed by{' '}
-                    <Link href="https://github.com/janithnirmal" className="text-primary">
-                        Janith Nirmal
+                    <Link href={Config.appAuthorUrl} className="text-primary">
+                        {Config.appAuthor}
                     </Link>
                 </p>
-                <p className="text-center text-xs text-neutral-800 dark:text-neutral-400">Version (Beta) 0.0.3</p>
+                <p className="text-center text-xs text-neutral-800 dark:text-neutral-400">Version (Beta) {Config.appVersion}</p>
             </div>
         </AppLayout>
     );
