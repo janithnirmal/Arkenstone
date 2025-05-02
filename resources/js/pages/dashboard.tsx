@@ -37,7 +37,7 @@ export default function Dashboard() {
                         Janith Nirmal
                     </Link>
                 </p>
-                <p className="text-center text-xs text-neutral-800 dark:text-neutral-400">Version (Beta) 0.0.1</p>
+                <p className="text-center text-xs text-neutral-800 dark:text-neutral-400">Version (Beta) 0.0.2</p>
             </div>
         </AppLayout>
     );
