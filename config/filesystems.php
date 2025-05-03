@@ -50,7 +50,24 @@ return [
         'data' => [
             'driver' => 'local',
             'root' => database_path('data'),
-            'url' => env('APP_URL') . '/storage/data',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
+        'categories' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/images/categories'),
+            'url' => env('APP_URL') . '/storage/images/categories',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
+        'products' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/images/products'),
+            'url' => env('APP_URL') . '/storage/images/products',
             'visibility' => 'public',
             'throw' => false,
             'report' => false,

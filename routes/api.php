@@ -1,13 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\CompanyUserController;
-use App\Http\Controllers\Form\FormController;
-use App\Http\Controllers\Form\FormInstanceController;
-use App\Http\Controllers\Form\ResponseController;
-use App\Http\Controllers\Form\StandardController;
-use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\Shop\CategoryController;
+use App\Http\Controllers\Shop\ProductController;
 use App\Http\Controllers\TestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +15,7 @@ Route::get('/user', function (Request $request) {
 // FORM
 
 Route::prefix('v1')->group(function () {
+
     // Admin
     Route::prefix('admin')->group(function () {
         Route::get('/', [AdminController::class, 'index']);
@@ -27,7 +23,25 @@ Route::prefix('v1')->group(function () {
         Route::put('/', [AdminController::class, 'update']);
         Route::delete('/', [AdminController::class, 'destroy']);
     });
+
+
+    // Shop
+    Route::prefix('product')->group(function () {
+        Route::get('/', [ProductController::class, 'index']);
+        Route::post('/', [ProductController::class, 'store']);
+        Route::put('/', [ProductController::class, 'update']);
+        Route::delete('/', [ProductController::class, 'destroy']);
+    });
+
+    Route::prefix('category')->group(function () {
+        Route::get('/', [CategoryController::class, 'index']);
+        Route::post('/', [CategoryController::class, 'store']);
+        Route::put('/', [CategoryController::class, 'update']);
+        Route::delete('/', [CategoryController::class, 'destroy']);
+    });
 });
+
+
 
 
 

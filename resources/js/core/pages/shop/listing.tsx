@@ -1,9 +1,11 @@
 import { Button } from '@/components/ui/button';
 import ProductCard from '@/core/components/shop/product-card/simple-card';
 import { useIsMobile } from '@/core/hooks/use-mobile';
+import { FilterContext } from '@/core/layouts/shop/shop-sidebar-filter-layout';
+import { apiGet } from '@/core/lib/api';
 import { Product } from '@/core/types';
-import { ChevronLeft, ChevronRight, ChevronsRight, ChevronsLeft } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, Loader2 } from 'lucide-react';
+import { useContext, useEffect, useState } from 'react';
 
 export default function Listing() {
     const [products, setProducts] = useState<Product[]>([]);
@@ -11,32 +13,27 @@ export default function Listing() {
     const [page, setPage] = useState(1);
     const [perPage] = useState(9);
 
+    const [isLoading, setIsLoading] = useState(false);
+
+    const { filterOption } = useContext(FilterContext);
+
     const isMobile = useIsMobile();
 
     const [showPageInput, setShowPageInput] = useState(false);
     const [pageInput, setPageInput] = useState('');
 
     useEffect(() => {
-        setProducts([
-            { id: 1, name: 'Product 1', price: 100 },
-            { id: 2, name: 'Product 2', price: 200 },
-            { id: 3, name: 'Product 3', price: 300 },
-            { id: 4, name: 'Product 4', price: 400 },
-            { id: 5, name: 'Product 5', price: 500 },
-            { id: 6, name: 'Product 6', price: 600 },
-            { id: 7, name: 'Product 7', price: 700 },
-            { id: 8, name: 'Product 8', price: 800 },
-            { id: 9, name: 'Product 9', price: 900 },
-            { id: 10, name: 'Product 10', price: 1000 },
-            { id: 11, name: 'Product 11', price: 1100 },
-            { id: 12, name: 'Product 12', price: 1200 },
-            { id: 13, name: 'Product 13', price: 1300 },
-            { id: 14, name: 'Product 14', price: 1400 },
-            { id: 15, name: 'Product 15', price: 1500 },
-            { id: 16, name: 'Product 16', price: 1600 },
-            { id: 17, name: 'Product 17', price: 1700 },
-        ]);
-    }, []);
+        setIsLoading(true);
+        apiGet('/product', {
+            data: {
+                category_ids: filterOption.categories?.map((category) => category.id),
+            },
+        }).then((res) => {
+            console.log(res);
+            setProducts(res);
+            setIsLoading(false);
+        });
+    }, [filterOption]);
 
     useEffect(() => {
         setFilteredProducts(products.slice((page - 1) * perPage, page * perPage));
@@ -87,7 +84,7 @@ export default function Listing() {
                         {isMobile ? <ChevronLeft /> : 'Previous'}
                     </Button>
                 </div>
-                <div className="col-span-4 row-start-1 row-end-2 flex items-center gap-1 justify-center">
+                <div className="col-span-4 row-start-1 row-end-2 flex items-center justify-center gap-1">
                     {pages.map((p, index) =>
                         p === '...' ? (
                             showPageInput ? (
@@ -131,10 +128,17 @@ export default function Listing() {
     };
 
     return (
-        <div className="mb-4 flex w-full flex-wrap justify-center gap-6 overflow-y-auto p-3 py-5">
+        <div className="mb-4 flex w-full flex-wrap justify-center gap-6 overflow-y-auto p-3 py-5 relative">
             {filteredProducts.map((product) => (
                 <ProductCard key={product.id} data={product} />
             ))}
+            {isLoading && (
+                <div className="mt-40 flex w-full flex-col items-center justify-center gap-2 absolute">
+                    <Loader2 className="h-16 w-16 animate-spin" />
+                    <p>Loading..</p>
+                </div>
+            )}
+            {filteredProducts.length === 0 && !isLoading && <div className="flex w-full justify-center gap-1">No products found</div>}
             {filteredProducts.length > 0 && <div className="flex w-full justify-center gap-1">{renderPagination()}</div>}
         </div>
     );

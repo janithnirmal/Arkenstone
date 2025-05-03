@@ -1,0 +1,463 @@
+[
+    {
+        "product_id": 1,
+        "name": "Astra",
+        "slug": "astra",
+        "description": "Astra butter is a premium quality butter made from the finest cream, with a rich and creamy texture and a subtle sweetness. It is perfect for cooking, baking, and spreading on toast.",
+        "primary_image": "storage/images/products/placeholder.jpg",
+        "brand_id": 1,
+        "category_id": 1,
+        "stock": [
+            {
+                "product_id": 1,
+                "quantity": 10,
+                "web_price": 570.0,
+                "pos_price": 570.0,
+                "web_discount": 100.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 1, "variation_option_id": 1 }]
+            },
+            {
+                "product_id": 2,
+                "quantity": 30,
+                "web_price": 690.0,
+                "pos_price": 5690.0,
+                "web_discount": 200.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 2, "variation_option_id": 2 }]
+            },
+            {
+                "product_id": 3,
+                "quantity": 10,
+                "web_price": 870.0,
+                "pos_price": 870.0,
+                "web_discount": 250.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 3, "variation_option_id": 3 }]
+            },
+            {
+                "product_id": 4,
+                "quantity": 10,
+                "web_price": 1000.0,
+                "pos_price": 1000.0,
+                "web_discount": 0.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 4, "variation_option_id": 4 }]
+            }
+        ]
+    },
+    {
+        "product_id": 2,
+        "name": "Kotmale Salted Butter",
+        "slug": "kotmale-salted-butter",
+        "description": "A bit of Kotmale Salted Butter adds a touch of elegance to any dish. Its rich, creamy texture and subtle sweetness make it a delight for cooking, baking, and spreading on toast.",
+        "primary_image": "storage/images/products/kotmale-salted-butter.jpeg",
+        "brand_id": 2,
+        "category_id": 1,
+        "stock": [
+            {
+                "product_id": 1,
+                "quantity": 10,
+                "web_price": 370.0,
+                "pos_price": 370.0,
+                "web_discount": 50.0,
+                "pos_discount": 50.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 6, "variation_option_id": 1 }]
+            },
+            {
+                "product_id": 2,
+                "quantity": 30,
+                "web_price": 690.0,
+                "pos_price": 5690.0,
+                "web_discount": 200.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 7, "variation_option_id": 2 }]
+            },
+            {
+                "product_id": 3,
+                "quantity": 20,
+                "web_price": 870.0,
+                "pos_price": 870.0,
+                "web_discount": 250.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 8, "variation_option_id": 3 }]
+            }
+        ]
+    },
+    {
+        "product_id": 3,
+        "name": "Fondre Original Fat Spread",
+        "slug": "fondre-original-fat-spread",
+        "description": "Fondre Original Fat Spread offers a luxurious butter experience, crafted from the finest cream to deliver a rich, creamy texture and a hint of sweetness. Ideal for a variety of uses, including cooking, baking, and as a delicious toast topping.",
+        "primary_image": "storage/images/products/fondre-original-fat-spread.jpeg",
+        "brand_id": 2,
+        "category_id": 2,
+        "stock": [
+            {
+                "product_id": 1,
+                "quantity": 10,
+                "web_price": 1000.0,
+                "pos_price": 1000.0,
+                "web_discount": 0.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 8, "variation_option_id": 6 }]
+            },
+            {
+                "product_id": 2,
+                "quantity": 20,
+                "web_price": 1200.0,
+                "pos_price": 1200.0,
+                "web_discount": 0.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 9, "variation_option_id": 7 }]
+            },
+            {
+                "product_id": 3,
+                "quantity": 30,
+                "web_price": 1500.0,
+                "pos_price": 1500.0,
+                "web_discount": 0.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 10, "variation_option_id": 8 }]
+            }
+        ]
+    },
+    {
+        "product_id": 4,
+        "name": "Happy Hen Eggs Village Eggs",
+        "slug": "happy-hen-eggs-village-eggs",
+        "description": "Experience the taste of freedom with Happy Hen Eggs Village Eggs. These free-range eggs offer a rich, creamy texture and a delicious flavor, making them perfect for breakfast, baking, or any culinary creation.",
+        "primary_image": "storage/images/products/happy-hen-eggs-village-eggs.png",
+        "brand_id": 3,
+        "category_id": 2,
+        "stock": [
+            {
+                "product_id": 1,
+                "quantity": 10,
+                "web_price": 1000.0,
+                "pos_price": 1000.0,
+                "web_discount": 0.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 11, "variation_option_id": 11 }]
+            },
+            {
+                "product_id": 2,
+                "quantity": 20,
+                "web_price": 1200.0,
+                "pos_price": 1200.0,
+                "web_discount": 0.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 12, "variation_option_id": 12 }]
+            },
+            {
+                "product_id": 3,
+                "quantity": 30,
+                "web_price": 1500.0,
+                "pos_price": 1500.0,
+                "web_discount": 0.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 13, "variation_option_id": 13 }]
+            }
+        ]
+    },
+    {
+        "product_id": 5,
+        "name": "Happy Hen Eggs Large 10Fresh Eggs",
+        "slug": "happy-hen-eggs-large-10-fresh-eggs",
+        "description": "Indulge in the rich flavor and creamy texture of Happy Hen Eggs Large 10Fresh Eggs. Perfect for breakfast, baking, or any culinary creation, these free-range eggs offer a taste of freedom.",
+        "primary_image": "storage/images/products/happy-hen-eggs-large-10-fresh-eggs.webp",
+        "brand_id": 3,
+        "category_id": 2,
+        "stock": [
+            {
+                "product_id": 1,
+                "quantity": 10,
+                "web_price": 1000.0,
+                "pos_price": 1000.0,
+                "web_discount": 0.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 14, "variation_option_id": 14 }]
+            },
+            {
+                "product_id": 2,
+                "quantity": 20,
+                "web_price": 1200.0,
+                "pos_price": 1200.0,
+                "web_discount": 0.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 15, "variation_option_id": 15 }]
+            },
+            {
+                "product_id": 3,
+                "quantity": 30,
+                "web_price": 1500.0,
+                "pos_price": 1500.0,
+                "web_discount": 0.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 16, "variation_option_id": 16 }]
+            }
+        ]
+    },
+    {
+        "product_id": 6,
+        "name": "Happy Cow Cheese",
+        "slug": "happy-cow-cheese",
+        "description": "Experience the rich flavor and creamy texture of Happy Cow Cheese. Perfect for snacking, cooking, or baking, this cheese offers a taste of freedom.",
+        "primary_image": "storage/images/products/placeholder.jpg",
+        "brand_id": 4,
+        "category_id": 3,
+        "stock": [
+            {
+                "product_id": 1,
+                "quantity": 10,
+                "web_price": 1000.0,
+                "pos_price": 1000.0,
+                "web_discount": 0.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 17, "variation_option_id": 14 }]
+            },
+            {
+                "product_id": 2,
+                "quantity": 20,
+                "web_price": 1200.0,
+                "pos_price": 1200.0,
+                "web_discount": 0.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 18, "variation_option_id": 15 }]
+            },
+            {
+                "product_id": 3,
+                "quantity": 30,
+                "web_price": 1500.0,
+                "pos_price": 1500.0,
+                "web_discount": 0.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 19, "variation_option_id": 16 }]
+            }
+        ]
+    },
+    {
+        "product_id": 7,
+        "name": "Astra Butter",
+        "slug": "astra-butter",
+        "description": "Astra butter is a premium quality butter made from the finest cream, with a rich and creamy texture and a subtle sweetness. It is perfect for cooking, baking, and spreading on toast.",
+        "primary_image": "storage/images/products/placeholder.jpg",
+        "brand_id": 1,
+        "category_id": 1,
+        "stock": [
+            {
+                "product_id": 1,
+                "quantity": 10,
+                "web_price": 570.0,
+                "pos_price": 570.0,
+                "web_discount": 100.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 20, "variation_option_id": 14 }]
+            },
+            {
+                "product_id": 2,
+                "quantity": 30,
+                "web_price": 690.0,
+                "pos_price": 5690.0,
+                "web_discount": 200.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 21, "variation_option_id": 15 }]
+            },
+            {
+                "product_id": 3,
+                "quantity": 10,
+                "web_price": 870.0,
+                "pos_price": 870.0,
+                "web_discount": 250.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 22, "variation_option_id": 16 }]
+            }
+        ]
+    },
+    {
+        "product_id": 8,
+        "name": "Coca Cola",
+        "slug": "coca-cola",
+        "description": "Experience the classic taste of Coca Cola, a refreshing beverage perfect for any occasion.",
+        "primary_image": "storage/images/products/cocacola.png",
+        "brand_id": 1,
+        "category_id": 2,
+        "stock": [
+            {
+                "product_id": 1,
+                "quantity": 10,
+                "web_price": 1000.0,
+                "pos_price": 1000.0,
+                "web_discount": 0.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 23, "variation_option_id": 6 }]
+            },
+            {
+                "product_id": 2,
+                "quantity": 20,
+                "web_price": 1200.0,
+                "pos_price": 1200.0,
+                "web_discount": 0.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 24, "variation_option_id": 7 }]
+            },
+            {
+                "product_id": 3,
+                "quantity": 30,
+                "web_price": 1500.0,
+                "pos_price": 1500.0,
+                "web_discount": 0.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 25, "variation_option_id": 8 }]
+            }
+        ]
+    },
+    {
+        "product_id": 9,
+        "name": "Farm Fresh Egg",
+        "slug": "farm-fresh-egg",
+        "description": "Experience the freshness and quality of Farm Fresh Eggs, perfect for breakfast, baking, or any culinary creation.",
+        "primary_image": "storage/images/products/placeholder.jpg",
+        "brand_id": 1,
+        "category_id": 2,
+        "stock": [
+            {
+                "product_id": 1,
+                "quantity": 10,
+                "web_price": 1000.0,
+                "pos_price": 1000.0,
+                "web_discount": 0.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 26, "variation_option_id": 14 }]
+            },
+            {
+                "product_id": 2,
+                "quantity": 20,
+                "web_price": 1200.0,
+                "pos_price": 1200.0,
+                "web_discount": 0.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 27, "variation_option_id": 15 }]
+            },
+            {
+                "product_id": 3,
+                "quantity": 30,
+                "web_price": 1500.0,
+                "pos_price": 1500.0,
+                "web_discount": 0.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 28, "variation_option_id": 16 }]
+            }
+        ]
+    },
+    {
+        "product_id": 10,
+        "name": "Golden Yolk Eggs",
+        "slug": "golden-yolk-eggs",
+        "description": "Experience the rich flavor and creamy texture of Golden Yolk Eggs, perfect for breakfast, baking, or any culinary creation.",
+        "primary_image": "storage/images/products/placeholder.jpg",
+        "brand_id": 1,
+        "category_id": 2,
+        "stock": [
+            {
+                "product_id": 1,
+                "quantity": 10,
+                "web_price": 1000.0,
+                "pos_price": 1000.0,
+                "web_discount": 0.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 29, "variation_option_id": 14 }]
+            },
+            {
+                "product_id": 2,
+                "quantity": 20,
+                "web_price": 1200.0,
+                "pos_price": 1200.0,
+                "web_discount": 0.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 30, "variation_option_id": 15 }]
+            },
+            {
+                "product_id": 3,
+                "quantity": 30,
+                "web_price": 1500.0,
+                "pos_price": 1500.0,
+                "web_discount": 0.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 31, "variation_option_id": 16 }]
+            }
+        ]
+    },
+    {
+        "product_id": 11,
+        "name": "My Cow Cheese",
+        "slug": "my-cow-cheese",
+        "description": "Experience the rich flavor and creamy texture of My Cow Cheese, perfect for snacking, cooking, or baking.",
+        "primary_image": "storage/images/products/placeholder.jpg",
+        "brand_id": 1,
+        "category_id": 3,
+        "stock": [
+            {
+                "product_id": 1,
+                "quantity": 10,
+                "web_price": 1000.0,
+                "pos_price": 1000.0,
+                "web_discount": 0.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 32, "variation_option_id": 14 }]
+            },
+            {
+                "product_id": 2,
+                "quantity": 20,
+                "web_price": 1200.0,
+                "pos_price": 1200.0,
+                "web_discount": 0.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 33, "variation_option_id": 15 }]
+            },
+            {
+                "product_id": 3,
+                "quantity": 30,
+                "web_price": 1500.0,
+                "pos_price": 1500.0,
+                "web_discount": 0.0,
+                "pos_discount": 0.0,
+                "reserved_quantity": 0,
+                "variationOption": [{ "stock_id": 34, "variation_option_id": 16 }]
+            }
+        ]
+    }
+]

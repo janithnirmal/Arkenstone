@@ -1,9 +1,10 @@
 // resources/js/lib/api.js
 import axios from 'axios';
 import { toast } from 'sonner';
+import Config from '../config';
 
 const api = axios.create({
-    baseURL: '/api/v1', // Optional if you prefix all endpoints
+    baseURL: `/api/${Config.apiVersion}`, // Optional if you prefix all endpoints
     headers: {
         'X-Requested-With': 'XMLHttpRequest',
         Accept: 'application/json',
@@ -24,16 +25,7 @@ interface ApiOptions {
     onError?: (error: any) => void;
 }
 const request = async (method: string, url: string, options: ApiOptions = {}) => {
-    const {
-        data = {},
-        params = {},
-        headers = {},
-        displayError = true,
-        displaySuccess = false,
-        isMultipart = false,
-        onSuccess,
-        onError,
-    } = options;
+    const { data = {}, params = {}, headers = {}, displayError = true, displaySuccess = false, isMultipart = false, onSuccess, onError } = options;
 
     try {
         const config = {

@@ -7,6 +7,8 @@ const Config = {
 
     appVersion: '0.0.4',
     lastUpdated: '2025-05-02 23:00:00',
+
+    apiVersion: 'v1',
 };
 
 export default Config;

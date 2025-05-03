@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Butter",
+        "slug": "butter",
+        "image": "storage/images/categories/butter.png"
+    },
+    {
+        "name": "Eggs",
+        "slug": "eggs",
+        "image": "storage/images/categories/eggs.png"
+    },
+    {
+        "name": "Cheese",
+        "slug": "cheese",
+        "image": "storage/images/categories/cheese.png"
+    },
+    {
+        "name": "Cordial & Squash",
+        "slug": "cordial-squash",
+        "image": "storage/images/categories/cordial-squash.png"
+    },
+    {
+        "name": "Canned Drinks",
+        "slug": "canned-drinks",
+        "image": "storage/images/categories/canned-drinks.png"
+    },
+    {
+        "name": "Rice",
+        "slug": "rice",
+        "image": "storage/images/categories/rice.png"
+    },
+    {
+        "name": "Flour",
+        "slug": "flour",
+        "image": "storage/images/categories/flour.png"
+    },
+    {
+        "name": "Fries",
+        "slug": "fries",
+        "image": "storage/images/categories/fries.png"
+    }
+]

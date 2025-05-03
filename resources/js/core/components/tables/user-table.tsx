@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react';
 
 import DefaultTable, { SearchComponent } from '@/components/custom/tables/default-table';
 import { Checkbox } from '@/components/ui/checkbox';
-import { apiGet } from '@/lib/custom/api';
+import { apiGet } from '@/core/lib/api';
 import { Role, User } from '@/types';
 import { ColumnDef } from '@tanstack/react-table';
 import { useState } from 'react';

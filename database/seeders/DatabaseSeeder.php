@@ -20,6 +20,10 @@ class DatabaseSeeder extends Seeder
             FolderSeeder::class,
             FileSeeder::class,
 
+            CategorySeeder::class,
+            TestProductDataSeeder::class,
+            ProductImageSeeder::class,
+            // StorageDataSeeder::class,
         ]);
     }
 }
