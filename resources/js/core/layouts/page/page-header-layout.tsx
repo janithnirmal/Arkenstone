@@ -4,10 +4,10 @@ import PageHeader, { HeaderItemProps } from '@/core/components/page/header';
 
 import type { PropsWithChildren } from 'react';
 
-export default function PageHeaderLayout({ children, headerItems }: PropsWithChildren<{ headerItems?: HeaderItemProps[] }>) {
+export default function PageHeaderLayout({ children }: PropsWithChildren) {
     return (
         <>
-            <PageHeader items={headerItems} />
+            <PageHeader/>
             {children}
             <PageFooter />
         </>

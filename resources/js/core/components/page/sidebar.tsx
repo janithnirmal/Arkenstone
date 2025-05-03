@@ -2,12 +2,12 @@ import config from '@/core/config';
 import { cn } from '@/lib/utils';
 import { X } from 'lucide-react';
 import { useContext } from 'react';
-import Header, { PageContext } from './header';
+import Header, { PageHeaderContext } from './header';
 import AppLogo from '@/components/app-logo';
 import AppLogoIcon from '@/components/app-logo-icon';
 
 export default function Sidebar() {
-    const { isOpen, items, setIsOpen } = useContext(PageContext);
+    const { isOpen, items, setIsOpen } = useContext(PageHeaderContext);
     return (
         <aside
             className={cn(

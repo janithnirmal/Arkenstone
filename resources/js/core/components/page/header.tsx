@@ -6,22 +6,42 @@ import { Link } from '@inertiajs/react';
 import { Menu } from 'lucide-react';
 import React, { PropsWithChildren, createContext, useState } from 'react';
 import PageSidebar from './sidebar';
-type PageContextType = {
+type PageHeaderContextType = {
     isOpen: boolean;
     items?: HeaderItemProps[];
     setIsOpen: (isOpen: boolean) => void;
 };
 
-export const PageContext = createContext<PageContextType>({ isOpen: false, setIsOpen: () => {} });
+export const PageHeaderContext = createContext<PageHeaderContextType>({ isOpen: false, setIsOpen: () => {} });
+
+
+const items: HeaderItemProps[] = [
+    {
+        name: 'Home',
+        href: '/home',
+    },
+    {
+        name: 'Shop',
+        href: '/shop',
+    },
+    {
+        name: 'About',
+        href: '/about',
+    },
+    {
+        name: 'Contact',
+        href: '/contact',
+    },
+];
 
 // Header component
-export function Header({ items }: { items?: HeaderItemProps[] }) {
+export function Header() {
     const [isOpen, setIsOpen] = useState(false);
     const isMobile = useIsMobile();
 
     return (
-        <PageContext.Provider value={{ isOpen, items, setIsOpen }}>
-            <header className="bg-accent flex w-full flex-col">
+        <PageHeaderContext.Provider value={{ isOpen, items, setIsOpen }}>
+            <header className="bg-secondary flex w-full flex-col">
                 <PageSidebar />
                 <div className="container mx-auto flex w-full items-center justify-between px-5 py-3">
                     <div className="flex items-center gap-1">
@@ -38,7 +58,7 @@ export function Header({ items }: { items?: HeaderItemProps[] }) {
                     </div>
                 </div>
             </header>
-        </PageContext.Provider>
+        </PageHeaderContext.Provider>
     );
 }
 
