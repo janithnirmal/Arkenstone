@@ -1,7 +1,7 @@
 import { type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
-import { Arkenstone, ArkenstoneLogo } from './dashboard';
+import { Arkenstone, ArkenstoneLogo } from './admin/dashboard';
 import Config from '../config';
 
 export default function Welcome() {
@@ -45,11 +45,11 @@ export default function Welcome() {
             >
                 <div className="bg-background/60 absolute inset-0" style={{ backdropFilter: 'blur(3px)' }}></div>
                 <div className="flex min-h-screen flex-col items-center p-6 text-[#1b1b18] lg:justify-center lg:p-8">
-                    <header className="mb-6 w-full max-w-[335px] text-sm not-has-[nav]:hidden lg:max-w-4xl">
+                    <header className="mb-6 w-full max-w-[335px] text-sm not-has-[nav]:hidden lg:max-w-4xl z-10">
                         <nav className="flex items-center justify-end gap-4">
                             {auth.user ? (
                                 <Link
-                                    href={route('dashboard')}
+                                    href={route('admin.dashboard')}
                                     className="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
                                 >
                                     Dashboard
@@ -80,7 +80,7 @@ export default function Welcome() {
                                 A platform for creating and managing your own E Commerce website.
                             </p>
                             <Link
-                                href={route('login')}
+                                href={route('home')}
                                 className="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
                             >
                                 Walk In

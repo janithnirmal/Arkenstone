@@ -4,12 +4,12 @@ import { Head, Link, usePage } from '@inertiajs/react';
 import AdminTable from '@/core/components/tables/admin-table';
 import { BreadcrumbItem } from '@/types';
 import { cn } from '@/lib/utils';
-import Config from '../config';
+import Config from '../../config';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Dashboard',
-        href: '/dashboard',
+        href: '/admin/dashboard',
     },
 ];
 

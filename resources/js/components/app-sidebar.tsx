@@ -29,7 +29,7 @@ export function AppSidebar() {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
-                            <Link href="/dashboard" prefetch>
+                            <Link href="/admin/dashboard" prefetch>
                                 <AppLogo />
                             </Link>
                         </SidebarMenuButton>
@@ -58,12 +58,12 @@ export function CompanySidebarItems() {
         const items = [
             {
                 title: 'Dashboard',
-                href: '/dashboard',
+                href: '/admin/dashboard',
                 icon: LayoutGrid,
             },
             {
                 title: 'Admins',
-                href: '/admins',
+                href: '/admin/admins',
                 icon: Shield,
             },
         ];

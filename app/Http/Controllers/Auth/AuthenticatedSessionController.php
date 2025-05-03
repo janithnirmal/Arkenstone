@@ -41,7 +41,7 @@ class AuthenticatedSessionController extends Controller
         Log::info('Token: ', [$token]);
 
         return redirect()
-            ->intended(route('dashboard', absolute: false));
+            ->intended(route('admin', absolute: false));
     }
 
     /**
