@@ -16,7 +16,10 @@
                 "web_discount": 100.0,
                 "pos_discount": 0.0,
                 "reserved_quantity": 0,
-                "variationOption": [{ "stock_id": 1, "variation_option_id": 1 }]
+                "variationOption": [
+                    { "stock_id": 1, "variation_option_id": 1 },
+                    { "stock_id": 35, "variation_option_id": 15 }
+                ]
             },
             {
                 "product_id": 2,
@@ -26,7 +29,10 @@
                 "web_discount": 200.0,
                 "pos_discount": 0.0,
                 "reserved_quantity": 0,
-                "variationOption": [{ "stock_id": 2, "variation_option_id": 2 }]
+                "variationOption": [
+                    { "stock_id": 2, "variation_option_id": 2 },
+                    { "stock_id": 36, "variation_option_id": 16 }
+                ]
             },
             {
                 "product_id": 3,

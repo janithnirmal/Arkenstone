@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Shop\ProductController;
 use App\Http\Controllers\TestController;
-
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -32,6 +32,14 @@ Route::get('/contact', function () {
 Route::get('/shop', function () {
     return Inertia::render('shop');
 })->name('shop');
+
+Route::get('/product/{product_slug}', function ($product_slug) {
+    $product = Product::with('images', 'category', 'stocks.variationStocks.variationOption.variation')->where('slug', $product_slug)->first();
+    if (!$product) {
+        return redirect()->route('shop');
+    }
+    return Inertia::render('product', ['product' => $product]);
+})->name('product');
 
 
 
