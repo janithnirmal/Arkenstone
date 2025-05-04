@@ -6,7 +6,7 @@ export default function SimpleCard({ data }: { data: Product }) {
 
     return (
         <a href={route('product', { product_slug: data.slug })} className="w-max">
-            <div className="flex w-84 cursor-pointer flex-col gap-2 overflow-hidden rounded-lg mx-auto">
+            <div className="flex w-82 cursor-pointer flex-col gap-2 overflow-hidden rounded-lg mx-auto">
                 <div
                     className="bg-muted h-96 w-full rounded-lg bg-cover bg-center p-3 shadow-xl transition-all duration-300 hover:scale-105"
                     style={{ backgroundImage: `url(${primaryImage})` }}

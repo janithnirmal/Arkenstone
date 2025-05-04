@@ -63,8 +63,8 @@ export default function Hero() {
                                 <div className="h-full w-full bg-cover bg-center" style={{ backgroundImage: `url(${slide.image})` }}></div>
                                 <div className="absolute top-0 left-0 h-full w-full bg-black/50"></div>
                                 <div className="absolute flex flex-col items-center justify-center h-full w-full">
-                                    <h1 className="text-4xl font-bold text-white">{slide.title}</h1>
-                                    <p className="text-xl text-white">{slide.description}</p>
+                                    <h1 className="lg:text-4xl text-lg font-bold text-white">{slide.title}</h1>
+                                    <p className="lg:text-xl text-sm text-center text-white">{slide.description}</p>
                                     <Link href={slide.url}>
                                         <Button variant="secondary" className="mt-4 rounded-full">{slide.button}</Button>
                                     </Link>
