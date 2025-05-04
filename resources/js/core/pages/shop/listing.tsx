@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import ProductCard from '@/core/components/shop/product-card/simple-card';
 import { useIsMobile } from '@/core/hooks/use-mobile';
 import { FilterContext } from '@/core/layouts/shop/shop-sidebar-filter-layout';
+import { SearchContext } from '@/core/layouts/shop/shop-sidebar-filter-layout';
 import { apiGet } from '@/core/lib/api';
 import { Product } from '@/core/types';
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, Loader2 } from 'lucide-react';
@@ -15,7 +16,7 @@ export default function Listing() {
 
     const [isLoading, setIsLoading] = useState(false);
 
-    const { filterOption } = useContext(FilterContext);
+    const searchContext = useContext(SearchContext);
 
     const isMobile = useIsMobile();
 
@@ -26,14 +27,14 @@ export default function Listing() {
         setIsLoading(true);
         apiGet('/product', {
             data: {
-                category_ids: filterOption.categories?.map((category) => category.id),
+                category_ids: searchContext?.filterOptions.categories?.map((category) => category.id),
+                search: searchContext?.search,
             },
         }).then((res) => {
-            console.log(res);
             setProducts(res);
             setIsLoading(false);
         });
-    }, [filterOption]);
+    }, [searchContext]);
 
     useEffect(() => {
         setFilteredProducts(products.slice((page - 1) * perPage, page * perPage));
@@ -128,12 +129,12 @@ export default function Listing() {
     };
 
     return (
-        <div className="mb-4 flex w-full flex-wrap justify-center gap-6 overflow-y-auto p-3 py-5 relative">
+        <div className="relative mb-4 flex w-full flex-wrap justify-center gap-6 overflow-y-auto p-3 py-5">
             {filteredProducts.map((product) => (
                 <ProductCard key={product.id} data={product} />
             ))}
             {isLoading && (
-                <div className="mt-40 flex w-full flex-col items-center justify-center gap-2 absolute">
+                <div className="absolute mt-40 flex w-full flex-col items-center justify-center gap-2">
                     <Loader2 className="h-16 w-16 animate-spin" />
                     <p>Loading..</p>
                 </div>

@@ -1,7 +1,6 @@
 import Button from '@/components/custom/button';
-import { FilterContext, FilterOption, FilterOptionValueMap } from '@/core/layouts/shop/shop-sidebar-filter-layout';
+import { FilterContext, FilterOptions, FilterOptionsValueMap } from '@/core/layouts/shop/shop-sidebar-filter-layout';
 import { apiGet } from '@/core/lib/api';
-import { Category } from '@/core/types';
 import { cn } from '@/lib/utils';
 import { X } from 'lucide-react';
 import { useContext, useEffect, useState } from 'react';
@@ -26,7 +25,7 @@ export function Filter({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (isO
     );
 }
 
-Filter.Section = function FilterSection<K extends keyof FilterOption>({
+Filter.Section = function FilterSection<K extends keyof FilterOptions>({
     uri,
     title,
     filterOptionKey,
@@ -36,8 +35,8 @@ Filter.Section = function FilterSection<K extends keyof FilterOption>({
     filterOptionKey: K;
 }) {
     const { updateFilter } = useContext(FilterContext);
-    const [dataSet, setDataSet] = useState<FilterOptionValueMap[K]>();
-    const [selectedData, setSelectedData] = useState<FilterOptionValueMap[K]>();
+    const [dataSet, setDataSet] = useState<FilterOptionsValueMap[K]>();
+    const [selectedData, setSelectedData] = useState<FilterOptionsValueMap[K]>();
 
     useEffect(() => {
         apiGet(uri).then((res) => {
@@ -46,7 +45,7 @@ Filter.Section = function FilterSection<K extends keyof FilterOption>({
     }, [uri]);
 
     useEffect(() => {
-        updateFilter(filterOptionKey, selectedData as FilterOptionValueMap[K]);
+        updateFilter(filterOptionKey, selectedData as FilterOptionsValueMap[K]);
     }, [selectedData]);
 
     return (
@@ -64,7 +63,7 @@ Filter.Section = function FilterSection<K extends keyof FilterOption>({
                                 if (selectedData?.includes(data)) {
                                     setSelectedData(selectedData?.filter((item: any) => item.id !== data.id));
                                 } else {
-                                    setSelectedData([...selectedData, data]);
+                                    setSelectedData([...(selectedData || []), data]);
                                 }
                             }}
                         >

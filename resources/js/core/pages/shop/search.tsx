@@ -1,4 +1,4 @@
-import { FilterContext } from '@/core/layouts/shop/shop-sidebar-filter-layout';
+import { FilterContext, SearchContext } from '@/core/layouts/shop/shop-sidebar-filter-layout';
 import { Input } from '@headlessui/react';
 import { List, SearchIcon } from 'lucide-react';
 import { useContext, useEffect, useState } from 'react';
@@ -7,7 +7,7 @@ export default function Search({ isOpen, setIsOpen }: { isOpen: boolean; setIsOp
     const [search, setSearch] = useState('');
     const [canSearch, setCanSearch] = useState(false);
 
-    const { filterOption, updateFilter } = useContext(FilterContext);
+    const searchContext = useContext(SearchContext);
 
     function searchHandler() {
         if (search.length > 3 || search.length === 0) {
@@ -23,7 +23,7 @@ export default function Search({ isOpen, setIsOpen }: { isOpen: boolean; setIsOp
 
     useEffect(() => {
         if (canSearch) {
-            updateFilter('search', search);
+            searchContext?.updateSearch('search', search);
             setCanSearch(false);
         }
     }, [canSearch]);
