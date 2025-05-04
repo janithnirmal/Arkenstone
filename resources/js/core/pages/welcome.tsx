@@ -75,7 +75,7 @@ export default function Welcome() {
                     <div className="relative flex w-full items-center justify-center opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0">
                         <main className="flex w-full max-w-[335px] flex-col items-center justify-center gap-2 lg:max-w-4xl">
                             <ArkenstoneLogo className="animate-pulse text-6xl" />
-                            <Arkenstone className="text-9xl" />
+                            <Arkenstone className="lg:text-9xl text-4xl" />
                             <p className="text-center text-lg text-neutral-800 dark:text-neutral-400">
                                 A platform for creating and managing your own E Commerce website.
                             </p>
