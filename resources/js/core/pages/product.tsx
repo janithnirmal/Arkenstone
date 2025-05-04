@@ -78,7 +78,7 @@ export function SingleProductBreadcrumb({ product }: { product: ProductType }) {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                    <BreadcrumbLink className="truncate" href={`/shop/${product.slug}/${product.slug}`}>
+                    <BreadcrumbLink className="truncate" href={`/product/${product.slug}`}>
                         {product.name}
                     </BreadcrumbLink>
                 </BreadcrumbItem>

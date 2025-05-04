@@ -1,10 +1,10 @@
 import { Button } from '@/components/ui/button';
 import ProductCard from '@/core/components/shop/product-card/simple-card';
 import { useIsMobile } from '@/core/hooks/use-mobile';
-import { FilterContext } from '@/core/layouts/shop/shop-sidebar-filter-layout';
 import { SearchContext } from '@/core/layouts/shop/shop-sidebar-filter-layout';
 import { apiGet } from '@/core/lib/api';
-import { Product } from '@/core/types';
+import { Category, Product } from '@/core/types';
+import { usePage } from '@inertiajs/react';
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, Loader2 } from 'lucide-react';
 import { useContext, useEffect, useState } from 'react';
 
@@ -13,6 +13,8 @@ export default function Listing() {
     const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
     const [page, setPage] = useState(1);
     const [perPage] = useState(9);
+
+    const { props } = usePage<{ category: Category }>();
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -27,7 +29,7 @@ export default function Listing() {
         setIsLoading(true);
         apiGet('/product', {
             data: {
-                category_ids: searchContext?.filterOptions.categories?.map((category) => category.id),
+                category_ids: props.category ? [props.category.id] : searchContext?.filterOptions.categories?.map((category) => category.id),
                 search: searchContext?.search,
             },
         }).then((res) => {

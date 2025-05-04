@@ -2,6 +2,7 @@ import Button from '@/components/custom/button';
 import { Input } from '@/components/ui/input';
 import { useContext } from 'react';
 import { ProductSelectorContext } from '../product-selector';
+import { Minus, Plus } from 'lucide-react';
 
 export default function DefaultQuantitySelector() {
     const { quantity, setQuantity } = useContext(ProductSelectorContext);
@@ -17,7 +18,7 @@ export default function DefaultQuantitySelector() {
                     }
                 }}
             >
-                -
+                <Minus />
             </Button>
             <Input className="w-20" type="number" value={quantity} onChange={(e) => setQuantity(Number(e.target.value))} />
             <Button
@@ -27,7 +28,7 @@ export default function DefaultQuantitySelector() {
                     setQuantity(quantity + 1);
                 }}
             >
-                +
+                <Plus />
             </Button>
         </div>
     );

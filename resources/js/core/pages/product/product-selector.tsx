@@ -4,6 +4,7 @@ import { createContext, useState } from 'react';
 import QuantitySelector from './quantity-selector.tsx/default-quantity-selector';
 import StockSelector from './stock-selector/default-stock-selector';
 import { StockByVariationOption } from './stock-selector/hooks/use-filter-stock-by-variation-option';
+import Config from '@/core/config';
 
 export type ProductSelectorContext = {
     quantity: number;
@@ -42,7 +43,7 @@ export default function ProductSelector({ product }: { product: Product }) {
                     const quantityMessage = quantity === 1 ? '1 item' : `${quantity} items`;
                     const message = `I want to buy ${quantityMessage} of ${product.name} in ${variationOptions}`;
 
-                    window.open(`https://wa.me/94710902997?text=${message}`, '_blank');
+                    window.open(`https://wa.me/${Config.seller.whatsapp}?text=${message}`, '_blank');
                 }}
                 disabled={Object.keys(selectedVariationOptions).length === 0}
                 variant="primary"
