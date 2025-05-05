@@ -11,15 +11,23 @@ type ProductCarousalOptions = {
     category_id?: number;
     category_ids?: number[];
     search?: string;
+    current_product_id?: number;
 };
 
-export default function ProductCarousal({ options }: { options: ProductCarousalOptions }) {
+export default function ProductCarousal({
+    options,
+    setHasProducts,
+}: {
+    options: ProductCarousalOptions;
+    setHasProducts?: (hasProducts: boolean) => void;
+}) {
     const [products, setProducts] = useState<Product[]>([]);
 
     const data = {
         category_id: options.category_id,
         category_ids: options.category_ids ?? [],
         search: options.search ?? '',
+        current_product_id: options.current_product_id,
     };
 
     useEffect(() => {
@@ -27,6 +35,7 @@ export default function ProductCarousal({ options }: { options: ProductCarousalO
             data,
         }).then((res) => {
             setProducts(res);
+            setHasProducts?.(res.length > 0);
         });
     }, []);
 
@@ -56,7 +65,7 @@ export default function ProductCarousal({ options }: { options: ProductCarousalO
             >
                 {products.map((product) => (
                     <SwiperSlide key={product.id} className="h-full basis-1/1 md:basis-1/2 lg:basis-1/3">
-                        <div className="w-max mx-auto">
+                        <div className="mx-auto w-max">
                             <ProductCard data={product} />
                         </div>
                     </SwiperSlide>

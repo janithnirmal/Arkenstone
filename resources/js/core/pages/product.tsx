@@ -1,12 +1,15 @@
-import Button from '@/components/custom/button';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
 import { Head, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 import PageLayout from '../layouts/page-layout';
 import { ProductImage, Product as ProductType } from '../types';
-import ProductSelector from './product/product-selector';
 
-export default function Product() {
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+
+import ProductSelector from './product/product-selector';
+import RelatedProducts from './product/suggested-products';
+
+export function Product() {
     const { product }: { product: ProductType } = usePage<{ product: ProductType }>().props;
 
     const [selectedImage, setSelectedImage] = useState<ProductImage>(
@@ -17,7 +20,7 @@ export default function Product() {
             <Head title="Product" />
             <div className="container mx-auto flex flex-col gap-5 p-4">
                 <SingleProductBreadcrumb product={product} />
-                <div className="flex h-screen flex-col gap-5 lg:flex-row">
+                <div className="flex min-h-[90vh] flex-col gap-5 lg:flex-row">
                     <div className="lg:hidden">
                         <h2 className="text-2xl font-bold lg:text-4xl">{product.name}</h2>
                         <span className="text-sm text-gray-500">{product.category?.name}</span>
@@ -52,16 +55,29 @@ export default function Product() {
                                 })}
                             </div>
 
-                            <p className="text-sm text-muted-foreground">{product.description}</p>
+                            <p className="text-muted-foreground text-sm">{product.description}</p>
                         </div>
 
                         <ProductSelector product={product} />
                     </div>
                 </div>
             </div>
+
+            <RelatedProducts search={product.name + ' ' + product.category?.name} current_product_id={product.id} />
         </PageLayout>
     );
 }
+
+Product.Accordion = () => {
+    return (
+        <Accordion type="single" collapsible>
+            <AccordionItem value="">
+                <AccordionTrigger>Is it accessible?</AccordionTrigger>
+                <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
+            </AccordionItem>
+        </Accordion>
+    );
+};
 
 export function SingleProductBreadcrumb({ product }: { product: ProductType }) {
     return (
@@ -86,3 +102,5 @@ export function SingleProductBreadcrumb({ product }: { product: ProductType }) {
         </Breadcrumb>
     );
 }
+
+export default Product;

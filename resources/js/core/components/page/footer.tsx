@@ -58,22 +58,16 @@ export default function Footer() {
                             </ul>
                         </div>
                         <div className="flex flex-col gap-2">
-                            <h1 className="text-2xl font-bold">Account</h1>
+                            <h1 className="text-2xl font-bold">Read More</h1>
                             <ul>
                                 <li>
-                                    <Link href="#my-account">My Account</Link>
+                                    <Link href="/privacy-policy">Privacy Policy</Link>
                                 </li>
                                 <li>
-                                    <Link href="#shop-details">Shop details</Link>
+                                    <Link href="/return-policy">Return Policy</Link>
                                 </li>
                                 <li>
-                                    <Link href="#shopping-cart">Shopping Cart</Link>
-                                </li>
-                                <li>
-                                    <Link href="#wishlist">Wishlist</Link>
-                                </li>
-                                <li>
-                                    <Link href="#order-history">Order History</Link>
+                                    <Link href="/terms-and-conditions">Terms and Conditions</Link>
                                 </li>
                             </ul>
                         </div>

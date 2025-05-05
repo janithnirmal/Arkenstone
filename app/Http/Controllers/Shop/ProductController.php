@@ -27,6 +27,7 @@ class ProductController extends \App\Http\Controllers\Controller
             'search' => 'string|nullable',
             'name' => 'string|exists:products,name',
             'slug' => 'string|exists:products,slug',
+            'current_product_id' => 'integer|exists:products,id',
 
             'category_id' => 'integer|exists:categories,id',
             'category_ids' => 'array',
@@ -143,12 +144,13 @@ class ProductController extends \App\Http\Controllers\Controller
             });
         }
 
-        // Fetch products by query
+        // Fetch products by query excluding the product with current_product_id
         if ($request->has('search')) {
             $query = $request->search;
             $words = explode(' ', $query); // Split query into words
+            $currentProductId = $request->current_product_id; // Assuming current_product_id is a field in the request
 
-            $products->where(function ($q) use ($words) {
+            $products->where(function ($q) use ($words, $currentProductId) {
                 foreach ($words as $word) {
                     $q->orWhere('name', 'like', "%$word%")
                         ->orWhere('description', 'like', "%$word%")
@@ -159,7 +161,7 @@ class ProductController extends \App\Http\Controllers\Controller
                             $query->where('name', 'like', "%$word%");
                         });
                 }
-            });
+            })->where('id', '<>', $currentProductId); // Exclude the product with current_product_id
         }
 
         if ($request->has('variation_option_ids') && count($request->variation_option_ids) > 0) {
