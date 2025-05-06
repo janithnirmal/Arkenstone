@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ContactMailController;
 use App\Http\Controllers\Shop\CategoryController;
 use App\Http\Controllers\Shop\ProductController;
 use App\Http\Controllers\TestController;
@@ -38,6 +39,10 @@ Route::prefix('v1')->group(function () {
         Route::post('/', [CategoryController::class, 'store']);
         Route::put('/', [CategoryController::class, 'update']);
         Route::delete('/', [CategoryController::class, 'destroy']);
+    });
+
+    Route::prefix('contact')->group(function () {
+        Route::post('/', [ContactMailController::class, 'store']);
     });
 });
 

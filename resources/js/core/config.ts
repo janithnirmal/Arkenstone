@@ -6,7 +6,7 @@ const Config = {
     appAuthorEmail: 'janithnirmal@gmail.com',
     appAuthorUrl: 'https://github.com/janithnirmal',
 
-    appVersion: '0.2.0',
+    appVersion: '0.2.1',
     lastUpdated: '2025-05-06 23:00:00',
 
     apiVersion: 'v1',
@@ -15,7 +15,7 @@ const Config = {
         name: 'Mr. Example',
         email: 'info@example.com',
         phone: '+123 456 7890',
-        whatsapp: '+123 456 7890',
+        whatsapp: '94710902997',
         address: '123 Main St, Anytown, USA',
         website: 'https://www.example.com',
 
