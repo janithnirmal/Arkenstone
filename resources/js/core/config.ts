@@ -6,8 +6,8 @@ const Config = {
     appAuthorEmail: 'janithnirmal@gmail.com',
     appAuthorUrl: 'https://github.com/janithnirmal',
 
-    appVersion: '0.2.1',
-    lastUpdated: '2025-05-06 23:00:00',
+    appVersion: '0.2.3',
+    lastUpdated: '2025-05-07 10:00:00',
 
     apiVersion: 'v1',
 
@@ -32,6 +32,11 @@ const Config = {
         phone: '+123 456 7890',
         email: 'info@example.com',
         website: 'https://www.example.com',
+
+        facebook: 'https://www.facebook.com',
+        instagram: 'https://www.instagram.com',
+        tiktok: 'https://www.tiktok.com',
+        linkedin: 'https://www.linkedin.com',
     },
 };
 
