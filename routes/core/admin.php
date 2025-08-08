@@ -27,5 +27,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
             return Inertia::render('admin/admins');
         })->name('admin.admins');
 
+        // Blog routes
+        Route::get('blog', function () {
+            return Inertia::render('admin/blog/index');
+        })->name('admin.blog.index');
+
+        Route::get('blog/create', function () {
+            return Inertia::render('admin/blog/create');
+        })->name('admin.blog.create');
+
+        Route::get('blog/{blog}/edit', function ($blog) {
+            return Inertia::render('admin/blog/edit', ['blog' => $blog]);
+        })->name('admin.blog.edit');
+
     });
 });

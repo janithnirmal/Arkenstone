@@ -1,10 +1,13 @@
 import { cn } from '@/lib/utils';
-import { Textarea as DefaultTextarea } from '@headlessui/react';
 
 export default function Textarea({ children, className, rows = 3, ...props }: React.ComponentProps<'textarea'>) {
     return (
-        <DefaultTextarea {...props} rows={rows} className={cn('border-border border-1 border-muted-foreground rounded-md p-1', className)}>
+        <textarea 
+            {...props} 
+            rows={rows} 
+            className={cn('flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50', className)}
+        >
             {children}
-        </DefaultTextarea>
+        </textarea>
     );
 }

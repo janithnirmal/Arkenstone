@@ -49,8 +49,18 @@ class User extends Authenticatable
         ];
     }
 
-    public function company()
+    public function blogs()
     {
-        return $this->hasMany(CompanyUser::class, 'user_id');
+        return $this->hasMany(Blog::class);
+    }
+
+    public function blogLikes()
+    {
+        return $this->hasMany(BlogLike::class);
+    }
+
+    public function likedBlogs()
+    {
+        return $this->belongsToMany(Blog::class, 'blog_likes');
     }
 }

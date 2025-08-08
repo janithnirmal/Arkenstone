@@ -44,8 +44,28 @@ export interface User {
     [key: string]: unknown; // This allows for additional properties...
 }
 
-export interface AdminUser extends User {}a
+export interface AdminUser extends User {}
 
+export interface Blog {
+    id: number;
+    title: string;
+    slug: string;
+    content: string;
+    excerpt?: string;
+    featured_image?: string;
+    status: 'draft' | 'published';
+    published_at?: string;
+    user_id: number;
+    meta_title?: string;
+    meta_description?: string;
+    tags?: string[];
+    featured: boolean;
+    created_at?: string;
+    updated_at?: string;
+    user?: User;
+    likes_count?: number;
+    is_liked?: boolean;
+}
 
 export interface Role {
     id: number;

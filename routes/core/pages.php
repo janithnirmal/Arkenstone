@@ -18,8 +18,16 @@ return Inertia::render('about');
 })->name('about');
 
 Route::get('/contact', function () {
-return Inertia::render('contact');
+    return Inertia::render('contact');
 })->name('contact');
+
+Route::get('/blog', function () {
+    return Inertia::render('blog');
+})->name('blog');
+
+Route::get('/blog/{slug}', function ($slug) {
+    return Inertia::render('blog-single', ['slug' => $slug]);
+})->name('blog.single');
 
 // Policies
 Route::get('/privacy-policy', function () {

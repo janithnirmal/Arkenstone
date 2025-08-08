@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactMailController;
 use App\Http\Controllers\Shop\CategoryController;
 use App\Http\Controllers\Shop\ProductController;
@@ -43,6 +44,22 @@ Route::prefix('v1')->group(function () {
 
     Route::prefix('contact')->group(function () {
         Route::post('/', [ContactMailController::class, 'store']);
+    });
+
+    // Blog
+    Route::prefix('blog')->group(function () {
+        Route::get('/', [BlogController::class, 'publicIndex']);
+        Route::get('/{slug}', [BlogController::class, 'publicShow']);
+        Route::post('/{blog}/like', [BlogController::class, 'toggleLike'])->middleware('auth:sanctum');
+        Route::get('/{blog}/likes', [BlogController::class, 'getLikes']);
+    });
+
+    Route::prefix('admin/blog')->group(function () {
+        Route::get('/', [BlogController::class, 'index']);
+        Route::post('/', [BlogController::class, 'store']);
+        Route::get('/{blog}', [BlogController::class, 'show']);
+        Route::put('/{blog}', [BlogController::class, 'update']);
+        Route::delete('/{blog}', [BlogController::class, 'destroy']);
     });
 });
 
