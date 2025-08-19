@@ -1,7 +1,7 @@
-import Card3 from './card3';
+import AdvancedProductCatalog from './card2';
 
 // const ProductCard = Card1;
-// const ProductCard = Card2;
-const ProductCard = Card3;
+const ProductCard = AdvancedProductCatalog;
+// const ProductCard = Card3;
 
 export default ProductCard;

@@ -1,8 +1,8 @@
-import { Product } from '@/core/types';
 import React, { useEffect, useState } from 'react';
 import ProductCard from '../components/product-card';
-import { ProductCardProps } from '../components/product-card/types';
 import { productService } from '../services/productService';
+import { Product } from '../types';
+import { CatalogResult } from '../types/http.types';
 
 const ProductListPage: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -13,8 +13,8 @@ const ProductListPage: React.FC = () => {
         const fetchProducts = async () => {
             try {
                 setLoading(true);
-                const data = await productService.getProducts();
-                setProducts(data);
+                const data: CatalogResult = await productService.getProducts();
+                setProducts(data.data);
                 setError(null);
             } catch (err) {
                 setError('Failed to fetch products. Please try again later.');
@@ -32,12 +32,7 @@ const ProductListPage: React.FC = () => {
 
     return (
         <div className="container mx-auto p-4">
-            <h1 className="mb-6 text-3xl font-bold">Our Products</h1>
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {products?.map((product) => (
-                    <ProductCard key={product.id} product={product as unknown as ProductCardProps} />
-                ))}
-            </div>
+                <ProductCard data={products} />
         </div>
     );
 };
