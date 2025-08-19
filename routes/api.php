@@ -25,25 +25,6 @@ Route::prefix('v1')->group(function () {
         Route::delete('/', [AdminController::class, 'destroy']);
     });
 
-
-    // Shop
-    Route::prefix('product')->group(function () {
-        Route::get('/', [ProductController::class, 'index']);
-        Route::post('/', [ProductController::class, 'store']);
-        Route::put('/', [ProductController::class, 'update']);
-        Route::delete('/', [ProductController::class, 'destroy']);
-    });
-
-    Route::prefix('category')->group(function () {
-        Route::get('/', [CategoryController::class, 'index']);
-        Route::post('/', [CategoryController::class, 'store']);
-        Route::put('/', [CategoryController::class, 'update']);
-        Route::delete('/', [CategoryController::class, 'destroy']);
-    });
-
-    Route::prefix('contact')->group(function () {
-        Route::post('/', [ContactMailController::class, 'store']);
-    });
 });
 
 

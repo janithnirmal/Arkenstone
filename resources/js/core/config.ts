@@ -6,8 +6,8 @@ const Config = {
     appAuthorEmail: 'janithnirmal@gmail.com',
     appAuthorUrl: 'https://github.com/janithnirmal',
 
-    appVersion: '0.2.3',
-    lastUpdated: '2025-05-07 10:00:00',
+    appVersion: '0.3.1',
+    lastUpdated: new Date().toISOString().split('T')[0],
 
     apiVersion: 'v1',
 
