@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Modules\Product\App\Http\Requests\QueryProductRequest;
 use Modules\Product\App\Http\Requests\StoreProductRequest;
 use Modules\Product\Contracts\ProductManagerServiceInterface;
-
+use Modules\Product\Http\Resources\ProductResource;
 
 class ProductController extends Controller
 {
@@ -27,7 +27,8 @@ class ProductController extends Controller
             return ResponseProtocol::success($this->productManagerService->find($requst->validated("id")));
         }
 
-        return ResponseProtocol::success($this->productManagerService->queryProducts($requst->validated()));
+        // return ResponseProtocol::success($this->productManagerService->queryProducts($requst->validated()));
+        return ResponseProtocol::success(ProductResource::collection($this->productManagerService->queryProducts($requst->validated())));
     }
 
 

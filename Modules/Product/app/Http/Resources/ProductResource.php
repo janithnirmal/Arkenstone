@@ -16,7 +16,7 @@ class ProductResource extends JsonResource
             'price' => (float) $this->price,
             'in_stock' => $this->isInStock(),
             'thumbnail_url' => $this->thumbnail_url,
-            'relationships' => [
+            'items' => [
                 'categories' => CategoryResource::collection($this->whenLoaded('categories')),
                 'images' => ProductImageResource::collection($this->whenLoaded('images')),
                 // Group terms by their taxonomy for a structured response

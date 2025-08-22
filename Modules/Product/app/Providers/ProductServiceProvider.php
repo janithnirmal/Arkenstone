@@ -6,7 +6,6 @@ namespace Modules\Product\Providers;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Modules\Product\app\Services\ProductManagerService;
-use Modules\Product\Contracts\ProductManagerServiceInterface;
 use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -45,7 +44,7 @@ class ProductServiceProvider extends ServiceProvider
         // Product model from this module.
         $this->app->bind(\Modules\Core\Contracts\ProductContract::class, \Modules\Product\Models\Product::class);
 
-        $this->app->bind(ProductManagerServiceInterface::class, ProductManagerService::class);
+        $this->app->bind(\Modules\Core\Contracts\ProductManagerServiceInterface::class, ProductManagerService::class);
     }
 
     /**
