@@ -90,6 +90,27 @@ return [
             'report' => false,
         ],
 
+        'backups' => [
+            'driver' => 'local',
+            'root' => storage_path('app/backups'),
+            'throw' => false,
+            'report' => false,
+        ],
+
+        'google_drive' => [
+            'driver' => 'google',
+            'clientId' => env('GOOGLE_DRIVE_CLIENT_ID'),
+            'clientSecret' => env('GOOGLE_DRIVE_CLIENT_SECRET'),
+            'refreshToken' => env('GOOGLE_DRIVE_REFRESH_TOKEN'),
+            'folderId' => env('GOOGLE_DRIVE_FOLDER_ID', null),
+            'teamDriveId' => env('GOOGLE_DRIVE_TEAM_DRIVE_ID', null),
+            // Add this configuration block
+            'guzzle' => [
+                'verify' => false,
+            ],
+
+        ],
+
     ],
 
     /*
