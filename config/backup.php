@@ -15,7 +15,8 @@ return [
                  * The list of directories and files that will be included in the backup.
                  */
                 'include' => [
-                    // base_path(),
+                    // base_path(), // Keep commented for database-only backup
+                    base_path('database/data'), // Add your specific folder
                 ],
 
                 /*
@@ -43,7 +44,7 @@ return [
                  * Set to `null` to include complete absolute path
                  * Example: base_path()
                  */
-                'relative_path' => null,
+                'relative_path' => base_path(),
             ],
 
             /*
@@ -197,12 +198,12 @@ return [
      */
     'notifications' => [
         'notifications' => [
-            \Spatie\Backup\Notifications\Notifications\BackupHasFailedNotification::class => ['mail','discord'],
+            \Spatie\Backup\Notifications\Notifications\BackupHasFailedNotification::class => ['mail', 'discord'],
             \Spatie\Backup\Notifications\Notifications\UnhealthyBackupWasFoundNotification::class => ['mail', 'discord'],
-            \Spatie\Backup\Notifications\Notifications\CleanupHasFailedNotification::class => ['mail','discord'],
-            \Spatie\Backup\Notifications\Notifications\BackupWasSuccessfulNotification::class => ['mail','discord'],
-            \Spatie\Backup\Notifications\Notifications\HealthyBackupWasFoundNotification::class => ['mail','discord'],
-            \Spatie\Backup\Notifications\Notifications\CleanupWasSuccessfulNotification::class => ['mail','discord'],
+            \Spatie\Backup\Notifications\Notifications\CleanupHasFailedNotification::class => ['mail', 'discord'],
+            \Spatie\Backup\Notifications\Notifications\BackupWasSuccessfulNotification::class => ['mail', 'discord'],
+            \Spatie\Backup\Notifications\Notifications\HealthyBackupWasFoundNotification::class => ['mail', 'discord'],
+            \Spatie\Backup\Notifications\Notifications\CleanupWasSuccessfulNotification::class => ['mail', 'discord'],
         ],
 
         /*
@@ -257,7 +258,7 @@ return [
     'monitor_backups' => [
         [
             'name' => env('APP_NAME', 'Arkenstone'),
-            'disks' => ['backups','google_drive'], // Add google_drive here
+            'disks' => ['backups', 'google_drive'], // Add google_drive here
             'health_checks' => [
                 \Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumAgeInDays::class => 1,
                 \Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumStorageInMegabytes::class => 5000,
