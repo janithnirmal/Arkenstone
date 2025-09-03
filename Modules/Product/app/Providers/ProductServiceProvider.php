@@ -9,6 +9,7 @@ use Modules\Product\app\Services\ProductManagerService;
 use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use Illuminate\Support\Facades\Route;
 
 class ProductServiceProvider extends ServiceProvider
 {
@@ -17,6 +18,13 @@ class ProductServiceProvider extends ServiceProvider
     protected string $name = 'Product';
 
     protected string $nameLower = 'product';
+
+    /**
+     * The module namespace to assume when generating URLs to actions.
+     *
+     * @var string
+     */
+    protected $moduleNamespace = 'Modules\Product\Http\Controllers';
 
     /**
      * Boot the application events.
@@ -29,6 +37,7 @@ class ProductServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->name, 'database/migrations'));
+        $this->mapApiRoutes();
     }
 
     /**
@@ -159,5 +168,20 @@ class ProductServiceProvider extends ServiceProvider
         }
 
         return $paths;
+    }
+
+    /**
+     * Define the "api" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapApiRoutes()
+    {
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->moduleNamespace . '\Api\V1') // Specify the controller namespace for v1
+            ->group(module_path('Product', '/Routes/api.php')); // Path to your module's api.php
     }
 }
