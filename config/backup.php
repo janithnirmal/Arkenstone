@@ -17,6 +17,7 @@ return [
                 'include' => [
                     // base_path(), // Keep commented for database-only backup
                     base_path('database/data'), // Add your specific folder
+                    storage_path('logs/audit')
                 ],
 
                 /*
