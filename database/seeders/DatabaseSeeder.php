@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Modules\Product\Database\Seeders\ProductDatabaseSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,6 +20,9 @@ class DatabaseSeeder extends Seeder
                 // file and folders
             FolderSeeder::class,
             FileSeeder::class,
+
+                // Product
+            ProductDatabaseSeeder::class,
 
         ]);
     }

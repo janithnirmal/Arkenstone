@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Product\App\Http\Requests;
+namespace Modules\Product\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -8,65 +8,55 @@ class StoreProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     * In a real application, this would check for permissions, e.g., Auth::user()->can('create-products').
-     *
-     * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
+        // For now, allow all. In a real app, you'd check user roles/permissions.
         return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * These rules are designed for creating a new product and handle the full complexity
-     * of the enhanced product model, including relationships and file uploads.
-     *
-     * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            // --- Core Product Details ---
-            'name' => 'required|string|max:255|unique:products,name',
-            'description' => 'required|string',
-            'price' => 'required|numeric|min:0',
-            'stock_quantity' => 'required|integer|min:0',
+            'brand_id' => ['nullable', 'exists:brands,id'], // Check if brand exists
+            'name' => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'sku' => ['required', 'string', 'max:255', 'unique:products,sku'],
+            'price' => ['required', 'numeric', 'min:0'],
+            'discount_price' => ['nullable', 'numeric', 'min:0', 'lt:price'], // Must be less than price
+            'tax_rate' => ['nullable', 'numeric', 'min:0', 'max:1'], // e.g., 0.05 for 5%
+            'stock' => ['required', 'integer', 'min:0'],
+            'is_active' => ['boolean'],
 
-            // --- Relationships (Optional on creation) ---
-            // 'categories' must be an array if it is present.
-            'categories' => 'sometimes|array',
-            // Each item within the 'categories' array must be an integer and exist in the 'categories' table.
-            'categories.*' => 'integer|exists:categories,id',
+            // For nested data like categories, images, variants (optional for MVP, but good to plan)
+            'category_ids' => ['array'],
+            'category_ids.*' => ['exists:categories,id'],
 
-            // 'terms' must be an array if it is present.
-            'terms' => 'sometimes|array',
-            // Each item within the 'terms' array must be an integer and exist in the 'terms' table.
-            'terms.*' => 'integer|exists:terms,id',
+            'images' => ['array'],
+            'images.*.url' => ['required_with:images', 'url', 'max:2048'],
+            'images.*.alt_text' => ['nullable', 'string', 'max:255'],
+            'images.*.is_primary' => ['boolean'],
+            'images.*.order' => ['nullable', 'integer', 'min:0'],
 
-            // --- File Uploads (Optional on creation) ---
-            // 'images' must be an array if it is present.
-            'images' => 'sometimes|array',
-            // Each item in the 'images' array must be a valid image file.
-            // We restrict the mimetypes and set a maximum file size (e.g., 2MB).
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'variants' => ['array'],
+            'variants.*.name' => ['required_with:variants', 'string', 'max:255'],
+            'variants.*.sku' => ['required_with:variants', 'string', 'max:255', 'unique:product_variants,sku'],
+            'variants.*.price' => ['required_with:variants', 'numeric', 'min:0'],
+            'variants.*.discount_price' => ['nullable', 'numeric', 'min:0', 'lt:variants.*.price'],
+            'variants.*.stock' => ['required_with:variants', 'integer', 'min:0'],
+            'variants.*.is_active' => ['boolean'],
+            'variants.*.attribute_value_ids' => ['required_with:variants.*.name', 'array'],
+            'variants.*.attribute_value_ids.*' => ['exists:attribute_values,id'],
         ];
     }
 
-    /**
-     * Get custom messages for validator errors.
-     *
-     * @return array
-     */
-    public function messages()
+    public function messages(): array
     {
         return [
-            'name.unique' => 'A product with this name already exists.',
-            'categories.*.exists' => 'One or more of the selected categories are invalid.',
-            'terms.*.exists' => 'One or more of the selected taxonomies are invalid.',
-            'images.*.image' => 'One or more of the uploaded files is not a valid image.',
-            'images.*.max' => 'An uploaded image cannot be larger than 2MB.',
+            'discount_price.lt' => 'The discount price must be less than the regular price.',
         ];
     }
 }

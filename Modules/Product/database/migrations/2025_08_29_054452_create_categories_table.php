@@ -4,18 +4,20 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('terms', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('taxonomy_id')->constrained()->onDelete('cascade');
-            $table->string('name'); // e.g., "Cotton", "Summer 2025"
+            $table->foreignId('parent_id')->nullable()->constrained('categories')->onDelete('set null'); // Self-referencing foreign key
+            $table->string('name');
             $table->string('slug')->unique();
             $table->timestamps();
+            $table->softDeletes(); // For archiving
         });
     }
 
@@ -24,6 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('terms');
+        Schema::dropIfExists('categories');
     }
 };
