@@ -15,8 +15,10 @@ use Modules\Product\Http\Controllers\Api\V1\CategoryController;
 //     Route::apiResource('products', ProductController::class);
 // });
 
+use Modules\Product\Http\Controllers\Api\V1\BrandController; 
 
 Route::prefix('v1')->group(function () {
     Route::apiResource('products', ProductController::class);
-    Route::apiResource('categories', CategoryController::class); 
+    Route::apiResource('categories', CategoryController::class);
+    Route::apiResource('brands', BrandController::class);   
 });
