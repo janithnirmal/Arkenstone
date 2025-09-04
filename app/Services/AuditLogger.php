@@ -109,16 +109,17 @@ class AuditLogger
     private static function addMetadata(array $context, string $level): array
     {
         return array_merge($context, [
-            'timestamp' => Carbon::now()->toISOString(),
+            'timestamp' => Carbon::now(env('APP_TIMEZONE', 'Asia/Colombo'))->format('Y/n/j g:i a'),
             'level' => strtoupper($level),
-            'user_id' => Auth::id(),
-            'user_email' => Auth::user()?->email,
-            'user_agent' => request()?->userAgent(),
-            'url' => request()?->fullUrl(),
-            'method' => request()?->method(),
-            'session_id' => session()->getId(),
-            'server_name' => env('APP_NAME', 'Arkenstone'),
-            'environment' => env('APP_ENV', 'production'),
+            'user_id' => $context['user_id'] ?? Auth::id(),
+            'user_email' => $context['user_email'] ?? Auth::user()?->email,
+            'user_agent' => $context['user_agent'] ?? request()?->userAgent(),
+            'ip_address' => $context['ip_address'] ?? request()?->ip(),
+            'url' => $context['url'] ?? request()?->fullUrl(),
+            'method' => $context['method'] ?? request()?->method(),
+            'session_id' => $context['session_id'] ?? session()->getId(),
+            'server_name' => $context['server_name'] ?? env('APP_NAME', 'Arkenstone'),
+            'environment' => $context['environment'] ?? env('APP_ENV', 'production'),
         ]);
     }
 

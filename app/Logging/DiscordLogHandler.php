@@ -76,7 +76,7 @@ class DiscordLogHandler extends AbstractProcessingHandler
 
         // Create the embed
         $embed = [
-            'title' => $this->getEmoji($level) . " {$level} Alert",
+            'title' => $this->getEmoji($level) . " {$level} Log",
             'description' => $message,
             'color' => $this->color,
             'timestamp' => $timestamp,
@@ -91,7 +91,7 @@ class DiscordLogHandler extends AbstractProcessingHandler
 
         if (isset($context['user_email']) && !empty($context['user_email'])) {
             $fields[] = [
-                'name' => '👤 User',
+                'name' => '👤 User Email',
                 'value' => $context['user_email'],
                 'inline' => true
             ];
@@ -125,6 +125,14 @@ class DiscordLogHandler extends AbstractProcessingHandler
             $fields[] = [
                 'name' => '🌍 Environment',
                 'value' => strtoupper($context['environment']),
+                'inline' => true
+            ];
+        }
+
+        if(isset($context['user_id'])){
+            $fields[] = [
+                'name' => '🆔 User ID',
+                'value' => $context['user_id'],
                 'inline' => true
             ];
         }

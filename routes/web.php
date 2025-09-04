@@ -23,3 +23,12 @@ Route::get('/', function () {
     return redirect()->route('welcome');
 });
 
+//test route
+Route::get('/test-audit-middleware', function () {
+    return response()->json([
+        'message' => 'Audit middleware test',
+        'timestamp' => now(),
+        'user' => auth()->user?->email ?? 'guest',
+        'middleware_active' => 'yes'
+    ]);
+});

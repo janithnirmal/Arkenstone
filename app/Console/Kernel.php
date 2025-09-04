@@ -31,6 +31,10 @@ class Kernel extends ConsoleKernel
      * The Artisan commands provided by your application.
      */
     protected $commands = [
-        \App\Console\Commands\TestAuditLogging::class,
+        \App\Console\Commands\Audit\TestAuditLogging::class,
+        \App\Console\Commands\Audit\AdvanceAuditMiddlewareTest::class,
+        \App\Console\Commands\Audit\ShowAuditStats::class,
+        \App\Console\Commands\Audit\TestAuditMiddleware::class,
+        \App\Console\Commands\Audit\ClearAuditLogs::class,
     ];
 }

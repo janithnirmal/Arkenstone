@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\AdvancedAuditMiddleware;
 use App\Http\Middleware\CheckCompanyExists;
 use App\Http\Middleware\HandleAppearance;
 use App\Http\Middleware\HandleInertiaRequests;
@@ -26,12 +27,19 @@ return Application::configure(basePath: dirname(__DIR__))
             'role' => RoleMiddleware::class,
             'permission' => PermissionMiddleware::class,
             'role_or_permission' => RoleOrPermissionMiddleware::class,
+            'audit' => AdvancedAuditMiddleware::class,
         ]);
-        
+
+        // Global middleware - applies to all requests
+        $middleware->append([
+            AdvancedAuditMiddleware::class,
+        ]);
+
         $middleware->web(append: [
             HandleAppearance::class,
             HandleInertiaRequests::class,
             AddLinkHeadersForPreloadedAssets::class,
+
         ]);
 
         $middleware->api(append: [
