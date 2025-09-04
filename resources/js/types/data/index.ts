@@ -5,7 +5,7 @@ import {
     Taxonomy as TaxonomyCore,
     Term as TermCore,
     Product as ProductCore,
-} from '@/features/products/types';
+} from '@/modules/products/types';
 
 //  Product Feature Shared
 export interface Pivot extends PivotCore {}

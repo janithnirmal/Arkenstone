@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -10,15 +9,15 @@ Route::get('welcome', function () {
 })->name('welcome');
 
 Route::get('/home', function () {
-return Inertia::render('home');
+    return Inertia::render('home');
 })->name('home');
 
 Route::get('/about', function () {
-return Inertia::render('about');
+    return Inertia::render('about');
 })->name('about');
 
 Route::get('/contact', function () {
-return Inertia::render('contact');
+    return Inertia::render('contact');
 })->name('contact');
 
 // Policies

@@ -1,9 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ContactMailController;
-use App\Http\Controllers\Shop\CategoryController;
-use App\Http\Controllers\Shop\ProductController;
+
 use App\Http\Controllers\TestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +22,8 @@ Route::prefix('v1')->group(function () {
         Route::put('/', [AdminController::class, 'update']);
         Route::delete('/', [AdminController::class, 'destroy']);
     });
+
+
 
 });
 

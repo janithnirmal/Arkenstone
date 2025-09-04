@@ -1,9 +1,5 @@
 <?php
 
-use App\Http\Controllers\Shop\ProductController;
-use App\Http\Controllers\TestController;
-use App\Models\Category;
-use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -23,3 +19,7 @@ Route::get('/', function () {
     return redirect()->route('welcome');
 });
 
+
+Route::get('/test', function () {
+    return Inertia::render('test');
+});
