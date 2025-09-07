@@ -2,6 +2,7 @@
 
 namespace Modules\Product\Models;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -160,6 +161,39 @@ class Product extends Model implements ProductContract
                       });
                 });
             }
+        });
+
+        $query->when($filters['has_promotion'] ?? null, function ($query, $hasPromotion) {
+            if (!filter_var($hasPromotion, FILTER_VALIDATE_BOOLEAN)) {
+                return;
+            }
+
+            // A product is on sale if...
+            $query->where(function (Builder $q) {
+                // 1. It has a direct, active product promotion.
+                $q->whereHas('promotions', fn(Builder $promoQuery) => $promoQuery->active());
+
+                // 2. OR it belongs to a category with an active promotion.
+                $q->orWhereHas('categories.promotions', fn(Builder $promoQuery) => $promoQuery->active());
+
+                // 3. OR it belongs to a brand with an active promotion.
+                $q->orWhereHas('brand.promotions', fn(Builder $promoQuery) => $promoQuery->active());
+
+                // 4. OR there is at least one active "global" promotion in the database.
+                $q->orWhereExists(function ($subQuery) {
+                    $subQuery->select(DB::raw(1))
+                             ->from('promotions')
+                             
+                             // Manually apply the conditions from the active() scope
+                             ->where('is_active', true)
+                             ->where('start_date', '<=', now())
+                             ->where(function ($dateQuery) {
+                                 $dateQuery->whereNull('end_date')
+                                           ->orWhere('end_date', '>=', now());
+                             })
+                             ->where('type', 'global');
+                });
+            });
         });
 
         // Add sorting options

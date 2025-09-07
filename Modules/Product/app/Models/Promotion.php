@@ -9,6 +9,7 @@ use Modules\Product\Models\Product;
 use Modules\Product\Models\Category;
 use Modules\Product\Models\Brand;
 use Modules\Core\Contracts\PromotionContract;
+use Illuminate\Database\Eloquent\Builder; 
 
 class Promotion extends Model implements PromotionContract
 {
@@ -34,14 +35,34 @@ class Promotion extends Model implements PromotionContract
         'is_active' => 'boolean',
     ];
 
-    // Method to check if promotion is currently active
-    public function scopeActive($query)
+    /**
+     * Scope a query to only include active promotions.
+     * An active promotion is marked active and is within its start/end date range.
+     */
+    // public function scopeActive($query)
+    // {
+    //     return $query->where('is_active', true)
+    //                  ->where('start_date', '<=', now())
+    //                  ->where(function ($query) {
+    //                      $query->whereNull('end_date')
+    //                            ->orWhere('end_date', '>=', now());
+    //                  });
+    // }
+
+     /**
+     * Scope a query to only include active promotions.
+     * An active promotion is marked as active and is within its start/end date range.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive(Builder $query): Builder
     {
         return $query->where('is_active', true)
                      ->where('start_date', '<=', now())
-                     ->where(function ($query) {
-                         $query->whereNull('end_date')
-                               ->orWhere('end_date', '>=', now());
+                     ->where(function ($subQuery) {
+                         $subQuery->whereNull('end_date')
+                                  ->orWhere('end_date', '>=', now());
                      });
     }
 
