@@ -20,7 +20,11 @@ use Modules\Product\Http\Controllers\Api\V1\ProductVariantController;
 
 Route::prefix('v1')->group(function () {
     Route::apiResource('products', ProductController::class);
+    Route::post('/products/{product}/images', [ProductController::class, 'uploadImages'])->name('products.images.store');
+    Route::delete('/products/images/{product_image}', [ProductController::class, 'destroyImage'])->name('products.images.destroy');
+    
     Route::apiResource('categories', CategoryController::class);
+
     Route::apiResource('brands', BrandController::class);   
     
     // --- Attributes and Attribute Values ---

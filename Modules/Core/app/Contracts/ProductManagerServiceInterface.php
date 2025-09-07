@@ -3,6 +3,7 @@
 namespace Modules\Core\Contracts;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 
 interface ProductManagerServiceInterface
 {
@@ -50,4 +51,21 @@ interface ProductManagerServiceInterface
     public function createProductVariant(ProductContract $product, array $data): ProductVariantContract;
     public function updateProductVariant(ProductVariantContract $variant, array $data): ProductVariantContract;
     public function deleteProductVariant(ProductVariantContract $variant): bool;
+
+    /**
+     * Handle uploading and attaching multiple images to a product.
+     *
+     * @param ProductContract $product
+     * @param array $images Array of UploadedFile objects.
+     * @return Collection A collection of the newly created ProductImage models.
+     */
+    public function addImagesToProduct(ProductContract $product, array $images): Collection;
+
+    /**
+     * Delete a single product image.
+     *
+     * @param ProductImageContract $image The image instance to delete.
+     * @return bool
+     */
+    public function deleteImage(ProductImageContract $image): bool;
 }

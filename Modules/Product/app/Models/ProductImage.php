@@ -5,8 +5,9 @@ namespace Modules\Product\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\Core\Contracts\ProductImageContract;
 
-class ProductImage extends Model
+class ProductImage extends Model implements ProductImageContract
 {
     use HasFactory;
 
@@ -29,5 +30,15 @@ class ProductImage extends Model
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
+    }
+
+    /**
+     * Get the public URL of the image.
+     *
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return $this->url;
     }
 }

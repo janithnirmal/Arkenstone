@@ -14,6 +14,13 @@ use Modules\Product\Events\ProductViewed;
 use Modules\Product\Models\Product;
 use Modules\Product\Models\ProductVariant;
 use Modules\Core\Contracts\ProductVariantContract;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+use Modules\Product\Events\ProductImagesUploaded;
+use Modules\Product\Models\ProductImage;
+use Modules\Core\Contracts\ProductImageContract;
+use Modules\Product\Events\ProductImageDeleted;
 
 class ProductManagerService implements ProductManagerServiceInterface
 {
@@ -146,5 +153,70 @@ class ProductManagerService implements ProductManagerServiceInterface
     {
         // Fire event: ProductVariantDeleted
         return $variant->delete();
+    }
+
+    public function addImagesToProduct(ProductContract|Product $product, array $images): Collection
+    {
+        $createdImages = new Collection();
+
+        DB::transaction(function () use ($product, $images, &$createdImages) {
+            foreach ($images as $imageFile) {
+                if ($imageFile instanceof UploadedFile) {
+                    // Store the file and get its relative path. This is what we save.
+                    $path = $imageFile->store('products', 'public');
+
+                    // Create the database record for the image.
+                    $newImage = $product->images()->create([
+                        'url' => $path, // <-- STORE THE RELATIVE PATH, NOT THE FULL URL
+                        'alt_text' => $product->name,
+                        'is_primary' => false,
+                    ]);
+
+                    $createdImages->push($newImage);
+                }
+            }
+        });
+
+        if ($createdImages->isNotEmpty()) {
+            ProductImagesUploaded::dispatch($product, $createdImages);
+        }
+
+        return $createdImages;
+    }
+    
+    // public function deleteImage(ProductImageContract|ProductImage $image): bool
+    // {
+    //     // The URL is stored in the database. We need to derive the relative storage path from it.
+    //     // Example: 'http://app.test/storage/products/image.jpg' becomes 'products/image.jpg'
+    //     $path = str_replace(Storage::disk('public')->url(''), '', $image->url);
+
+    //     // 1. Delete the physical file from storage.
+    //     Storage::disk('public')->delete($path);
+
+    //     // 2. Then delete the database record.
+    //     // TODO: Fire a ProductImageDeleted event here if desired.
+
+    //     return $image->delete();
+    // }
+
+    public function deleteImage(ProductImageContract|ProductImage $image): bool
+    {
+        // The relative path is now stored directly in the 'url' property.
+        $path = $image->getUrl(); // This returns the relative path
+
+        // Delete the physical file from storage.
+        if (Storage::disk('public')->exists($path)) {
+            Storage::disk('public')->delete($path);
+        }
+
+        // Then delete the database record.
+        $result = $image->delete();
+
+        // If the deletion was successful, dispatch the event.
+        if ($result) {
+            ProductImageDeleted::dispatch($image);
+        }
+
+        return $result;
     }
 }

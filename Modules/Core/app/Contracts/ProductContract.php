@@ -22,7 +22,7 @@ interface ProductContract
      *
      * @return bool|null
      */
-    public function delete(): ?bool;
+    public function delete();
 
     /**
      * Reload a fresh model instance from the database.
