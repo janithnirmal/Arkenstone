@@ -5,11 +5,16 @@ namespace Modules\Product\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-use Modules\Product\app\Services\ProductManagerService;
 use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use Illuminate\Support\Facades\Route;
+use Modules\Core\Contracts\BrandManagerServiceInterface;
+use Modules\Core\Contracts\CategoryManagerServiceInterface;
+use Modules\Core\Contracts\ProductManagerServiceInterface;
+use Modules\Product\Services\BrandManagerService;
+use Modules\Product\Services\CategoryManagerService;
+use Modules\Product\Services\ProductManagerService;
 
 class ProductServiceProvider extends ServiceProvider
 {
@@ -48,12 +53,10 @@ class ProductServiceProvider extends ServiceProvider
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
 
-        // When any part of the application (including other modules)
-        // asks for a ProductContract, Laravel will provide the concrete
-        // Product model from this module.
-        $this->app->bind(\Modules\Core\Contracts\ProductContract::class, \Modules\Product\Models\Product::class);
-
-        $this->app->bind(\Modules\Core\Contracts\ProductManagerServiceInterface::class, ProductManagerService::class);
+        // Bind the interfaces to their concrete service classes
+        $this->app->bind(ProductManagerServiceInterface::class, ProductManagerService::class);
+        $this->app->bind(CategoryManagerServiceInterface::class, CategoryManagerService::class);
+        $this->app->bind(BrandManagerServiceInterface::class, BrandManagerService::class);
     }
 
     /**

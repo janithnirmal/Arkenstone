@@ -3,10 +3,10 @@
 namespace Modules\Core\Contracts;
 
 /**
- * Interface ProductContract
- * Represents a product entity within the application.
+ * Interface BrandContract
+ * Represents a brand entity.
  */
-interface ProductContract
+interface BrandContract
 {
     /**
      * Update the model in the database.
@@ -22,7 +22,7 @@ interface ProductContract
      *
      * @return bool|null
      */
-    public function delete(): ?bool;
+    public function delete();
 
     /**
      * Reload a fresh model instance from the database.
@@ -30,13 +30,5 @@ interface ProductContract
      * @param  array|string|null  $with
      * @return static|null
      */
-    public function fresh($with = []);
-
-    /**
-     * Eager load relations on the model.
-     *
-     * @param  string|array  $relations
-     * @return static
-     */
-    public function load($relations);
+    public function fresh($with = []); 
 }

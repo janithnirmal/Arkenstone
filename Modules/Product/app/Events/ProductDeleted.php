@@ -7,7 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 use Modules\Core\Contracts\ProductContract;
 
-class ProductViewed
+class ProductDeleted
 {
     use Dispatchable, SerializesModels;
 
@@ -19,6 +19,6 @@ class ProductViewed
     public function __construct(ProductContract $product)
     {
         $this->product = $product;
-        Log::info("Product Viewed Event: A product was viewed.", ['id' => $product->id, 'name' => $product->name]);
+        Log::info("Product Deleted Event: A product was soft-deleted.", ['id' => $product->id, 'name' => $product->name]);
     }
 }

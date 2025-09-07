@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Core\Contracts\CategoryContract;
 
-class Category extends Model
+class Category extends Model implements CategoryContract
+
 {
     use HasFactory, SoftDeletes;
 

@@ -11,8 +11,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Builder; 
 use Illuminate\Support\Str;
+use Modules\Core\Contracts\ProductContract;
 
-class Product extends Model
+class Product extends Model implements ProductContract
 {
     use HasFactory, SoftDeletes;
 
