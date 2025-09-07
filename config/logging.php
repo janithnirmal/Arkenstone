@@ -89,7 +89,7 @@ return [
             'handler_with' => [
                 'host' => env('PAPERTRAIL_URL'),
                 'port' => env('PAPERTRAIL_PORT'),
-                'connectionString' => 'tls://'.env('PAPERTRAIL_URL').':'.env('PAPERTRAIL_PORT'),
+                'connectionString' => 'tls://' . env('PAPERTRAIL_URL') . ':' . env('PAPERTRAIL_PORT'),
             ],
             'processors' => [PsrLogMessageProcessor::class],
         ],
@@ -125,6 +125,150 @@ return [
 
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
+        ],
+
+        /*
+        |---------------------------------------------------------------------------------
+        | File-only channels for other log levels
+        |---------------------------------------------------------------------------------
+        */
+
+        'audit_error' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/audit/error/error.log'),
+            'level' => 'error',
+            'days' => 30,
+            'replace_placeholders' => true,
+        ],
+
+        'audit_warning' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/audit/warning/warning.log'),
+            'level' => 'warning',
+            'days' => 30,
+            'replace_placeholders' => true,
+        ],
+
+        'audit_info' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/audit/info/info.log'),
+            'level' => 'info',
+            'days' => 30,
+            'replace_placeholders' => true,
+        ],
+
+        'audit_notice' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/audit/notice/notice.log'),
+            'level' => 'notice',
+            'days' => 30,
+            'replace_placeholders' => true,
+        ],
+
+        /*
+        |---------------------------------------------------------------------------------
+        | Custom Audit Logging Channels with Discord notifications
+        |---------------------------------------------------------------------------------
+        */
+
+        'audit_emergency' => [
+            'driver' => 'stack',
+            'channels' => ['audit_emergency_file', 'discord_emergency'],
+            'ignore_exceptions' => false,
+        ],
+
+        'audit_alert' => [
+            'driver' => 'stack',
+            'channels' => ['audit_alert_file', 'discord_alert'],
+            'ignore_exceptions' => false,
+        ],
+
+        'audit_critical' => [
+            'driver' => 'stack',
+            'channels' => ['audit_critical_file', 'discord_critical'],
+            'ignore_exceptions' => false,
+        ],
+
+        /*
+         |---------------------------------------------------------------------------------
+         | File channels for high-priority logs
+         |---------------------------------------------------------------------------------
+        */
+        'audit_emergency_file' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/audit/emergency/emergency.log'),
+            'level' => 'emergency',
+            'days' => 60,
+            'replace_placeholders' => true,
+        ],
+
+        'audit_alert_file' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/audit/alert/alert.log'),
+            'level' => 'alert',
+            'days' => 30,
+            'replace_placeholders' => true,
+        ],
+
+        'audit_critical_file' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/audit/critical/critical.log'),
+            'level' => 'critical',
+            'days' => 30,
+            'replace_placeholders' => true,
+        ],
+
+        /*
+         |---------------------------------------------------------------------------------
+         | Discord channels for high-priority notifications
+         |---------------------------------------------------------------------------------
+         */
+
+        'discord_emergency' => [
+            'driver' => 'monolog',
+            'handler' => App\Logging\DiscordLogHandler::class,
+            'level' => 'emergency',
+            'with' => [
+                'webhook_url' => env('DISCORD_EMERGENCY_WEBHOOK_URL', env('DISCORD_WEBHOOK_URL')),
+                'username' => 'Arkenstone Emergency Alert',
+                'avatar_url' => 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f6a8.png',
+                'color' => 15158332, // Red color
+            ],
+        ],
+
+        'discord_alert' => [
+            'driver' => 'monolog',
+            'handler' => App\Logging\DiscordLogHandler::class,
+            'level' => 'alert',
+            'with' => [
+                'webhook_url' => env('DISCORD_ALERT_WEBHOOK_URL', env('DISCORD_WEBHOOK_URL')),
+                'username' => 'Arkenstone Alert',
+                'avatar_url' => 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/26a0.png',
+                'color' => 16744448, // Orange color
+            ],
+        ],
+
+        'discord_critical' => [
+            'driver' => 'monolog',
+            'handler' => App\Logging\DiscordLogHandler::class,
+            'level' => 'critical',
+            'with' => [
+                'webhook_url' => env('DISCORD_CRITICAL_WEBHOOK_URL', env('DISCORD_WEBHOOK_URL')),
+                'username' => 'Arkenstone Critical',
+                'avatar_url' => 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f534.png',
+                'color' => 10038562, // Dark red color
+            ],
+        ],
+
+        /*
+         |---------------------------------------------------------------------------------
+         | Stack channel for audit logs (logs to all audit channels)
+         |---------------------------------------------------------------------------------
+         */
+        'audit_stack' => [
+            'driver' => 'stack',
+            'channels' => ['audit_alert', 'audit_critical', 'audit_error', 'audit_warning', 'audit_info', 'audit_emergency', 'audit_notice'],
+            'ignore_exceptions' => false,
         ],
 
     ],

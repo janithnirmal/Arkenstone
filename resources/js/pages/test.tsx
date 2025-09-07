@@ -1,10 +1,5 @@
-import PageLayout from '@/core/layouts/page-layout';
-import ProductListPage from '@/features/products/pages/ProductListPage';
+import { AnalyticsTest } from '@/modules/analytics/page/analytics-test';
 
 export default function Test() {
-    return (
-        <PageLayout>
-            <ProductListPage />
-        </PageLayout>
-    );
+    return <AnalyticsTest />;
 }

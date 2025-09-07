@@ -1,9 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ContactMailController;
-use App\Http\Controllers\Shop\CategoryController;
-use App\Http\Controllers\Shop\ProductController;
+use App\Http\Controllers\LoggerTestController;
 use App\Http\Controllers\TestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +23,8 @@ Route::prefix('v1')->group(function () {
         Route::delete('/', [AdminController::class, 'destroy']);
     });
 
+
+
 });
 
 
@@ -35,3 +35,15 @@ Route::prefix('v1')->group(function () {
 Route::get('/auth-test', [TestController::class, 'index'])->middleware('web', 'auth:sanctum');
 Route::get('/role-test', [TestController::class, 'roleTest'])->middleware('web', 'auth:sanctum', 'permission:manage_standard');
 Route::get('/event-test', [TestController::class, 'testEvent'])->middleware('web', 'auth:sanctum');
+
+// Test Laravel logging system
+Route::get('/log-test', [LoggerTestController::class, 'test']);
+
+Route::get('/test-audit-middleware', function () {
+    return response()->json([
+        'message' => 'Audit middleware test',
+        'timestamp' => now(),
+        'user' => auth()->user?->email ?? 'guest',
+        'middleware_active' => 'yes'
+    ]);
+});
