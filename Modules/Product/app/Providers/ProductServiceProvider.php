@@ -15,6 +15,9 @@ use Modules\Core\Contracts\ProductManagerServiceInterface;
 use Modules\Product\Services\BrandManagerService;
 use Modules\Product\Services\CategoryManagerService;
 use Modules\Product\Services\ProductManagerService;
+use Modules\Core\Contracts\AttributeManagerServiceInterface;
+use Modules\Product\Services\AttributeManagerService;
+
 
 class ProductServiceProvider extends ServiceProvider
 {
@@ -53,10 +56,10 @@ class ProductServiceProvider extends ServiceProvider
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
 
-        // Bind the interfaces to their concrete service classes
         $this->app->bind(ProductManagerServiceInterface::class, ProductManagerService::class);
         $this->app->bind(CategoryManagerServiceInterface::class, CategoryManagerService::class);
         $this->app->bind(BrandManagerServiceInterface::class, BrandManagerService::class);
+        $this->app->bind(AttributeManagerServiceInterface::class, AttributeManagerService::class);
     }
 
     /**

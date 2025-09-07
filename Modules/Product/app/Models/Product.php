@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Builder; 
 use Illuminate\Support\Str;
 use Modules\Core\Contracts\ProductContract;
+use Modules\Product\Models\ProductVariant;
 
 class Product extends Model implements ProductContract
 {
@@ -54,7 +55,8 @@ class Product extends Model implements ProductContract
 
     /**
      * Get the variants for the product.
-     */
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Modules\Product\Models\ProductVariant>
+    */
     public function variants(): HasMany
     {
         return $this->hasMany(ProductVariant::class);

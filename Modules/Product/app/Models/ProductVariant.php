@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Core\Contracts\ProductVariantContract;
+use Modules\Product\Models\AttributeValue; 
 
-class ProductVariant extends Model
+class ProductVariant extends Model implements ProductVariantContract
 {
     use HasFactory, SoftDeletes;
 

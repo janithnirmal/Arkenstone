@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Modules\Core\Contracts\AttributeValueContract;
 
-class AttributeValue extends Model
+class AttributeValue extends Model implements AttributeValueContract
 {
     use HasFactory;
 
@@ -28,6 +29,7 @@ class AttributeValue extends Model
 
     /**
      * Get the product variants that use this attribute value.
+     *  @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<\Modules\Product\Models\ProductVariant>
      */
     public function productVariants(): BelongsToMany
     {

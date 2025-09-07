@@ -46,4 +46,8 @@ interface ProductManagerServiceInterface
      * @return bool True on successful deletion.
      */
     public function deleteProduct(ProductContract $product): bool;
+
+    public function createProductVariant(ProductContract $product, array $data): ProductVariantContract;
+    public function updateProductVariant(ProductVariantContract $variant, array $data): ProductVariantContract;
+    public function deleteProductVariant(ProductVariantContract $variant): bool;
 }

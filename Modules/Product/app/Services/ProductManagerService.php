@@ -13,6 +13,7 @@ use Modules\Product\Events\ProductUpdated;
 use Modules\Product\Events\ProductViewed;
 use Modules\Product\Models\Product;
 use Modules\Product\Models\ProductVariant;
+use Modules\Core\Contracts\ProductVariantContract;
 
 class ProductManagerService implements ProductManagerServiceInterface
 {
@@ -115,5 +116,35 @@ class ProductManagerService implements ProductManagerServiceInterface
             ProductDeleted::dispatch($product);
         }
         return $result;
+    }
+    
+    public function createProductVariant(ProductContract|Product $product, array $data): ProductVariantContract
+    {
+        $variantData = collect($data)->except('attribute_value_ids')->toArray();
+        $variant = $product->variants()->create($variantData);
+
+        if (!empty($data['attribute_value_ids'])) {
+            $variant->attributeValues()->attach($data['attribute_value_ids']);
+        }
+        // Fire event: ProductVariantCreated
+        return $variant;
+    }
+
+    public function updateProductVariant(ProductVariantContract|ProductVariant $variant, array $data): ProductVariantContract
+    {
+        $variantData = collect($data)->except('attribute_value_ids')->toArray();
+        $variant->update($variantData);
+
+        if (isset($data['attribute_value_ids'])) {
+            $variant->attributeValues()->sync($data['attribute_value_ids']);
+        }
+        // Fire event: ProductVariantUpdated
+        return $variant->fresh('attributeValues.attribute');
+    }
+
+    public function deleteProductVariant(ProductVariantContract|ProductVariant $variant): bool
+    {
+        // Fire event: ProductVariantDeleted
+        return $variant->delete();
     }
 }
