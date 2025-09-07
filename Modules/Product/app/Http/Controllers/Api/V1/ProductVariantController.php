@@ -10,6 +10,7 @@ use Modules\Product\Models\Product;
 use Modules\Product\Models\ProductVariant;
 use Modules\Product\Http\Requests\StoreProductVariantRequest;
 use Modules\Product\Http\Requests\UpdateProductVariantRequest;
+use Modules\Product\Http\Requests\UpdateVariantStockRequest;
 
 class ProductVariantController extends Controller
 {
@@ -36,5 +37,17 @@ class ProductVariantController extends Controller
     {
         $this->productService->deleteProductVariant($variant);
         return response()->json(null, 204);
+    }
+
+    /**
+     * Update the stock for a specific product variant.
+     */
+    public function updateStock(UpdateVariantStockRequest $request, ProductVariant $variant): ProductVariantResource
+    {
+        $updatedVariant = $this->productService->updateVariantStock(
+            $variant,
+            $request->validated()['stock']
+        );
+        return new ProductVariantResource($updatedVariant);
     }
 }

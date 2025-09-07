@@ -41,4 +41,8 @@ Route::prefix('v1')->group(function () {
 
     // --- Promotions ---
     Route::apiResource('promotions', PromotionController::class);
+
+    // --- Stock Management ---
+    Route::patch('/products/{product}/stock', [ProductController::class, 'updateStock'])->name('products.stock.update');
+    Route::patch('/products/variants/{variant}/stock', [ProductVariantController::class, 'updateStock'])->name('variants.stock.update');
 });

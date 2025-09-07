@@ -18,6 +18,7 @@ use Modules\Product\Http\Resources\ProductResource;
 use Modules\Product\Http\Requests\UploadProductImagesRequest;
 use Modules\Product\Http\Resources\ProductImageResource;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Modules\Product\Http\Requests\UpdateProductStockRequest;
 
 class ProductController extends Controller
 {
@@ -84,6 +85,18 @@ class ProductController extends Controller
         // Add authorization check here to ensure user can delete this image.
         $this->productService->deleteImage($product_image);
         return response()->json(null, 204);
+    }
+
+    /**
+     * Update the stock for a specific product.
+     */
+    public function updateStock(UpdateProductStockRequest $request, Product $product): ProductResource
+    {
+        $updatedProduct = $this->productService->updateProductStock(
+            $product,
+            $request->validated()['stock']
+        );
+        return new ProductResource($updatedProduct);
     }
     
 }

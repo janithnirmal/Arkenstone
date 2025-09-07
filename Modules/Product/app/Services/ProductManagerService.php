@@ -21,6 +21,7 @@ use Modules\Product\Events\ProductImagesUploaded;
 use Modules\Product\Models\ProductImage;
 use Modules\Core\Contracts\ProductImageContract;
 use Modules\Product\Events\ProductImageDeleted;
+use Modules\Product\Events\StockUpdated;
 
 class ProductManagerService implements ProductManagerServiceInterface
 {
@@ -183,21 +184,6 @@ class ProductManagerService implements ProductManagerServiceInterface
 
         return $createdImages;
     }
-    
-    // public function deleteImage(ProductImageContract|ProductImage $image): bool
-    // {
-    //     // The URL is stored in the database. We need to derive the relative storage path from it.
-    //     // Example: 'http://app.test/storage/products/image.jpg' becomes 'products/image.jpg'
-    //     $path = str_replace(Storage::disk('public')->url(''), '', $image->url);
-
-    //     // 1. Delete the physical file from storage.
-    //     Storage::disk('public')->delete($path);
-
-    //     // 2. Then delete the database record.
-    //     // TODO: Fire a ProductImageDeleted event here if desired.
-
-    //     return $image->delete();
-    // }
 
     public function deleteImage(ProductImageContract|ProductImage $image): bool
     {
@@ -218,5 +204,25 @@ class ProductManagerService implements ProductManagerServiceInterface
         }
 
         return $result;
+    }
+
+    public function updateProductStock(ProductContract|Product $product, int $quantity): ProductContract
+    {
+        $oldStock = $product->stock;
+        $product->update(['stock' => $quantity]);
+
+        StockUpdated::dispatch($product, $oldStock, $quantity);
+
+        return $product->fresh();
+    }
+
+    public function updateVariantStock(ProductVariantContract|ProductVariant $variant, int $quantity): ProductVariantContract
+    {
+        $oldStock = $variant->stock;
+        $variant->update(['stock' => $quantity]);
+
+        StockUpdated::dispatch($variant, $oldStock, $quantity);
+
+        return $variant->fresh();
     }
 }

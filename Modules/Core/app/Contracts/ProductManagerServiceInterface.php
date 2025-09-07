@@ -68,4 +68,22 @@ interface ProductManagerServiceInterface
      * @return bool
      */
     public function deleteImage(ProductImageContract $image): bool;
+
+    /**
+     * Updates the stock for a simple product.
+     *
+     * @param ProductContract $product
+     * @param int $quantity
+     * @return ProductContract
+     */
+    public function updateProductStock(ProductContract $product, int $quantity): ProductContract;
+
+    /**
+     * Updates the stock for a specific product variant.
+     *
+     * @param ProductVariantContract $variant
+     * @param int $quantity
+     * @return ProductVariantContract
+     */
+    public function updateVariantStock(ProductVariantContract $variant, int $quantity): ProductVariantContract;
 }
