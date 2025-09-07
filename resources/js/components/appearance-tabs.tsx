@@ -1,5 +1,5 @@
-import { Appearance, useAppearance } from '@/core/hooks/use-appearance';
 import { cn } from '@/lib/utils';
+import { Appearance, useAppearance } from '@@/core/hooks/use-appearance';
 import { LucideIcon, Monitor, Moon, Sun } from 'lucide-react';
 import { HTMLAttributes } from 'react';
 
@@ -27,7 +27,7 @@ export default function AppearanceToggleTab({
                     key={value}
                     onClick={() => updateAppearance(value)}
                     className={cn(
-                        'flex items-center rounded-md px-3.5 py-1.5 transition-colors cursor-pointer',
+                        'flex cursor-pointer items-center rounded-md px-3.5 py-1.5 transition-colors',
                         appearance === value ? 'hidden' : 'text-foreground hover:text-foreground/60',
                     )}
                 >

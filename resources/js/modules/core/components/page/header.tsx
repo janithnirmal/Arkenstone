@@ -1,7 +1,7 @@
 import AppLogo from '@/components/app-logo';
 import AppearanceToggleTab from '@/components/appearance-tabs';
-import { useIsMobile } from '@/core/hooks/use-mobile';
 import { cn } from '@/lib/utils';
+import { useIsMobile } from '@@/core/hooks/use-mobile';
 import { Link } from '@inertiajs/react';
 import { Menu } from 'lucide-react';
 import React, { PropsWithChildren, createContext, useState } from 'react';
@@ -13,7 +13,6 @@ type PageHeaderContextType = {
 };
 
 export const PageHeaderContext = createContext<PageHeaderContextType>({ isOpen: false, setIsOpen: () => {} });
-
 
 const items: HeaderItemProps[] = [
     {

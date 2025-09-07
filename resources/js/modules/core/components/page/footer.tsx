@@ -1,6 +1,6 @@
 import Button from '@/components/custom/button';
 import { Input } from '@/components/ui/input';
-import Config from '@/core/config';
+import Config from '@@/core/config';
 import { Link } from '@inertiajs/react';
 import { Facebook, Instagram, Linkedin } from 'lucide-react';
 
