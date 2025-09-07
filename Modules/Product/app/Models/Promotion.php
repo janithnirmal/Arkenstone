@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Product\Models\Product;
 use Modules\Product\Models\Category;
 use Modules\Product\Models\Brand;
+use Modules\Core\Contracts\PromotionContract;
 
-class Promotion extends Model
+class Promotion extends Model implements PromotionContract
 {
     use HasFactory, SoftDeletes;
 

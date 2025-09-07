@@ -7,6 +7,7 @@ use Modules\Product\Http\Controllers\Api\V1\CategoryController;
 use Modules\Product\Http\Controllers\Api\V1\BrandController; 
 use Modules\Product\Http\Controllers\Api\V1\AttributeController;
 use Modules\Product\Http\Controllers\Api\V1\ProductVariantController;
+use Modules\Product\Http\Controllers\Api\V1\PromotionController;
 // use Modules\Product\Http\Controllers\Api\ProductController;
 
 // Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
@@ -37,4 +38,7 @@ Route::prefix('v1')->group(function () {
     Route::post('/products/{product}/variants', [ProductVariantController::class, 'store']);
     Route::put('/products/variants/{variant}', [ProductVariantController::class, 'update']);
     Route::delete('/products/variants/{variant}', [ProductVariantController::class, 'destroy']);
+
+    // --- Promotions ---
+    Route::apiResource('promotions', PromotionController::class);
 });
