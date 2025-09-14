@@ -4,6 +4,7 @@ namespace Modules\Analytics\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 use Modules\Core\Contracts\ProductManagerServiceInterface;
 
 class AnalyticsController extends Controller
@@ -19,7 +20,7 @@ class AnalyticsController extends Controller
      */
     public function index()
     {
-        return $this->productManager->find(1);
+
     }
 
     /**
@@ -42,7 +43,7 @@ class AnalyticsController extends Controller
      */
     public function show($id)
     {
-        return view('analytics::show');
+        return Inertia::render("analytics");
     }
 
     /**

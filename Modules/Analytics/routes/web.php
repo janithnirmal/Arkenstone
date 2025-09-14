@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 use Modules\Analytics\Http\Controllers\AnalyticsController;
 
 
@@ -9,4 +10,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 
-Route::get("test-1", [AnalyticsController::class, "index"]);
+Route::get("test-1", function() {
+    return Inertia::render("analytics");
+});

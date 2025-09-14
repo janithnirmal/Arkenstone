@@ -2,12 +2,13 @@
 
 namespace Modules\Analytics\Services;
 
+use Modules\Analytics\Contracts\AnalyticsServiceInterface;
 use Modules\Analytics\Helpers\AnalyticsStorage;
 
 /**
  * Track System wide Events and User Events and store the data in the file system in JSON format
  */
-class AnalyticsService
+class AnalyticsService implements AnalyticsServiceInterface
 {
     protected $storage;
 
