@@ -59,7 +59,7 @@ export interface Promotion {
     id: number;
     title: string;
     description?: string;
-    type: 'product' | 'category' | 'taxonomy' | 'global';
+    type: 'product' | 'category' | 'brand' | 'global';
     entity_id: number;
     discount_percent: number;
     start_date: string; // ISO 8601 date string
