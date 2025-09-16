@@ -3,9 +3,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { productService } from '../services/productService';
-import { Product, ProductImage, ProductVariant } from '../types';
-import ImageGallery from '../components/catalog/ImageGallery';
-import RelatedProducts from '../components/catalog/RelatedProducts'; 
+import { Product, ProductVariant } from '../types';
+import ImageCarousel from '../components/shared/ImageCarousel';
+import RelatedProducts from '../components/catalog/RelatedProducts';
 // We'll re-use the VariantSelector here, but it may need adjustment based on real API data
 // import VariantSelector from '../components/catalog/VariantSelector';
 
@@ -17,7 +17,6 @@ const ProductDetailPage: React.FC = () => {
 
     // State for user selections
     const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(null);
-    const [mainImage, setMainImage] = useState<ProductImage | null>(null);
 
     useEffect(() => {
         if (!id) return;
@@ -28,14 +27,9 @@ const ProductDetailPage: React.FC = () => {
                 const data = await productService.getProduct(parseInt(id, 10));
                 setProduct(data);
 
-                // --- Set initial state after data is fetched ---
-                // Set the first variant as the default selection
                 if (data.variants && data.variants.length > 0) {
                     setSelectedVariant(data.variants[0]);
                 }
-                // Set the primary image as the default main image
-                const primary = data.images.find(img => img.is_primary) || data.images[0];
-                setMainImage(primary);
 
             } catch (err) {
                 setError("Product not found or failed to load.");
@@ -63,11 +57,9 @@ const ProductDetailPage: React.FC = () => {
                     
                     {/* Image gallery */}
                     <div className="lg:col-span-1 lg:border-r lg:border-gray-200 lg:pr-8">
-                        <ImageGallery
+                        <ImageCarousel
                             images={product.images}
                             productName={product.name}
-                            selectedImage={mainImage}
-                            onSelectImage={setMainImage}
                         />
                     </div>
 
