@@ -6,7 +6,7 @@ import { Brand, Category, Product } from '../types';
 import { ProductListQuery, ProductListResponse } from '../types/http.types';
 import FilterSidebar from '../components/catalog/FilterSidebar';
 import ProductCard from '../components/catalog/ProductCard';
-import Pagination from '../components/catalog/Pagination';
+import Pagination from '../components/shared/Pagination';
 
 const CatalogPage: React.FC = () => {
     const [productResponse, setProductResponse] = useState<ProductListResponse | null>(null);
