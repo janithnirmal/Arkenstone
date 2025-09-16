@@ -2,9 +2,8 @@
 
 import { apiDelete, apiGet, apiPost, apiPut } from '@@/core/lib/api';
 import { toFormData } from '@@/core/lib/to-form-data';
-import { Brand, Category, Product } from '../types';
+import { Brand, Category, Product, ProductVariant, ProductImage } from '../types';
 import { CreateProductData, ProductListQuery, ProductListResponse, UpdateProductData } from '../types/http.types';
-import { ProductVariant } from '../types';
 
 /**
  * Fetches a paginated list of products.
@@ -123,6 +122,36 @@ const deleteVariant = (variantId: number): Promise<void> => {
     return apiDelete(`/products/variants/${variantId}`, { displaySuccess: true });
 };
 
+/**
+ * Uploads one or more images for a specific product.
+ * @param productId The ID of the product.
+ * @param images An array of File objects to upload.
+ * @returns A promise that resolves with the data of the newly created images.
+ */
+const uploadProductImages = (productId: number, images: File[]): Promise<ProductImage[]> => {
+    // Our toFormData utility correctly handles array data with the `[]` syntax.
+    const formData = toFormData({ images });
+
+    return apiPost(`/products/${productId}/images`, {
+        data: formData,
+        isMultipart: true, // This is essential for file uploads
+        displaySuccess: true,
+    });
+};
+
+/**
+ * Deletes a specific product image.
+ * The API endpoint is based on the product_image_id, not the product_id.
+ * @param imageId The ID of the product_image record to delete.
+ * @returns A promise that resolves when deletion is complete.
+ */
+const deleteProductImage = (imageId: number): Promise<void> => {
+    return apiDelete(`/products/images/${imageId}`, {
+        displaySuccess: true,
+    });
+};
+
+
 // Bundle all functions into a single service object for easy importing.
 export const productService = {
     getProducts,
@@ -135,4 +164,6 @@ export const productService = {
     createVariant,
     updateVariant,
     deleteVariant,
+    uploadProductImages,
+    deleteProductImage,
 };

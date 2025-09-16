@@ -5,6 +5,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { productService } from '../../services/productService';
 import { Brand, Category, Product } from '../../types';
 import VariantManager from './VariantManager'; 
+import ProductImageManager from './ProductImageManager';
 
 interface ProductFormData {
     name: string;
@@ -163,7 +164,16 @@ const ProductForm: React.FC<Props> = ({ productToEdit, onSuccess }) => {
                 </div>
             </form>
 
-            {/* --- VARIANT SECTION --- */}
+            {/*IMAGE MANAGEMENT SECTION*/}
+            {productToEdit && (
+                <div className="mt-8">
+                    <h2 className="text-lg font-medium text-gray-900">Image Management</h2>
+                    <p className="text-sm text-gray-500 mb-4">Upload, view, and delete images for this product.</p>
+                    <ProductImageManager product={productToEdit} onSuccess={onSuccess} />
+                </div>
+            )}
+
+            {/*VARIANT SECTION*/}
             {productToEdit && (
                 <div className="mt-8">
                     <h2 className="text-lg font-medium text-gray-900">Variant Management</h2>
