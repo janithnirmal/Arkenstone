@@ -151,6 +151,47 @@ const deleteProductImage = (imageId: number): Promise<void> => {
     });
 };
 
+/**
+ * Updates the stock for a simple product (one without variants).
+ * @param productId The ID of the product.
+ * @param stock The new stock quantity.
+ * @returns A promise that resolves with the updated product data.
+ */
+const updateProductStock = (productId: number, stock: number): Promise<Product> => {
+    // Laravel's PATCH method is used here, but api utility can handle it via apiPut/apiPost.
+    // Assuming apiPut can handle PATCH or have an apiPatch. We'll use apiPut for now.
+    // The API docs specify PATCH, but often PUT can be used if the backend route accepts it.
+    // If not, might need an `apiPatch` function in core `api.ts`. Let's assume apiPost with method spoofing.
+    const formData = new FormData();
+    formData.append('stock', stock.toString());
+    formData.append('_method', 'PATCH');
+
+    return apiPost(`/products/${productId}/stock`, {
+        data: formData,
+        isMultipart: true, // Use multipart to send form-data
+        displaySuccess: true,
+    });
+};
+
+
+/**
+ * Updates the stock for a specific product variant.
+ * @param variantId The ID of the variant.
+ * @param stock The new stock quantity.
+ * @returns A promise that resolves with the updated variant data.
+ */
+const updateVariantStock = (variantId: number, stock: number): Promise<ProductVariant> => {
+    const formData = new FormData();
+    formData.append('stock', stock.toString());
+    formData.append('_method', 'PATCH');
+
+    return apiPost(`/products/variants/${variantId}/stock`, {
+        data: formData,
+        isMultipart: true,
+        displaySuccess: true,
+    });
+};
+
 
 // Bundle all functions into a single service object for easy importing.
 export const productService = {
@@ -166,4 +207,6 @@ export const productService = {
     deleteVariant,
     uploadProductImages,
     deleteProductImage,
+    updateProductStock,
+    updateVariantStock,
 };
