@@ -53,8 +53,20 @@ const deletePromotion = (id: number): Promise<void> => {
     return apiDelete(`/promotions/${id}`, { displaySuccess: true });
 };
 
+/**
+ * Fetches a list of all currently active promotions for the customer-facing page.
+ * Assumes the backend is eager-loading sample products with each promotion.
+ * @returns A promise resolving to an array of active Promotion objects.
+ */
+const getActivePromotions = (): Promise<Promotion[]> => {
+    // apiGet utility will correctly append these params to the URL
+    // e.g., /api/v1/promotions?is_active=true
+    return apiGet('/promotions', { params: { is_active: true } });
+};
+
 export const promotionService = {
-    getPromotions,
+    getPromotions, // For admin
+    getActivePromotions, // For customer
     createPromotion,
     updatePromotion,
     deletePromotion,

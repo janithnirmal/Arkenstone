@@ -65,6 +65,7 @@ export interface Promotion {
     start_date: string; // ISO 8601 date string
     end_date: string;   // ISO 8601 date string
     is_active: boolean;
+    products?: Product[];
 }
 
 /**
