@@ -6,7 +6,7 @@ export default function Analytics() {
     return (
         <PageLayout>
             <Head title="Analytics" />
-            <div className="flex h-screen flex-col items-center justify-center">
+            <div className="flex flex-col items-center justify-center py-5">
                 <h1 className="text-4xl font-bold">Analytics</h1>
             </div>
 
