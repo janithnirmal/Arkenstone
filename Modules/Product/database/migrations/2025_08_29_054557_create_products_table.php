@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -15,12 +14,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('brand_id')->nullable()->constrained('brands')->onDelete('set null'); // Optional brand
             $table->string('name');
+            $table->string('slug');
             $table->text('description')->nullable();
-            $table->string('sku')->unique(); // Stock Keeping Unit
-            $table->decimal('price', 10, 2);
+            $table->string('sku')->unique()->nullable(); // Stock Keeping Unit
+            $table->decimal('price', 10, 2)->nullable();
             $table->decimal('discount_price', 10, 2)->nullable();
-            $table->decimal('tax_rate', 5, 2)->default(0.00); // e.g., 0.15 for 15%
-            $table->integer('stock')->default(0); // Default stock for simple products, or sum of variants
+            $table->integer('quantity')->default(0); // Default stock for simple products, or sum of variants
             $table->boolean('is_active')->default(true);
             $table->timestamps();
             $table->softDeletes();

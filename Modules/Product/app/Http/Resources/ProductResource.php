@@ -16,7 +16,7 @@ class ProductResource extends JsonResource
     {
         // When using `loadMissing`, relations are only loaded if they haven't been already.
         // This is good for preventing N+1 queries in some scenarios.
-        $this->loadMissing(['brand', 'categories', 'images', 'variants.attributeValues.attribute']);
+        $this->loadMissing(['brand', 'categories', 'images']);
 
         $data = [
             'id' => $this->id,
@@ -26,8 +26,7 @@ class ProductResource extends JsonResource
             'sku' => $this->sku,
             'price' => (float) $this->price,
             'discount_price' => (float) $this->discount_price,
-            'tax_rate' => (float) $this->tax_rate,
-            'stock' => (int) $this->stock,
+            'quantity' => (int) $this->stock,
             'is_active' => (bool) $this->is_active,
             'created_at' => $this->created_at?->toDateTimeString(),
             'updated_at' => $this->updated_at?->toDateTimeString(),
@@ -36,12 +35,11 @@ class ProductResource extends JsonResource
             }),
             'categories' => CategoryResource::collection($this->whenLoaded('categories')), // Create a CategoryResource if needed
             'images' => ProductImageResource::collection($this->whenLoaded('images')), // Create a ProductImageResource
-            'variants' => ProductVariantResource::collection($this->whenLoaded('variants')), // Create a ProductVariantResource
             'primary_image_url' => $this->primaryImage?->url, // Assuming a primaryImage relationship on Product model
             'final_price' => $this->discount_price > 0 ? (float) $this->discount_price : (float) $this->price, // Calculate final price
         ];
 
         // Filter out null values for nullable fields if they are not set
-        return array_filter($data, fn ($value) => !is_null($value));
+        return array_filter($data, fn($value) => !is_null($value));
     }
 }

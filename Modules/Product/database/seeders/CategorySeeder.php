@@ -19,30 +19,28 @@ class CategorySeeder extends Seeder
         $categories = [
             ['name' => 'Electronics'],
             ['name' => 'Fashion'],
-            ['name' => 'Home & Kitchen'],
             ['name' => 'Books'],
+            ['name' => 'mens-clothing'],
+            ['name' => 'womens-clothing'],
+            ['name' => 'smartphones'],
+            ['name' => 'laptops'],
+            ['name' => 'headphones'],
+            ['name' => 'wearables'],
+            ['name' => 'computer-accessories'],
+            ['name' => 'mens-footwear'],
+            ['name' => 'womens-footwear'],
+            ['name' => 'travel'],
+            ['name' => 'home-office'],
+            ['name' => 'home-kitchen'],
+            ['name' => 'home-decor'],
         ];
+
 
         foreach ($categories as $categoryData) {
             $category = Category::create([
                 'name' => $categoryData['name'],
                 'slug' => Str::slug($categoryData['name']),
             ]);
-
-            // Add subcategories
-            if ($category->name === 'Electronics') {
-                $category->children()->createMany([
-                    ['name' => 'Laptops', 'slug' => 'laptops'],
-                    ['name' => 'Smartphones', 'slug' => 'smartphones'],
-                    ['name' => 'Cameras', 'slug' => 'cameras'],
-                ]);
-            } elseif ($category->name === 'Fashion') {
-                $category->children()->createMany([
-                    ['name' => 'Men\'s Clothing', 'slug' => 'mens-clothing'],
-                    ['name' => 'Women\'s Clothing', 'slug' => 'womens-clothing'],
-                    ['name' => 'Footwear', 'slug' => 'footwear'],
-                ]);
-            }
         }
 
         $this->command->info('Categories seeded!');

@@ -20,9 +20,6 @@ class QueryProductRequest extends FormRequest
             'categories' => 'sometimes|array',
             'categories.*' => 'integer|exists:categories,id',
 
-            'taxonomies' => 'sometimes|array',
-            'taxonomies.*' => 'integer|exists:terms,id',
-
             'min_price' => 'sometimes|numeric|min:0',
             'max_price' => 'sometimes|numeric|gt:min_price',
 

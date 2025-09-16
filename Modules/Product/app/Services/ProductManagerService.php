@@ -2,51 +2,63 @@
 
 namespace Modules\Product\Services;
 
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Modules\Core\Contracts\ProductContract;
+
 use Modules\Core\Contracts\ProductManagerServiceInterface;
 use Modules\Product\Events\ProductCreated;
 use Modules\Product\Events\ProductDeleted;
 use Modules\Product\Events\ProductUpdated;
-use Modules\Product\Events\ProductViewed;
 use Modules\Product\Models\Product;
-use Modules\Product\Models\ProductVariant;
-use Modules\Core\Contracts\ProductVariantContract;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Modules\Product\Events\ProductImagesUploaded;
 use Modules\Product\Models\ProductImage;
 use Modules\Core\Contracts\ProductImageContract;
+use Modules\Core\Contracts\Products\ProductContract;
 use Modules\Product\Events\ProductImageDeleted;
-use Modules\Product\Events\StockUpdated;
+use Modules\Product\Filters\ProductFilter;
 
 class ProductManagerService implements ProductManagerServiceInterface
 {
-    public function findProduct(int $id): ?ProductContract
-    {
-        $product = Product::with(['brand', 'categories', 'images', 'variants.attributeValues.attribute'])->find($id);
 
+    /**
+     * A whitelist of relations that are safe to be eager-loaded.
+     * @var array
+     */
+    protected array $allowedRelations = ['brand', 'categories', 'images'];
+
+    public function find(int $id, array $with = []): ?ProductContract
+    {
+
+        $relationsToLoad = empty($with) ? $this->allowedRelations : array_intersect($this->allowedRelations, $with);
+        $product = Product::with($relationsToLoad)->find($id);
+
+        // trigger Event
         if ($product) {
-            ProductViewed::dispatch($product);
+            \Modules\Product\Events\ProductViewed::dispatch($product); // viewd a single product
         }
 
         return $product;
     }
 
-    public function queryProducts(array $filters): LengthAwarePaginator
+    public function search(array $filters): Collection
     {
-        $query = Product::with(['brand', 'categories', 'images', 'primaryImage', 'variants.attributeValues.attribute']);
+        $requestedRelations = $filters['with'] ?? [];
+        $requestedRelations = is_array($requestedRelations) ? $requestedRelations : [$requestedRelations];
 
-        // Use the scopeFilter we created earlier
-        $query->filter($filters);
+        $relationsToLoad = array_intersect($this->allowedRelations, $requestedRelations);
 
-        return $query->paginate($filters['limit'] ?? 15);
+        $query = Product::query()->with($relationsToLoad);
+
+        $filter = new ProductFilter($query, $filters);
+        $filteredQuery = $filter->apply();
+
+        return $filteredQuery->get();
     }
 
-    public function createProduct(array $data): ProductContract
+    // TODO: to be updated
+    public function create(array $data): ProductContract
     {
         return DB::transaction(function () use ($data) {
             $product = Product::create($data);
@@ -74,12 +86,9 @@ class ProductManagerService implements ProductManagerServiceInterface
         });
     }
 
-    /**
-     * @param Product $product The CONCRETE Eloquent model
-     * @param array $data
-     * @return ProductContract
-     */
-    public function updateProduct(ProductContract|Product $product, array $data): ProductContract
+
+    // TODO: to be updated
+    public function update(ProductContract|Product $product, array $data): ProductContract
     {
         return DB::transaction(function () use ($product, $data) {
             $product->update($data);
@@ -98,9 +107,9 @@ class ProductManagerService implements ProductManagerServiceInterface
 
             if (isset($data['variants'])) {
                 $existingVariantIds = collect($data['variants'])->pluck('id')->filter()->toArray();
-                $product->variants()->whereNotIn('id', $existingVariantIds)->delete(); 
+                $product->variants()->whereNotIn('id', $existingVariantIds)->delete();
                 foreach ($data['variants'] as $variantData) {
-                    $variant = $product->variants()->updateOrCreate(['id' => $variantData['id'] ?? null], $variantData); 
+                    $variant = $product->variants()->updateOrCreate(['id' => $variantData['id'] ?? null], $variantData);
                     if (isset($variantData['attribute_value_ids'])) {
                         $variant->attributeValues()->sync($variantData['attribute_value_ids']);
                     }
@@ -112,11 +121,9 @@ class ProductManagerService implements ProductManagerServiceInterface
         });
     }
 
-    /**
-     * @param Product $product The CONCRETE Eloquent model
-     * @return bool
-     */
-    public function deleteProduct(ProductContract|Product $product): bool
+
+    // TODO: to be updated
+    public function delete(ProductContract|Product $product): bool
     {
         $result = $product->delete();
 
@@ -125,38 +132,9 @@ class ProductManagerService implements ProductManagerServiceInterface
         }
         return $result;
     }
-    
-    public function createProductVariant(ProductContract|Product $product, array $data): ProductVariantContract
-    {
-        $variantData = collect($data)->except('attribute_value_ids')->toArray();
-        $variant = $product->variants()->create($variantData);
 
-        if (!empty($data['attribute_value_ids'])) {
-            $variant->attributeValues()->attach($data['attribute_value_ids']);
-        }
-        // Fire event: ProductVariantCreated
-        return $variant;
-    }
-
-    public function updateProductVariant(ProductVariantContract|ProductVariant $variant, array $data): ProductVariantContract
-    {
-        $variantData = collect($data)->except('attribute_value_ids')->toArray();
-        $variant->update($variantData);
-
-        if (isset($data['attribute_value_ids'])) {
-            $variant->attributeValues()->sync($data['attribute_value_ids']);
-        }
-        // Fire event: ProductVariantUpdated
-        return $variant->fresh('attributeValues.attribute');
-    }
-
-    public function deleteProductVariant(ProductVariantContract|ProductVariant $variant): bool
-    {
-        // Fire event: ProductVariantDeleted
-        return $variant->delete();
-    }
-
-    public function addImagesToProduct(ProductContract|Product $product, array $images): Collection
+    // TODO: lets work on media later
+    public function addImages(ProductContract|Product $product, array $images): Collection
     {
         $createdImages = new Collection();
 
@@ -185,6 +163,7 @@ class ProductManagerService implements ProductManagerServiceInterface
         return $createdImages;
     }
 
+    // TODO: lets work on media later
     public function deleteImage(ProductImageContract|ProductImage $image): bool
     {
         // The relative path is now stored directly in the 'url' property.
@@ -206,23 +185,4 @@ class ProductManagerService implements ProductManagerServiceInterface
         return $result;
     }
 
-    public function updateProductStock(ProductContract|Product $product, int $quantity): ProductContract
-    {
-        $oldStock = $product->stock;
-        $product->update(['stock' => $quantity]);
-
-        StockUpdated::dispatch($product, $oldStock, $quantity);
-
-        return $product->fresh();
-    }
-
-    public function updateVariantStock(ProductVariantContract|ProductVariant $variant, int $quantity): ProductVariantContract
-    {
-        $oldStock = $variant->stock;
-        $variant->update(['stock' => $quantity]);
-
-        StockUpdated::dispatch($variant, $oldStock, $quantity);
-
-        return $variant->fresh();
-    }
 }

@@ -1,0 +1,327 @@
+[
+    {
+        "product": {
+            "brand_name": "Stylo",
+            "name": "Classic Cotton T-Shirt",
+            "description": "A comfortable and stylish classic cotton t-shirt, perfect for everyday wear. Made from 100% premium cotton.",
+            "sku": "STY-TSH-001",
+            "price": 24.99,
+            "is_active": true
+        },
+        "categories": ["mens-clothing", "womens-clothing"],
+        "images": [
+            {
+                "url": "https://via.placeholder.com/800x800/000000/FFFFFF?text=Black+T-Shirt",
+                "alt_text": "Black Classic T-Shirt",
+                "is_primary": true
+            },
+            { "url": "https://via.placeholder.com/800x800/FFFFFF/000000?text=White+T-Shirt", "alt_text": "White Classic T-Shirt" },
+            { "url": "https://via.placeholder.com/800x800/0000FF/FFFFFF?text=Blue+T-Shirt", "alt_text": "Blue Classic T-Shirt" }
+        ],
+        "variants": [
+            { "sku_suffix": "BLK-M", "stock": 50, "attributes": { "Color": "Black", "Size": "Medium" } },
+            { "sku_suffix": "BLK-L", "stock": 30, "attributes": { "Color": "Black", "Size": "Large" } },
+            { "sku_suffix": "WHI-S", "stock": 45, "attributes": { "Color": "White", "Size": "Small" } },
+            { "sku_suffix": "WHI-M", "stock": 25, "attributes": { "Color": "White", "Size": "Medium" } },
+            { "sku_suffix": "BLU-L", "stock": 15, "attributes": { "Color": "Blue", "Size": "Large" } },
+            { "sku_suffix": "BLU-XL", "stock": 10, "attributes": { "Color": "Blue", "Size": "XL" } }
+        ]
+    },
+    {
+        "product": {
+            "brand_name": "Denim Co.",
+            "name": "Slim Fit Jeans",
+            "description": "Modern slim fit jeans crafted from stretch-denim for ultimate comfort and style.",
+            "sku": "DEN-JEA-002",
+            "price": 89.99,
+            "is_active": true
+        },
+        "categories": ["mens-clothing"],
+        "images": [
+            { "url": "https://via.placeholder.com/800x800/3A5199/FFFFFF?text=Indigo+Jeans", "alt_text": "Indigo Blue Jeans", "is_primary": true },
+            { "url": "https://via.placeholder.com/800x800/1E1E1E/FFFFFF?text=Washed+Black+Jeans", "alt_text": "Washed Black Jeans" }
+        ],
+        "variants": [
+            { "sku_suffix": "IND-32", "stock": 20, "attributes": { "Color": "Indigo", "Size": "32x32" } },
+            { "sku_suffix": "IND-34", "stock": 15, "attributes": { "Color": "Indigo", "Size": "34x32" } },
+            { "sku_suffix": "BLK-32", "stock": 18, "attributes": { "Color": "Black", "Size": "32x32" } }
+        ]
+    },
+    {
+        "product": {
+            "brand_name": "Outdoor Pro",
+            "name": "All-Weather Bomber Jacket",
+            "description": "A versatile and water-resistant bomber jacket for all seasons.",
+            "sku": "OUT-JAK-003",
+            "price": 149.5,
+            "is_active": true
+        },
+        "categories": ["mens-clothing", "womens-clothing"],
+        "images": [
+            { "url": "https://via.placeholder.com/800x800/2F4F4F/FFFFFF?text=Olive+Jacket", "alt_text": "Olive Green Jacket", "is_primary": true }
+        ]
+    },
+
+    {
+        "product": {
+            "brand_name": "Techtron",
+            "name": "Galaxy Smartphone Z",
+            "description": "The latest generation smartphone with a stunning OLED display and pro-grade camera system.",
+            "sku": "TEC-PHN-004",
+            "price": 999.0,
+            "is_active": true
+        },
+        "categories": ["smartphones"],
+        "images": [
+            { "url": "https://via.placeholder.com/800x800/1C1C1C/FFFFFF?text=Phone+Front", "alt_text": "Smartphone Front View", "is_primary": true },
+            { "url": "https://via.placeholder.com/800x800/333333/FFFFFF?text=Phone+Back", "alt_text": "Smartphone Back View" }
+        ],
+        "variants": [
+            { "sku_suffix": "BLK-128", "stock": 40, "attributes": { "Color": "Midnight Black", "Storage": "128GB" } },
+            { "sku_suffix": "BLK-256", "stock": 25, "attributes": { "Color": "Midnight Black", "Storage": "256GB" }, "price_modifier": 100.0 },
+            { "sku_suffix": "SIL-128", "stock": 35, "attributes": { "Color": "Starlight Silver", "Storage": "128GB" } },
+            { "sku_suffix": "SIL-256", "stock": 15, "attributes": { "Color": "Starlight Silver", "Storage": "256GB" }, "price_modifier": 100.0 }
+        ]
+    },
+    {
+        "product": {
+            "brand_name": "InnoWork",
+            "name": "ProBook 16 Laptop",
+            "description": "Powerful M3 Pro chip laptop designed for professionals, with a sleek design and 22-hour battery life.",
+            "sku": "INW-LAP-005",
+            "price": 2499.0,
+            "quantity": 12,
+            "is_active": true
+        },
+        "categories": ["laptops"],
+        "images": [
+            { "url": "https://via.placeholder.com/800x800/888888/FFFFFF?text=Laptop+Open", "alt_text": "Laptop Open View", "is_primary": true }
+        ]
+    },
+    {
+        "product": {
+            "brand_name": "AudioPhile",
+            "name": "Aura Noise-Cancelling Headphones",
+            "description": "Immerse yourself in sound with industry-leading noise cancellation and high-fidelity audio.",
+            "sku": "AUD-HDP-006",
+            "price": 349.99,
+            "discount_price": 299.99,
+            "quantity": 40,
+            "is_active": true
+        },
+        "categories": ["headphones"],
+        "images": [{ "url": "https://via.placeholder.com/800x800/1A1A1A/FFFFFF?text=Headphones", "alt_text": "Black Headphones", "is_primary": true }]
+    },
+    {
+        "product": {
+            "brand_name": "Techtron",
+            "name": "TimeKeeper Smartwatch 5",
+            "description": "The ultimate device for a healthy life. Track your workouts, monitor your health, and stay connected.",
+            "sku": "TEC-WAT-007",
+            "price": 429.0,
+            "is_active": true
+        },
+        "categories": ["wearables"],
+        "images": [{ "url": "https://via.placeholder.com/800x800/555555/FFFFFF?text=Smartwatch", "alt_text": "Smartwatch face", "is_primary": true }],
+        "variants": [
+            { "sku_suffix": "41-MID", "stock": 30, "attributes": { "Case Size": "41mm", "Color": "Midnight Black" } },
+            { "sku_suffix": "45-MID", "stock": 20, "attributes": { "Case Size": "45mm", "Color": "Midnight Black" }, "price_modifier": 30.0 },
+            { "sku_suffix": "41-SIL", "stock": 25, "attributes": { "Case Size": "41mm", "Color": "Starlight Silver" } }
+        ]
+    },
+    {
+        "product": {
+            "brand_name": "GameOn",
+            "name": "Mechanical Gaming Keyboard",
+            "description": "RGB mechanical keyboard with responsive switches for a competitive edge.",
+            "sku": "GAM-KEY-008",
+            "price": 119.99,
+            "quantity": 50,
+            "is_active": true
+        },
+        "categories": ["computer-accessories"],
+        "images": [
+            { "url": "https://via.placeholder.com/800x800/212121/FFFFFF?text=Gaming+Keyboard", "alt_text": "RGB Gaming Keyboard", "is_primary": true }
+        ]
+    },
+
+    {
+        "product": {
+            "brand_name": "Urban Tread",
+            "name": "City Runner Sneakers",
+            "description": "Lightweight and breathable sneakers perfect for city life and casual wear.",
+            "sku": "URB-SNK-009",
+            "price": 109.99,
+            "is_active": true
+        },
+        "categories": ["mens-footwear", "womens-footwear"],
+        "images": [
+            { "url": "https://via.placeholder.com/800x800/EAEAEA/000000?text=White+Sneakers", "alt_text": "White City Sneakers", "is_primary": true },
+            { "url": "https://via.placeholder.com/800x800/363636/FFFFFF?text=Black+Sneakers", "alt_text": "Black City Sneakers" }
+        ],
+        "variants": [
+            { "sku_suffix": "WH-9", "stock": 25, "attributes": { "Color": "White", "Size": "9" } },
+            { "sku_suffix": "WH-10", "stock": 15, "attributes": { "Color": "White", "Size": "10" } },
+            { "sku_suffix": "BK-9", "stock": 22, "attributes": { "Color": "Black", "Size": "9" } },
+            { "sku_suffix": "BK-10", "stock": 18, "attributes": { "Color": "Black", "Size": "10" } }
+        ]
+    },
+    {
+        "product": {
+            "brand_name": "Rugged Gear",
+            "name": "Leather Work Boots",
+            "description": "Durable and waterproof leather boots built to last on any job site.",
+            "sku": "RUG-BOT-010",
+            "price": 180.0,
+            "quantity": 30,
+            "is_active": true
+        },
+        "categories": ["mens-footwear"],
+        "images": [
+            { "url": "https://via.placeholder.com/800x800/8B4513/FFFFFF?text=Work+Boots", "alt_text": "Brown Leather Work Boots", "is_primary": true }
+        ]
+    },
+
+    {
+        "product": {
+            "brand_name": "Stylo",
+            "name": "Minimalist Leather Wallet",
+            "description": "A slim and elegant wallet crafted from genuine full-grain leather, featuring RFID blocking.",
+            "sku": "STY-WAL-011",
+            "price": 59.99,
+            "quantity": 100,
+            "is_active": true
+        },
+        "categories": ["fashion"],
+        "images": [
+            { "url": "https://via.placeholder.com/800x800/964B00/FFFFFF?text=Leather+Wallet", "alt_text": "Brown Leather Wallet", "is_primary": true }
+        ]
+    },
+    {
+        "product": {
+            "brand_name": "Outdoor Pro",
+            "name": "Adventure 30L Backpack",
+            "description": "A durable, water-resistant backpack with multiple compartments for hiking and travel.",
+            "sku": "OUT-BPK-012",
+            "price": 75.0,
+            "quantity": 60,
+            "is_active": true
+        },
+        "categories": ["fashion", "travel"],
+        "images": [{ "url": "https://via.placeholder.com/800x800/2E4053/FFFFFF?text=Backpack", "alt_text": "Dark Blue Backpack", "is_primary": true }]
+    },
+
+    {
+        "product": {
+            "brand_name": "ErgoLiving",
+            "name": "Ergonomic Mesh Office Chair",
+            "description": "Stay comfortable and productive with this fully adjustable ergonomic office chair with lumbar support.",
+            "sku": "ERG-CHR-013",
+            "price": 279.0,
+            "quantity": 25,
+            "is_active": true
+        },
+        "categories": ["home-office"],
+        "images": [
+            { "url": "https://via.placeholder.com/800x800/555555/FFFFFF?text=Office+Chair", "alt_text": "Ergonomic Office Chair", "is_primary": true }
+        ]
+    },
+    {
+        "product": {
+            "brand_name": "BrewMaster",
+            "name": "Digital Drip Coffee Maker",
+            "description": "12-cup programmable coffee maker for the perfect brew every morning.",
+            "sku": "BRW-COF-014",
+            "price": 65.0,
+            "discount_price": 49.5,
+            "quantity": 70,
+            "is_active": true
+        },
+        "categories": ["home-kitchen"],
+        "images": [{ "url": "https://via.placeholder.com/800x800/4B5358/FFFFFF?text=Coffee+Maker", "alt_text": "Coffee Maker", "is_primary": true }]
+    },
+    {
+        "product": {
+            "brand_name": "Glow",
+            "name": "Vanilla Bean Scented Candle",
+            "description": "A warm and inviting scented candle made from natural soy wax. 40-hour burn time.",
+            "sku": "GLW-CND-015",
+            "price": 18.0,
+            "quantity": 200,
+            "is_active": true
+        },
+        "categories": ["home-decor"],
+        "images": [
+            { "url": "https://via.placeholder.com/800x800/F3E5AB/000000?text=Scented+Candle", "alt_text": "Scented Candle", "is_primary": true }
+        ]
+    },
+
+    {
+        "product": {
+            "brand_name": "Page Turner Inc.",
+            "name": "The Last Voyage",
+            "description": "A thrilling mystery novel set on the high seas. A New York Times Bestseller.",
+            "sku": "PTI-BOK-016",
+            "price": 15.99,
+            "quantity": 150,
+            "is_active": true
+        },
+        "categories": ["books"],
+        "images": [{ "url": "https://via.placeholder.com/800x800/00008B/FFFFFF?text=The+Last+Voyage", "alt_text": "Book Cover", "is_primary": true }]
+    },
+    {
+        "product": {
+            "brand_name": "Page Turner Inc.",
+            "name": "A Brief History of Code",
+            "description": "An engaging non-fiction book about the history of computing and programming.",
+            "sku": "PTI-BOK-017",
+            "price": 22.5,
+            "quantity": 90,
+            "is_active": true
+        },
+        "categories": ["books"],
+        "images": [{ "url": "https://via.placeholder.com/800x800/228B22/FFFFFF?text=History+of+Code", "alt_text": "Book Cover", "is_primary": true }]
+    },
+
+    {
+        "product": {
+            "brand_name": "Stylo",
+            "name": "Cozy Wool Scarf",
+            "description": "A soft and warm scarf made from 100% merino wool.",
+            "sku": "STY-SCF-018",
+            "price": 45.0,
+            "quantity": 80,
+            "is_active": true
+        },
+        "categories": ["fashion", "womens-clothing"],
+        "images": [{ "url": "https://via.placeholder.com/800x800/A9A9A9/FFFFFF?text=Wool+Scarf", "alt_text": "Gray Wool Scarf", "is_primary": true }]
+    },
+    {
+        "product": {
+            "brand_name": "InnoWork",
+            "name": "Modern Oak Desk",
+            "description": "A sturdy and stylish desk with a minimalist design, perfect for any home office.",
+            "sku": "INW-DSK-019",
+            "price": 399.0,
+            "quantity": 30,
+            "is_active": false
+        },
+        "categories": ["home-office"],
+        "images": [{ "url": "https://via.placeholder.com/800x800/D2B48C/FFFFFF?text=Oak+Desk", "alt_text": "Modern Oak Desk", "is_primary": true }]
+    },
+    {
+        "product": {
+            "brand_name": "Urban Tread",
+            "name": "Classic Aviator Sunglasses",
+            "description": "Timeless aviator sunglasses with polarized lenses for 100% UV protection.",
+            "sku": "URB-SUN-020",
+            "price": 120.0,
+            "quantity": 110,
+            "is_active": true
+        },
+        "categories": ["fashion"],
+        "images": [
+            { "url": "https://via.placeholder.com/800x800/333333/FFFFFF?text=Sunglasses", "alt_text": "Aviator Sunglasses", "is_primary": true }
+        ]
+    }
+]

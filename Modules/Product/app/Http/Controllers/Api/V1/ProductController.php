@@ -2,13 +2,9 @@
 
 namespace Modules\Product\Http\Controllers\Api\V1;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Modules\Product\Models\Product;
-use Modules\Product\Models\ProductVariant;
 use Modules\Product\Models\ProductImage;
 use Modules\Core\Contracts\ProductManagerServiceInterface;
 use Modules\Product\Http\Requests\StoreProductRequest;
@@ -17,8 +13,7 @@ use Modules\Product\Http\Resources\ProductCollection;
 use Modules\Product\Http\Resources\ProductResource;
 use Modules\Product\Http\Requests\UploadProductImagesRequest;
 use Modules\Product\Http\Resources\ProductImageResource;
-use Illuminate\Http\Resources\Json\JsonResource;
-use Modules\Product\Http\Requests\UpdateProductStockRequest;
+use Modules\Product\App\Http\Requests\QueryProductRequest;
 
 class ProductController extends Controller
 {
@@ -29,16 +24,22 @@ class ProductController extends Controller
         $this->productService = $productService;
     }
 
-    public function index(Request $request): ProductCollection
+    public function index(QueryProductRequest $request): ProductCollection|ProductResource
     {
-        $products = $this->productService->queryProducts($request->all());
-        return new ProductCollection($products);
+
+        if ($request->has(["id"])) {
+            $product = $this->productService->find($request->id);
+            return new ProductResource($product);
+        } else {
+            $products = $this->productService->search($request->validated());
+            return new ProductCollection($products);
+        }
     }
 
     public function store(StoreProductRequest $request): JsonResponse
     {
-        $product = $this->productService->createProduct($request->validated());
-        return (new ProductResource($product->load(['brand', 'categories', 'images', 'variants.attributeValues.attribute'])))
+        $product = $this->productService->create($request->validated());
+        return (new ProductResource($product))
             ->response()
             ->setStatusCode(201);
     }
@@ -48,28 +49,28 @@ class ProductController extends Controller
         // The findProduct service method is implicitly called by Laravel's route model binding.
         // We can dispatch the event here if we don't want to rely on the service's find method.
         // Or, we can use the service explicitly:
-        $foundProduct = $this->productService->findProduct($product->id);
+        $foundProduct = $this->productService->find($product->id);
         return new ProductResource($foundProduct);
     }
 
     public function update(UpdateProductRequest $request, Product $product): ProductResource
     {
-        $updatedProduct = $this->productService->updateProduct($product, $request->validated());
-        return new ProductResource($updatedProduct->load(['brand', 'categories', 'images', 'variants.attributeValues.attribute']));
+        $updatedProduct = $this->productService->update($product, $request->validated());
+        return new ProductResource($updatedProduct);
     }
 
     public function destroy(Product $product): JsonResponse
     {
-        $this->productService->deleteProduct($product);
+        $this->productService->delete($product);
         return response()->json(null, 204);
     }
-    
+
     /**
      * Handle file uploads for a specific product.
      */
     public function uploadImages(UploadProductImagesRequest $request, Product $product): JsonResponse
     {
-        $newImages = $this->productService->addImagesToProduct(
+        $newImages = $this->productService->addImages(
             $product,
             $request->validated()['images']
         );
@@ -87,16 +88,4 @@ class ProductController extends Controller
         return response()->json(null, 204);
     }
 
-    /**
-     * Update the stock for a specific product.
-     */
-    public function updateStock(UpdateProductStockRequest $request, Product $product): ProductResource
-    {
-        $updatedProduct = $this->productService->updateProductStock(
-            $product,
-            $request->validated()['stock']
-        );
-        return new ProductResource($updatedProduct);
-    }
-    
 }

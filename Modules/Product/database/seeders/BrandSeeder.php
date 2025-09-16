@@ -16,11 +16,19 @@ class BrandSeeder extends Seeder
         Brand::truncate(); // Clear existing brands
 
         $brands = [
-            'Acme Corp',
-            'Globex Inc',
-            'Innovate Tech',
-            'Fashionista',
-            'Bookworm Co',
+            "Stylo",
+            "Denim Co.",
+            "Outdoor Pro",
+            "Techtron",
+            "InnoWork",
+            "AudioPhile",
+            "GameOn",
+            "Urban Tread",
+            "Rugged Gear",
+            "ErgoLiving",
+            "BrewMaster",
+            "Glow",
+            "Page Turner Inc.",
         ];
 
         foreach ($brands as $brandName) {

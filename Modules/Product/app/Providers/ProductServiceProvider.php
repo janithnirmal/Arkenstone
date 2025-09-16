@@ -46,7 +46,7 @@ class ProductServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->name, 'database/migrations'));
-        $this->mapApiRoutes();
+        // $this->mapApiRoutes(); // TODO: why was this needed?
     }
 
     /**

@@ -2,26 +2,29 @@
 
 namespace Modules\Core\Contracts;
 
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
+use Modules\Core\Contracts\Products\ProductContract;
 
 interface ProductManagerServiceInterface
 {
+
+
     /**
      * Find a single product by its ID.
      *
      * @param int $id
+     * @param array $with - with combinations
      * @return ProductContract|null
      */
-    public function findProduct(int $id): ?ProductContract;
+    public function find(int $id, array $with = []): ?ProductContract;
 
     /**
      * Query and filter products based on a set of criteria.
      *
      * @param array $filters
-     * @return LengthAwarePaginator
+     * @return Collection<int, \Modules\Core\Contracts\Products\ProductContract>
      */
-    public function queryProducts(array $filters): LengthAwarePaginator;
+    public function search(array $filters): Collection;
 
     /**
      * Create a new product with its relationships.
@@ -29,7 +32,7 @@ interface ProductManagerServiceInterface
      * @param array $data Validated data from the request.
      * @return ProductContract The newly created product instance.
      */
-    public function createProduct(array $data): ProductContract;
+    public function create(array $data): ProductContract;
 
     /**
      * Update an existing product and its relationships.
@@ -38,7 +41,7 @@ interface ProductManagerServiceInterface
      * @param array $data Validated data from the request.
      * @return ProductContract The updated product instance.
      */
-    public function updateProduct(ProductContract $product, array $data): ProductContract;
+    public function update(ProductContract $product, array $data): ProductContract;
 
     /**
      * Delete/archive a product.
@@ -46,11 +49,7 @@ interface ProductManagerServiceInterface
      * @param ProductContract $product The product model instance to delete.
      * @return bool True on successful deletion.
      */
-    public function deleteProduct(ProductContract $product): bool;
-
-    public function createProductVariant(ProductContract $product, array $data): ProductVariantContract;
-    public function updateProductVariant(ProductVariantContract $variant, array $data): ProductVariantContract;
-    public function deleteProductVariant(ProductVariantContract $variant): bool;
+    public function delete(ProductContract $product): bool;
 
     /**
      * Handle uploading and attaching multiple images to a product.
@@ -59,7 +58,7 @@ interface ProductManagerServiceInterface
      * @param array $images Array of UploadedFile objects.
      * @return Collection A collection of the newly created ProductImage models.
      */
-    public function addImagesToProduct(ProductContract $product, array $images): Collection;
+    public function addImages(ProductContract $product, array $images): Collection;
 
     /**
      * Delete a single product image.
@@ -69,21 +68,5 @@ interface ProductManagerServiceInterface
      */
     public function deleteImage(ProductImageContract $image): bool;
 
-    /**
-     * Updates the stock for a simple product.
-     *
-     * @param ProductContract $product
-     * @param int $quantity
-     * @return ProductContract
-     */
-    public function updateProductStock(ProductContract $product, int $quantity): ProductContract;
 
-    /**
-     * Updates the stock for a specific product variant.
-     *
-     * @param ProductVariantContract $variant
-     * @param int $quantity
-     * @return ProductVariantContract
-     */
-    public function updateVariantStock(ProductVariantContract $variant, int $quantity): ProductVariantContract;
 }
