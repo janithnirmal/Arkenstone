@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { productService } from '../services/productService';
 import { Product, ProductImage, ProductVariant } from '../types';
 import ImageGallery from '../components/catalog/ImageGallery';
+import RelatedProducts from '../components/catalog/RelatedProducts'; 
 // We'll re-use the VariantSelector here, but it may need adjustment based on real API data
 // import VariantSelector from '../components/catalog/VariantSelector';
 
@@ -128,6 +129,9 @@ const ProductDetailPage: React.FC = () => {
                     </div>
                 </div>
             </div>
+
+            {/* RELATED PRODUCTS SECTION */}
+            <RelatedProducts products={product.related_products || []} />
         </div>
     );
 };
