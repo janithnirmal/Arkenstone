@@ -1,82 +1,97 @@
-import { apiDelete, apiGet, apiPost } from '@/core/lib/api';
-import { toFormData } from '@/core/lib/to-form-data';
+// resources/js/modules/products/services/productService.ts
 
-import { Product } from '../types';
-import { CatalogResult, CreateProductData, ProductQuery, UpdateProductData } from '../types/http.types';
+import { apiDelete, apiGet, apiPost, apiPut } from '@@/core/lib/api';
+import { toFormData } from '@@/core/lib/to-form-data';
+import { Brand, Category, Product } from '../types';
+import { CreateProductData, ProductListQuery, ProductListResponse, UpdateProductData } from '../types/http.types';
 
 /**
- * Fetches a paginated list of products, with optional filtering and sorting.
- * @param params - The query parameters for filtering and pagination.
- * @returns A promise that resolves to the paginated CatalogResult.
+ * Fetches a paginated list of products.
+ * @param params - Query parameters for filtering, sorting, and pagination.
+ * @returns A promise resolving to the paginated product list response.
  */
-const getProducts = async (params?: ProductQuery): Promise<CatalogResult> => {
-    // For a GET request, the api utility correctly places 'params' into the URL query string.
-    // We expect the raw paginated response from Laravel.
+const getProducts = (params?: ProductListQuery): Promise<ProductListResponse> => {
     return apiGet('/products', { params });
 };
 
 /**
  * Fetches a single product by its ID.
- * @param id - The ID of the product to fetch.
- * @returns A promise that resolves to the Product object.
+ * @param id - The unique identifier of the product.
+ * @returns A promise resolving to the detailed Product object.
  */
-const getProductById = async (id: number | string): Promise<Product> => {
-    // The api utility handles extracting the nested 'data' object for single resources.
-    return apiGet(`/products`, {
-        data: {
-            id,
-        },
-    });
+const getProduct = (id: number): Promise<Product> => {
+    return apiGet(`/products/${id}`);
 };
 
 /**
- * Creates a new product. Handles multipart form data for image uploads.
- * @param data - The data for the new product, including optional image files.
- * @returns A promise that resolves to the newly created Product object.
+ * Creates a new product. Handles multipart/form-data for image uploads.
+ * @param productData - The data for the new product.
+ * @returns A promise resolving to the newly created product.
  */
-const createProduct = async (data: CreateProductData): Promise<Product> => {
-    const formData = toFormData(data);
+const createProduct = (productData: CreateProductData): Promise<Product> => {
+    // The `toFormData` utility correctly handles file uploads and array data.
+    const formData = toFormData(productData);
 
     return apiPost('/products', {
         data: formData,
-        isMultipart: true, // This is crucial for file uploads
-        displaySuccess: true, // Display a success toast on completion
+        isMultipart: true, // Crucial for sending files
+        displaySuccess: true, // Show a success toast message automatically
     });
 };
 
 /**
- * Updates an existing product. Handles multipart form data for new images.
+ * Updates an existing product by its ID.
  * @param id - The ID of the product to update.
- * @param data - The data to update.
- * @returns A promise that resolves to the updated Product object.
+ * @param productData - The data to update.
+ * @returns A promise resolving to the updated product.
  */
-const updateProduct = async (id: number | string, data: UpdateProductData): Promise<Product> => {
-    const formData = toFormData(data);
-    // For multipart form updates in Laravel, we use a POST request
-    // and add a `_method` field with the value 'PUT'.
-    formData.append('_method', 'PUT');
-
-    return apiPost(`/products/${id}`, {
-        data: formData,
-        isMultipart: true,
+const updateProduct = (id: number, productData: UpdateProductData): Promise<Product> => {
+    // For updates, the API expects a PUT request.
+    // We will assume for now it accepts JSON. If it requires multipart for image updates,
+    // we would use the same `toFormData` and `apiPost` with `_method: 'PUT'` trick.
+    return apiPut(`/products/${id}`, {
+        data: productData,
         displaySuccess: true,
     });
 };
 
 /**
- * Deletes a product by its ID.
+ * Deletes (archives) a product by its ID.
  * @param id - The ID of the product to delete.
  * @returns A promise that resolves when the deletion is complete.
  */
-const deleteProduct = async (id: number | string): Promise<void> => {
-    // The API returns a 204 No Content, and the api utility will resolve with no data.
-    await apiDelete(`/products/${id}`, { displaySuccess: true });
+const deleteProduct = (id: number): Promise<void> => {
+    return apiDelete(`/products/${id}`, {
+        displaySuccess: true,
+    });
 };
 
+/**
+ * Fetches a list of all categories.
+ * @returns A promise resolving to an array of Category objects.
+ */
+const getCategories = (): Promise<Category[]> => {
+    // Assuming the API returns a flat list under the 'data' key
+    return apiGet('/categories');
+};
+
+/**
+ * Fetches a paginated list of all brands.
+ * @returns A promise resolving to an array of Brand objects.
+ */
+const getBrands = (): Promise<Brand[]> => {
+    // Assuming the API returns a flat list under the 'data' key
+    return apiGet('/brands');
+};
+
+
+// Bundle all functions into a single service object for easy importing.
 export const productService = {
     getProducts,
-    getProductById,
+    getProduct,
     createProduct,
     updateProduct,
     deleteProduct,
+    getCategories,
+    getBrands,
 };

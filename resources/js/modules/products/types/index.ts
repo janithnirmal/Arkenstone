@@ -1,76 +1,94 @@
-/**
- * Represents the base structure for a Laravel pivot table relationship.
- */
-export interface Pivot {
-    product_id: number;
-    category_id?: number;
-    term_id?: number;
-}
+// resources/js/modules/products/types/index.ts
 
 /**
  * Represents a single Product Image.
- * Note: `is_primary` is converted to a boolean for easier use in React.
  */
 export interface ProductImage {
     id: number;
     product_id: number;
-    path: string; // This would ideally be converted to a full URL
-    alt_text: string | null;
-    is_primary: boolean; // Converted from 0/1 to true/false
-    created_at: string;
-    updated_at: string;
+    url: string;
+    is_primary: boolean;
 }
 
 /**
- * Represents a single Product Category.
+ * Represents a Product Category.
  */
 export interface Category {
+    id:number;
+    parent_id?: number;
+    name: string;
+    slug: string;
+    children?: Category[]; // For nested categories
+}
+
+/**
+ * Represents a Brand.
+ */
+export interface Brand {
     id: number;
     name: string;
     slug: string;
-    created_at: string;
-    updated_at: string;
-    pivot: Pivot;
+    logo?: string;
 }
 
 /**
- * Represents a Taxonomy group (e.g., "Material", "Collection").
+ * Represents a single option for a product variant, like "Red" or "Large".
  */
-export interface Taxonomy {
+export interface AttributeValue {
     id: number;
-    name: string;
-    created_at: string;
-    updated_at: string;
+    attribute_id: number;
+    value: string;
 }
 
 /**
- * Represents a single Term within a Taxonomy (e.g., "Cotton").
+ * Represents a product variant with its own SKU, price, and stock.
  */
-export interface Term {
+export interface ProductVariant {
     id: number;
-    taxonomy_id: number;
-    name: string;
-    slug: string;
-    created_at: string;
-    updated_at: string;
-    pivot: Pivot;
-    taxonomy: Taxonomy;
+    product_id: number;
+    name: string; // e.g., "Red / Large"
+    sku: string;
+    price: number;
+    stock: number;
 }
 
 /**
- * Represents the complete, detailed Product object.
- * This is the central type definition for a single product.
+ * Represents a Promotion that can be applied to products or categories.
+ */
+export interface Promotion {
+    id: number;
+    title: string;
+    description?: string;
+    type: 'product' | 'category' | 'taxonomy' | 'global';
+    entity_id: number;
+    discount_percent: number;
+    start_date: string; // ISO 8601 date string
+    end_date: string;   // ISO 8601 date string
+    is_active: boolean;
+}
+
+/**
+ * The primary interface representing a complete Product object.
+ * This is the central data model for our module.
  */
 export interface Product {
     id: number;
     name: string;
-    slug: string;
     description: string;
+    sku: string;
     price: number;
-    stock_quantity: number;
+    discount_price?: number;
+    tax_rate?: number;
+    stock: number;
+    is_active: boolean;
     created_at: string;
     updated_at: string;
+
+    // Relationships
     images: ProductImage[];
     categories: Category[];
-    terms: Term[];
+    brand?: Brand;
+    variants: ProductVariant[];
+    attributes: AttributeValue[];
+    promotions?: Promotion[]; // A product might have direct promotions
 }
