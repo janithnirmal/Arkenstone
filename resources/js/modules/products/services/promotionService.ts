@@ -2,7 +2,7 @@
 
 import { apiDelete, apiGet, apiPost, apiPut } from '@@/core/lib/api';
 import { Promotion } from '../types';
-import { PaginatedResponse } from '../types/http.types';
+import { PaginatedResponse, ProductListQuery } from '../types/http.types';
 
 /**
  * Data structure for creating or updating a promotion.
@@ -53,15 +53,31 @@ const deletePromotion = (id: number): Promise<void> => {
     return apiDelete(`/promotions/${id}`, { displaySuccess: true });
 };
 
+// /**
+//  * Fetches a list of all currently active promotions for the customer-facing page.
+//  * Assumes the backend is eager-loading sample products with each promotion.
+//  * @returns A promise resolving to an array of active Promotion objects.
+//  */
+// const getActivePromotions = (): Promise<Promotion[]> => {
+//     // apiGet utility will correctly append these params to the URL
+//     // e.g., /api/v1/promotions?is_active=true
+//     return apiGet('/promotions', { params: { is_active: true } });
+// };
+
 /**
  * Fetches a list of all currently active promotions for the customer-facing page.
- * Assumes the backend is eager-loading sample products with each promotion.
+ * Can now accept additional filters (like category).
+ * @param filters - Optional query parameters for filtering promotions.
  * @returns A promise resolving to an array of active Promotion objects.
  */
-const getActivePromotions = (): Promise<Promotion[]> => {
-    // apiGet utility will correctly append these params to the URL
-    // e.g., /api/v1/promotions?is_active=true
-    return apiGet('/promotions', { params: { is_active: true } });
+// --- 2. Update the function signature to accept the filters argument ---
+const getActivePromotions = (filters?: ProductListQuery): Promise<Promotion[]> => {
+    // --- Merge the permanent filter with the optional filters ---
+    // This uses the spread syntax to combine our permanent { is_active: true } filter
+    // with any additional filters you provide from the sidebar.
+    const params = { is_active: true, ...filters };
+
+    return apiGet('/promotions', { params });
 };
 
 export const promotionService = {
