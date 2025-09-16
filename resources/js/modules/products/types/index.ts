@@ -92,3 +92,21 @@ export interface Product {
     attributes: AttributeValue[];
     promotions?: Promotion[]; // A product might have direct promotions
 }
+
+/**
+ * Represents a single attribute value (e.g., "Red", "Large").
+ */
+export interface AttributeValue {
+    id: number;
+    attribute_id: number;
+    value: string;
+}
+
+/**
+ * Represents a global attribute (e.g., "Color") and all its possible values.
+ */
+export interface Attribute {
+    id: number;
+    name: string;
+    values: AttributeValue[];
+}

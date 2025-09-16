@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { brandService, BrandFormData } from '../../services/brandService';
+import { brandService, BrandFormData, BrandFormShape } from '../../services/brandService';
 import { Brand } from '../../types';
 
 interface Props {
@@ -11,10 +11,11 @@ interface Props {
 }
 
 const BrandForm: React.FC<Props> = ({ brandToEdit, onSuccess }) => {
-    const { register, handleSubmit, reset, watch, formState: { errors, isSubmitting } } = useForm<BrandFormData>();
+    const { register, handleSubmit, reset, watch, formState: { errors, isSubmitting } } = useForm<BrandFormShape>();
     const [preview, setPreview] = useState<string | null>(brandToEdit?.logo || null);
 
-    const logoFile = watch('logo');
+    // watch('logo') returns a FileList or undefined
+    const logoFileList = watch('logo');
 
     useEffect(() => {
         if (brandToEdit) {
@@ -28,19 +29,21 @@ const BrandForm: React.FC<Props> = ({ brandToEdit, onSuccess }) => {
 
     useEffect(() => {
         // Create a preview URL for the selected file
-        if (logoFile && logoFile.length > 0) {
-            const file = logoFile[0];
+        if (logoFileList && logoFileList.length > 0) {
+            const file = logoFileList[0]; // Access the first file
             const objectUrl = URL.createObjectURL(file);
             setPreview(objectUrl);
 
-            // Free memory when the component is unmounted
             return () => URL.revokeObjectURL(objectUrl);
         }
-    }, [logoFile]);
+    }, [logoFileList]);
 
-    const onSubmit: SubmitHandler<{ name: string, logo?: FileList }> = async (data) => {
+    const onSubmit: SubmitHandler<BrandFormShape> = async (data) => {
+        
+        // Create a payload that matches the `BrandFormData` interface from the service.
         const payload: BrandFormData = {
             name: data.name,
+            // Extract the single File from the FileList, or null if empty.
             logo: data.logo && data.logo.length > 0 ? data.logo[0] : null,
         };
 

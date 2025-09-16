@@ -16,6 +16,14 @@ export interface BrandFormData {
 }
 
 /**
+ *react-hook-form will give FileList for the logo field.
+ */
+export interface BrandFormShape {
+    name: string;
+    logo?: FileList;
+}
+
+/**
  * Fetches a paginated list of all brands.
  * Note: Your API docs mention this is paginated.
  * @returns A promise resolving to a paginated response of Brand objects.

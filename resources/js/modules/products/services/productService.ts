@@ -4,6 +4,7 @@ import { apiDelete, apiGet, apiPost, apiPut } from '@@/core/lib/api';
 import { toFormData } from '@@/core/lib/to-form-data';
 import { Brand, Category, Product } from '../types';
 import { CreateProductData, ProductListQuery, ProductListResponse, UpdateProductData } from '../types/http.types';
+import { ProductVariant } from '../types';
 
 /**
  * Fetches a paginated list of products.
@@ -84,6 +85,43 @@ const getBrands = (): Promise<Brand[]> => {
     return apiGet('/brands');
 };
 
+export interface VariantFormData {
+    name: string;
+    sku: string;
+    price: number;
+    stock: number;
+    // You will likely need to send the attribute values that make up this variant
+    // For simplicity, we assume the name "Red / Large" is enough for the backend to parse
+}
+
+/**
+ * Creates a new variant for a specific product.
+ * @param productId The ID of the product.
+ * @param variantData The data for the new variant.
+ * @returns The newly created variant.
+ */
+const createVariant = (productId: number, variantData: VariantFormData): Promise<ProductVariant> => {
+    return apiPost(`/products/${productId}/variants`, { data: variantData, displaySuccess: true });
+};
+
+/**
+ * Updates an existing product variant.
+ * @param variantId The ID of the variant to update.
+ * @param variantData The data to update.
+ * @returns The updated variant.
+ */
+const updateVariant = (variantId: number, variantData: Partial<VariantFormData>): Promise<ProductVariant> => {
+    // Note: The API docs show PUT /products/variants/{variant_id}, not nested under product
+    return apiPut(`/products/variants/${variantId}`, { data: variantData, displaySuccess: true });
+};
+
+/**
+ * Deletes a product variant.
+ * @param variantId The ID of the variant to delete.
+ */
+const deleteVariant = (variantId: number): Promise<void> => {
+    return apiDelete(`/products/variants/${variantId}`, { displaySuccess: true });
+};
 
 // Bundle all functions into a single service object for easy importing.
 export const productService = {
@@ -94,4 +132,7 @@ export const productService = {
     deleteProduct,
     getCategories,
     getBrands,
+    createVariant,
+    updateVariant,
+    deleteVariant,
 };
