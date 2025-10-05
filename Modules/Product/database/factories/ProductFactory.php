@@ -2,6 +2,7 @@
 
 namespace Modules\Product\Database\Factories;
 
+use DiscountType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Modules\Product\Models\Brand;
@@ -31,7 +32,8 @@ class ProductFactory extends Factory
             'description' => $this->faker->paragraph,
             'sku' => $this->faker->unique()->ean13,
             'price' => $price,
-            'discount_price' => $this->faker->optional(0.5)->randomFloat(2, 5, $price - 1), // Optional discount
+            'discount_type' => array_rand(DiscountType::cases()), // Optional discount
+            'discount_value' => $this->faker->optional(0.5)->randomFloat(2, 5, $price - 1), // Optional discount
             'quantity' => $this->faker->numberBetween(0, 100),
             'is_active' => $this->faker->boolean(90), // 90% chance of being active
         ];

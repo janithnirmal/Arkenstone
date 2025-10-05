@@ -3,6 +3,7 @@
 namespace Modules\Product\Filters;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Log;
 
 class ProductFilter
 {
@@ -57,6 +58,7 @@ class ProductFilter
      */
     protected function name(string $value): void
     {
+        Log::info("Applying name filter", ['value' => $value]);
         $this->query->filterByName($value);
     }
 
@@ -66,6 +68,7 @@ class ProductFilter
      */
     protected function min_price(float $value): void
     {
+
         $this->query->minPrice($value);
     }
 
@@ -78,12 +81,29 @@ class ProductFilter
         $this->query->maxPrice($value);
     }
 
+
     /**
-     * Handles the 'category' filter.
+     * Handles the 'categories' filter.
      * Maps to the scopeByCategory() in the Product model.
      */
-    protected function category(string $value): void
+    protected function categories(array $value): void
     {
-        $this->query->byCategory($value);
+        $this->query->byCategories($value);
     }
+
+
+    /**
+     * Handles the 'all_categories' filter.
+     * Maps to the scopeByAllCategories() in the Product model.
+     */
+    protected function all_categories(array $value): void
+    {
+        $this->query->byAllCategories($value);
+    }
+
+    protected function brand(string $value): void
+    {
+        $this->query->byBrand($value);
+    }
+
 }

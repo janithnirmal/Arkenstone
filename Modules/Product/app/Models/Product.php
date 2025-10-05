@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Builder;
-
+use Illuminate\Support\Facades\Log;
 use Modules\Core\Contracts\Products\ProductContract;
 
 
@@ -26,14 +26,15 @@ class Product extends Model implements ProductContract
         'description',
         'sku',
         'price',
-        'discount_price',
+        'discount_type',
+        'discount_value',
         'quantity',
         'is_active',
     ];
 
     protected $casts = [
         'price' => 'decimal:2',
-        'discount_price' => 'decimal:2',
+        'discount_value' => 'decimal:2',
         'is_active' => 'boolean',
     ];
 
@@ -71,6 +72,8 @@ class Product extends Model implements ProductContract
     }
 
 
+    // filters
+
     public function scopeIsActive(Builder $query): Builder
     {
         return $query->where('is_active', true);
@@ -79,6 +82,7 @@ class Product extends Model implements ProductContract
 
     public function scopeFilterByName(Builder $query, string $name): Builder
     {
+        Log::info("Filtering by name", ['name' => $name]);
         return $query->where('name', 'like', '%' . $name . '%');
     }
 
@@ -92,10 +96,28 @@ class Product extends Model implements ProductContract
         return $query->where('price', '<=', $price);
     }
 
-    public function scopeByCategory(Builder $query, string $slug): Builder
+    public function scopeByCategory(Builder $query, int $id): Builder
     {
-        return $query->whereHas('categories', function (Builder $q) use ($slug) {
-            $q->where('slug', $slug);
+        return $query;
+    }
+
+    public function scopeByCategories(Builder $query, array $ids): Builder
+    {
+        return $query->whereHas('categories', function (Builder $q) use ($ids) {
+            $q->whereIn('categories.id', $ids);
         });
+    }
+
+    public function scopeByAllCategories(Builder $query, array $ids): Builder
+    {
+        foreach ($ids as $id) {
+            $query->whereHas('categories', fn($q) => $q->where('categories.id', $id));
+        }
+        return $query;
+    }
+
+    public function scopeByBrand(Builder $query, int $ud): Builder
+    {
+        return $query->where('brand_id', $ud);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Modules\Product\Services;
 
+
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 
 use Modules\Core\Contracts\ProductManagerServiceInterface;
@@ -11,6 +13,7 @@ use Modules\Product\Events\ProductUpdated;
 use Modules\Product\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Modules\Product\Events\ProductImagesUploaded;
 use Modules\Product\Models\ProductImage;
@@ -26,12 +29,12 @@ class ProductManagerService implements ProductManagerServiceInterface
      * A whitelist of relations that are safe to be eager-loaded.
      * @var array
      */
-    protected array $allowedRelations = ['brand', 'categories', 'images'];
+    protected array $allowedRelations = ['categories', 'brand', 'images'];
 
     public function find(int $id, array $with = []): ?ProductContract
     {
 
-        $relationsToLoad = empty($with) ? $this->allowedRelations : array_intersect($this->allowedRelations, $with);
+        $relationsToLoad = empty($with) ? $this->allowedRelations : $with;
         $product = Product::with($relationsToLoad)->find($id);
 
         // trigger Event
@@ -42,19 +45,17 @@ class ProductManagerService implements ProductManagerServiceInterface
         return $product;
     }
 
-    public function search(array $filters): Collection
+    public function search(array $filters): LengthAwarePaginator
     {
-        $requestedRelations = $filters['with'] ?? [];
-        $requestedRelations = is_array($requestedRelations) ? $requestedRelations : [$requestedRelations];
-
-        $relationsToLoad = array_intersect($this->allowedRelations, $requestedRelations);
+        $relationsToLoad = isset($filters['with']) & !empty($filters['with']) ? $filters['with'] : $this->allowedRelations;
+        Log::info("Relations", [$relationsToLoad]);
 
         $query = Product::query()->with($relationsToLoad);
 
-        $filter = new ProductFilter($query, $filters);
+        $filter = new ProductFilter($query, $filters); // filter the query based on the provided filters
         $filteredQuery = $filter->apply();
 
-        return $filteredQuery->get();
+        return $filteredQuery->paginate($filters['per_page'] ?? 15);
     }
 
     // TODO: to be updated

@@ -53,5 +53,28 @@ interface ProductContract
      * Scope a query to filter products belonging to a specific category slug.
      * (Assumes you have a 'categories' relationship defined on this model).
      */
-    public function scopeByCategory(Builder $query, string $slug): Builder;
+    public function scopeByCategory(Builder $query, int $id): Builder;
+
+    /**
+     * Scope a query to filter products belonging to specific category ids.
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param int $id
+     * @return void
+     */
+    public function scopeByCategories(Builder $query, array $ids): Builder;
+
+    /**
+     * Scope a query to filter products belonging to all specified category ids.
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param int $id
+     * @return void
+     */
+    public function scopeByAllCategories(Builder $query, array $ids): Builder;
+
+
+
+    /**
+     * Scope a query to filter products belonging to a specific brand id.
+     */
+    public function scopeByBrand(Builder $query, int $id): Builder;
 }

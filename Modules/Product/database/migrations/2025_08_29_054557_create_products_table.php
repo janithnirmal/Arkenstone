@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Modules\Product\App\Enum\DiscountType;
 
 return new class extends Migration {
     /**
@@ -18,7 +19,8 @@ return new class extends Migration {
             $table->text('description')->nullable();
             $table->string('sku')->unique()->nullable(); // Stock Keeping Unit
             $table->decimal('price', 10, 2)->nullable();
-            $table->decimal('discount_price', 10, 2)->nullable();
+            $table->string('discount_type')->default(DiscountType::PERCENTAGE->value); // e.g., percentage or fixed amount
+            $table->decimal('discount_value', 10, 2)->nullable();
             $table->integer('quantity')->default(0); // Default stock for simple products, or sum of variants
             $table->boolean('is_active')->default(true);
             $table->timestamps();

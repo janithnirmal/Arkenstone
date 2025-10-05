@@ -105,7 +105,7 @@
             "description": "Immerse yourself in sound with industry-leading noise cancellation and high-fidelity audio.",
             "sku": "AUD-HDP-006",
             "price": 349.99,
-            "discount_price": 299.99,
+            "discount_value": 20,
             "quantity": 40,
             "is_active": true
         },
@@ -233,7 +233,7 @@
             "description": "12-cup programmable coffee maker for the perfect brew every morning.",
             "sku": "BRW-COF-014",
             "price": 65.0,
-            "discount_price": 49.5,
+            "discount_value": 9,
             "quantity": 70,
             "is_active": true
         },

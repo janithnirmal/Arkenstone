@@ -2,6 +2,7 @@
 
 namespace Modules\Core\Contracts;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Modules\Core\Contracts\Products\ProductContract;
 
@@ -22,9 +23,9 @@ interface ProductManagerServiceInterface
      * Query and filter products based on a set of criteria.
      *
      * @param array $filters
-     * @return Collection<int, \Modules\Core\Contracts\Products\ProductContract>
+     * @return LengthAwarePaginator
      */
-    public function search(array $filters): Collection;
+    public function search(array $filters): LengthAwarePaginator;
 
     /**
      * Create a new product with its relationships.

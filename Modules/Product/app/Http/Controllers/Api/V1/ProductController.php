@@ -2,8 +2,10 @@
 
 namespace Modules\Product\Http\Controllers\Api\V1;
 
+use App\Helpers\ResponseProtocol;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Log;
 use Modules\Product\Models\Product;
 use Modules\Product\Models\ProductImage;
 use Modules\Core\Contracts\ProductManagerServiceInterface;
@@ -14,6 +16,7 @@ use Modules\Product\Http\Resources\ProductResource;
 use Modules\Product\Http\Requests\UploadProductImagesRequest;
 use Modules\Product\Http\Resources\ProductImageResource;
 use Modules\Product\App\Http\Requests\QueryProductRequest;
+use Modules\Product\Http\Resources\ProductResourceCollection;
 
 class ProductController extends Controller
 {
@@ -24,24 +27,26 @@ class ProductController extends Controller
         $this->productService = $productService;
     }
 
-    public function index(QueryProductRequest $request): ProductCollection|ProductResource
+    /**
+     * Fetch product(s) based on query parameters.
+     * @param \Modules\Product\App\Http\Requests\QueryProductRequest $request
+     * @return JsonResponse
+     */
+    public function index(QueryProductRequest $request): JsonResponse
     {
-
         if ($request->has(["id"])) {
-            $product = $this->productService->find($request->id);
-            return new ProductResource($product);
+            $product = $this->productService->find($request->id, $request->get('with', []));
+            return ResponseProtocol::success(new ProductResource($product));
         } else {
             $products = $this->productService->search($request->validated());
-            return new ProductCollection($products);
+            return ResponseProtocol::success(new ProductResourceCollection($products));
         }
     }
 
     public function store(StoreProductRequest $request): JsonResponse
     {
         $product = $this->productService->create($request->validated());
-        return (new ProductResource($product))
-            ->response()
-            ->setStatusCode(201);
+        return ResponseProtocol::success(new ProductResource($product), 201);
     }
 
     public function show(Product $product): ProductResource
