@@ -11,12 +11,12 @@
         "categories": ["mens-clothing", "womens-clothing"],
         "images": [
             {
-                "url": "https://via.placeholder.com/800x800/000000/FFFFFF?text=Black+T-Shirt",
+                "url": "https://picsum.photos/id/1/200/300",
                 "alt_text": "Black Classic T-Shirt",
                 "is_primary": true
             },
-            { "url": "https://via.placeholder.com/800x800/FFFFFF/000000?text=White+T-Shirt", "alt_text": "White Classic T-Shirt" },
-            { "url": "https://via.placeholder.com/800x800/0000FF/FFFFFF?text=Blue+T-Shirt", "alt_text": "Blue Classic T-Shirt" }
+            { "url": "https://picsum.photos/id/2/200/300", "alt_text": "White Classic T-Shirt" },
+            { "url": "https://picsum.photos/id/3/200/300", "alt_text": "Blue Classic T-Shirt" }
         ],
         "variants": [
             { "sku_suffix": "BLK-M", "stock": 50, "attributes": { "Color": "Black", "Size": "Medium" } },
@@ -38,8 +38,8 @@
         },
         "categories": ["mens-clothing"],
         "images": [
-            { "url": "https://via.placeholder.com/800x800/3A5199/FFFFFF?text=Indigo+Jeans", "alt_text": "Indigo Blue Jeans", "is_primary": true },
-            { "url": "https://via.placeholder.com/800x800/1E1E1E/FFFFFF?text=Washed+Black+Jeans", "alt_text": "Washed Black Jeans" }
+            { "url": "https://picsum.photos/id/4/200/300", "alt_text": "Indigo Blue Jeans", "is_primary": true },
+            { "url": "https://picsum.photos/id/5/200/300", "alt_text": "Washed Black Jeans" }
         ],
         "variants": [
             { "sku_suffix": "IND-32", "stock": 20, "attributes": { "Color": "Indigo", "Size": "32x32" } },
@@ -58,7 +58,7 @@
         },
         "categories": ["mens-clothing", "womens-clothing"],
         "images": [
-            { "url": "https://via.placeholder.com/800x800/2F4F4F/FFFFFF?text=Olive+Jacket", "alt_text": "Olive Green Jacket", "is_primary": true }
+            { "url": "https://picsum.photos/id/6/200/300", "alt_text": "Olive Green Jacket", "is_primary": true }
         ]
     },
 
@@ -73,8 +73,8 @@
         },
         "categories": ["smartphones"],
         "images": [
-            { "url": "https://via.placeholder.com/800x800/1C1C1C/FFFFFF?text=Phone+Front", "alt_text": "Smartphone Front View", "is_primary": true },
-            { "url": "https://via.placeholder.com/800x800/333333/FFFFFF?text=Phone+Back", "alt_text": "Smartphone Back View" }
+            { "url": "https://picsum.photos/id/7/200/300", "alt_text": "Smartphone Front View", "is_primary": true },
+            { "url": "https://picsum.photos/id/8/200/300", "alt_text": "Smartphone Back View" }
         ],
         "variants": [
             { "sku_suffix": "BLK-128", "stock": 40, "attributes": { "Color": "Midnight Black", "Storage": "128GB" } },
@@ -95,7 +95,7 @@
         },
         "categories": ["laptops"],
         "images": [
-            { "url": "https://via.placeholder.com/800x800/888888/FFFFFF?text=Laptop+Open", "alt_text": "Laptop Open View", "is_primary": true }
+            { "url": "https://picsum.photos/id/9/200/300", "alt_text": "Laptop Open View", "is_primary": true }
         ]
     },
     {
@@ -110,7 +110,7 @@
             "is_active": true
         },
         "categories": ["headphones"],
-        "images": [{ "url": "https://via.placeholder.com/800x800/1A1A1A/FFFFFF?text=Headphones", "alt_text": "Black Headphones", "is_primary": true }]
+        "images": [{ "url": "https://picsum.photos/id/10/200/300", "alt_text": "Black Headphones", "is_primary": true }]
     },
     {
         "product": {
@@ -122,7 +122,7 @@
             "is_active": true
         },
         "categories": ["wearables"],
-        "images": [{ "url": "https://via.placeholder.com/800x800/555555/FFFFFF?text=Smartwatch", "alt_text": "Smartwatch face", "is_primary": true }],
+        "images": [{ "url": "https://picsum.photos/id/11/200/300", "alt_text": "Smartwatch face", "is_primary": true }],
         "variants": [
             { "sku_suffix": "41-MID", "stock": 30, "attributes": { "Case Size": "41mm", "Color": "Midnight Black" } },
             { "sku_suffix": "45-MID", "stock": 20, "attributes": { "Case Size": "45mm", "Color": "Midnight Black" }, "price_modifier": 30.0 },
@@ -141,7 +141,7 @@
         },
         "categories": ["computer-accessories"],
         "images": [
-            { "url": "https://via.placeholder.com/800x800/212121/FFFFFF?text=Gaming+Keyboard", "alt_text": "RGB Gaming Keyboard", "is_primary": true }
+            { "url": "https://picsum.photos/id/12/200/300", "alt_text": "RGB Gaming Keyboard", "is_primary": true }
         ]
     },
 
@@ -156,8 +156,8 @@
         },
         "categories": ["mens-footwear", "womens-footwear"],
         "images": [
-            { "url": "https://via.placeholder.com/800x800/EAEAEA/000000?text=White+Sneakers", "alt_text": "White City Sneakers", "is_primary": true },
-            { "url": "https://via.placeholder.com/800x800/363636/FFFFFF?text=Black+Sneakers", "alt_text": "Black City Sneakers" }
+            { "url": "https://picsum.photos/id/13/200/300", "alt_text": "White City Sneakers", "is_primary": true },
+            { "url": "https://picsum.photos/id/14/200/300", "alt_text": "Black City Sneakers" }
         ],
         "variants": [
             { "sku_suffix": "WH-9", "stock": 25, "attributes": { "Color": "White", "Size": "9" } },
@@ -178,7 +178,7 @@
         },
         "categories": ["mens-footwear"],
         "images": [
-            { "url": "https://via.placeholder.com/800x800/8B4513/FFFFFF?text=Work+Boots", "alt_text": "Brown Leather Work Boots", "is_primary": true }
+            { "url": "https://picsum.photos/id/15/200/300", "alt_text": "Brown Leather Work Boots", "is_primary": true }
         ]
     },
 
@@ -194,7 +194,7 @@
         },
         "categories": ["fashion"],
         "images": [
-            { "url": "https://via.placeholder.com/800x800/964B00/FFFFFF?text=Leather+Wallet", "alt_text": "Brown Leather Wallet", "is_primary": true }
+            { "url": "https://picsum.photos/id/16/200/300", "alt_text": "Brown Leather Wallet", "is_primary": true }
         ]
     },
     {
@@ -208,7 +208,7 @@
             "is_active": true
         },
         "categories": ["fashion", "travel"],
-        "images": [{ "url": "https://via.placeholder.com/800x800/2E4053/FFFFFF?text=Backpack", "alt_text": "Dark Blue Backpack", "is_primary": true }]
+        "images": [{ "url": "https://picsum.photos/id/17/200/300", "alt_text": "Dark Blue Backpack", "is_primary": true }]
     },
 
     {
@@ -223,7 +223,7 @@
         },
         "categories": ["home-office"],
         "images": [
-            { "url": "https://via.placeholder.com/800x800/555555/FFFFFF?text=Office+Chair", "alt_text": "Ergonomic Office Chair", "is_primary": true }
+            { "url": "https://picsum.photos/id/18/200/300", "alt_text": "Ergonomic Office Chair", "is_primary": true }
         ]
     },
     {
@@ -238,7 +238,7 @@
             "is_active": true
         },
         "categories": ["home-kitchen"],
-        "images": [{ "url": "https://via.placeholder.com/800x800/4B5358/FFFFFF?text=Coffee+Maker", "alt_text": "Coffee Maker", "is_primary": true }]
+        "images": [{ "url": "https://picsum.photos/id/19/200/300", "alt_text": "Coffee Maker", "is_primary": true }]
     },
     {
         "product": {
@@ -252,7 +252,7 @@
         },
         "categories": ["home-decor"],
         "images": [
-            { "url": "https://via.placeholder.com/800x800/F3E5AB/000000?text=Scented+Candle", "alt_text": "Scented Candle", "is_primary": true }
+            { "url": "https://picsum.photos/id/20/200/300", "alt_text": "Scented Candle", "is_primary": true }
         ]
     },
 
@@ -267,7 +267,7 @@
             "is_active": true
         },
         "categories": ["books"],
-        "images": [{ "url": "https://via.placeholder.com/800x800/00008B/FFFFFF?text=The+Last+Voyage", "alt_text": "Book Cover", "is_primary": true }]
+        "images": [{ "url": "https://picsum.photos/id/21/200/300", "alt_text": "Book Cover", "is_primary": true }]
     },
     {
         "product": {
@@ -280,7 +280,7 @@
             "is_active": true
         },
         "categories": ["books"],
-        "images": [{ "url": "https://via.placeholder.com/800x800/228B22/FFFFFF?text=History+of+Code", "alt_text": "Book Cover", "is_primary": true }]
+        "images": [{ "url": "https://picsum.photos/id/22/200/300", "alt_text": "Book Cover", "is_primary": true }]
     },
 
     {
@@ -294,7 +294,7 @@
             "is_active": true
         },
         "categories": ["fashion", "womens-clothing"],
-        "images": [{ "url": "https://via.placeholder.com/800x800/A9A9A9/FFFFFF?text=Wool+Scarf", "alt_text": "Gray Wool Scarf", "is_primary": true }]
+        "images": [{ "url": "https://picsum.photos/id/23/200/300", "alt_text": "Gray Wool Scarf", "is_primary": true }]
     },
     {
         "product": {
@@ -307,7 +307,7 @@
             "is_active": false
         },
         "categories": ["home-office"],
-        "images": [{ "url": "https://via.placeholder.com/800x800/D2B48C/FFFFFF?text=Oak+Desk", "alt_text": "Modern Oak Desk", "is_primary": true }]
+        "images": [{ "url": "https://picsum.photos/id/24/200/300", "alt_text": "Modern Oak Desk", "is_primary": true }]
     },
     {
         "product": {
@@ -321,7 +321,7 @@
         },
         "categories": ["fashion"],
         "images": [
-            { "url": "https://via.placeholder.com/800x800/333333/FFFFFF?text=Sunglasses", "alt_text": "Aviator Sunglasses", "is_primary": true }
+            { "url": "https://picsum.photos/id/25/200/300", "alt_text": "Aviator Sunglasses", "is_primary": true }
         ]
     }
 ]

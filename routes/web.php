@@ -19,6 +19,8 @@ Route::get('/', function () {
     return redirect()->route('welcome');
 });
 
+
+
 //test route
 Route::get('/test-audit-middleware', function () {
     return response()->json([
@@ -28,3 +30,8 @@ Route::get('/test-audit-middleware', function () {
         'middleware_active' => 'yes'
     ]);
 });
+
+
+Route::get('test', function () {
+    return Inertia::render('test');
+})->name('admin.test');

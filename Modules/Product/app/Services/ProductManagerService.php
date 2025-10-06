@@ -20,7 +20,7 @@ use Modules\Product\Models\ProductImage;
 use Modules\Core\Contracts\ProductImageContract;
 use Modules\Core\Contracts\Products\ProductContract;
 use Modules\Product\Events\ProductImageDeleted;
-use Modules\Product\Filters\ProductFilter;
+use Modules\Product\Helpers\ProductFilter;
 
 class ProductManagerService implements ProductManagerServiceInterface
 {

@@ -2,8 +2,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/compon
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar';
 import { UserInfo } from '@/components/user-info';
 import { UserMenuContent } from '@/components/user-menu-content';
-import { useIsMobile } from '@/core/hooks/use-mobile';
 import { type SharedData } from '@/types';
+import { useIsMobile } from '@core/hooks/use-mobile';
 import { usePage } from '@inertiajs/react';
 import { ChevronsUpDown } from 'lucide-react';
 

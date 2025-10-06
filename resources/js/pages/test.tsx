@@ -1,5 +1,7 @@
-import { AnalyticsTest } from '@/modules/analytics/page/analytics-test';
+import ProductTest from '@product/pages/test';
 
 export default function Test() {
-    return <AnalyticsTest />;
+    // return <AnalyticsTest />;
+
+    return <ProductTest />;
 }

@@ -8,10 +8,6 @@ Route::get('/dashboard', function () {
     return redirect()->route('admin.dashboard');
 })->name('dashboard');
 
-Route::get('test', function () {
-    return Inertia::render('test');
-})->name('admin.test');
-
 Route::get('/admin', function () {
     return redirect()->route('admin.dashboard');
 })->name('admin');

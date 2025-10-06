@@ -2,11 +2,11 @@ import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
-import { Roles } from '@/core/enum/Roles';
-import usePermission from '@/core/hooks/use-permission';
 import { type NavItem } from '@/types';
+import { Roles } from '@core/enum/Roles';
+import usePermission from '@core/hooks/use-permission';
 import { Link } from '@inertiajs/react';
-import { Building, FolderClosed, LayoutGrid, Shield } from 'lucide-react';
+import { LayoutGrid, Shield } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import AppLogo from './app-logo';
 

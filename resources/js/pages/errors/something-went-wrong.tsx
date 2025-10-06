@@ -1,5 +1,4 @@
-import { Button } from '@/components/ui/button';
-import ErrorBoundaryCore from '@/core/pages/errors/something-went-wrong';
+import ErrorBoundaryCore from '@core/pages/errors/something-went-wrong';
 
 class ErrorBoundary extends ErrorBoundaryCore {
     // render() {
@@ -15,7 +14,6 @@ class ErrorBoundary extends ErrorBoundaryCore {
     //             </div>
     //         );
     //     }
-
     //     return this.props.children;
     // }
 }

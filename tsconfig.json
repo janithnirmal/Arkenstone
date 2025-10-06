@@ -110,10 +110,12 @@
         "baseUrl": ".",
         "paths": {
             "@/*": ["./resources/js/*"],
-            "@@/*": ["./resources/js/modules/*"],
+            "@core/*": ["./Modules/Core/resources/assets/js/*"],
+            "@product/*": ["./Modules/Product/resources/assets/js/*"],
+            "@analytics/*": ["./Modules/Analytics/resources/assets/js/*"],
             "ziggy-js": ["./vendor/tightenco/ziggy"]
         },
         "jsx": "react-jsx"
     },
-    "include": ["resources/js/**/*.ts", "resources/js/**/*.d.ts", "resources/js/**/*.tsx"]
+    "include": ["resources/js/**/*.ts", "resources/js/**/*.d.ts", "resources/js/**/*.tsx", "Modules/**/resources/assets/js/**/*.tsx"]
 }
