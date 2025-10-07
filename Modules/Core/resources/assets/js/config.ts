@@ -2,9 +2,20 @@ const Config = {
     appName: 'Arkenstone',
     appDescription: 'Mae govannen na i ven e-Commerce.',
     appSlogan: 'Mae govannen na i ven e-Commerce.',
-    appAuthor: 'Janith Nirmal',
+    appCompany: 'Algowrite (Pvt) Ltd',
+    appAuthors: [
+        {
+            name: 'Janith Nirmal',
+            url: 'https://github.com/janithnirmal',
+        },
+        {
+            name: 'Madusha Pravinda',
+            url: 'https://github.com/MADUSHADEV',
+        },
+    ],
     appAuthorEmail: 'janithnirmal@gmail.com',
     appAuthorUrl: 'https://github.com/janithnirmal',
+    appCompanyUrl: 'https://algowrite.com',
 
     appVersion: '0.3.1',
     lastUpdated: new Date().toISOString().split('T')[0],

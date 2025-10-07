@@ -89,7 +89,7 @@ export default function Welcome() {
                             <p className="text-center text-sm text-neutral-800 dark:text-neutral-200">
                                 Developed by{' '}
                                 <Link href={Config.appAuthorUrl} className="text-primary">
-                                    {Config.appAuthor}
+                                    {Config.appCompany}
                                 </Link>
                             </p>
                             <hr className="w-full my-5" />

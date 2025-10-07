@@ -37,7 +37,7 @@ export default function Dashboard() {
                 <p className="text-center text-xs text-neutral-400">
                     Developed by{' '}
                     <Link href={Config.appAuthorUrl} className="text-primary">
-                        {Config.appAuthor}
+                        {Config.appCompany}
                     </Link>
                 </p>
                 <p className="text-center text-xs text-neutral-800 dark:text-neutral-400">Version (Beta) {Config.appVersion}</p>

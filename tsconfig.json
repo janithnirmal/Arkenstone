@@ -111,6 +111,7 @@
         "paths": {
             "@/*": ["./resources/js/*"],
             "@core/*": ["./Modules/Core/resources/assets/js/*"],
+            "@site/*": ["./Modules/Site/resources/assets/js/*"],
             "@product/*": ["./Modules/Product/resources/assets/js/*"],
             "@analytics/*": ["./Modules/Analytics/resources/assets/js/*"],
             "ziggy-js": ["./vendor/tightenco/ziggy"]

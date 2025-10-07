@@ -1,5 +1,6 @@
 {
     "Core": true,
     "Product": true,
-    "Analytics": true
+    "Analytics": true,
+    "Site": true
 }

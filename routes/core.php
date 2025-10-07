@@ -4,8 +4,6 @@
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
-require __DIR__ . '/core/pages.php';
-require __DIR__ . '/core/shop.php';
 require __DIR__ . '/core/admin.php';
 require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';

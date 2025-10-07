@@ -21,6 +21,7 @@ export default defineConfig({
         alias: {
             '@core': resolve(__dirname, 'Modules/Core/resources/assets/js/'),
             '@analytics': resolve(__dirname, 'Modules/Analytics/resources/assets/js/'),
+            '@site': resolve(__dirname, 'Modules/Site/resources/assets/js/'),
             '@product': resolve(__dirname, 'Modules/Product/resources/assets/js/'),
             'ziggy-js': resolve(__dirname, 'vendor/tightenco/ziggy'),
         },
