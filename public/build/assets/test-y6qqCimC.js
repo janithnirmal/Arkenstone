@@ -1,0 +1,1 @@
+import{j as t}from"./app-Cdmo_d00.js";import r from"./test-C_nObKDD.js";import"./api-BGUpZDB6.js";import"./index-DSKZDLSw.js";import"./index-DXul0gwE.js";import"./config-CcMCiyZX.js";function f(){return t.jsx(r,{})}export{f as default};
