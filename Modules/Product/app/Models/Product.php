@@ -120,4 +120,9 @@ class Product extends Model implements ProductContract
     {
         return $query->where('brand_id', $ud);
     }
+
+    public function taxonomies(): BelongsToMany
+    {
+        return $this->belongsToMany(Taxonomy::class, 'product_taxonomies');
+    }
 }

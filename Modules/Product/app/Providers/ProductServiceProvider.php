@@ -18,7 +18,9 @@ use Modules\Product\Services\ProductManagerService;
 use Modules\Core\Contracts\AttributeManagerServiceInterface;
 use Modules\Product\Services\AttributeManagerService;
 use Modules\Core\Contracts\PromotionManagerServiceInterface;
+use Modules\Core\Contracts\TaxonomyManagerServiceInterface;
 use Modules\Product\Services\PromotionManagerService;
+use Modules\Product\Services\TaxonomyService;
 
 class ProductServiceProvider extends ServiceProvider
 {
@@ -62,6 +64,7 @@ class ProductServiceProvider extends ServiceProvider
         $this->app->bind(BrandManagerServiceInterface::class, BrandManagerService::class);
         $this->app->bind(AttributeManagerServiceInterface::class, AttributeManagerService::class);
         $this->app->bind(PromotionManagerServiceInterface::class, PromotionManagerService::class);
+        $this->app->bind(TaxonomyManagerServiceInterface::class, TaxonomyService::class);
     }
 
     /**

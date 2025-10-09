@@ -19,6 +19,8 @@ class ProductDatabaseSeeder extends Seeder
             AttributeSeeder::class,
             ProductSeeder::class,
             PromotionSeeder::class,
+            TaxonomyTypeSeeder::class,
+            TaxonomySeeder::class,
         ]);
     }
 }

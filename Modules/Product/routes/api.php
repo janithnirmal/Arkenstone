@@ -4,7 +4,10 @@ use Illuminate\Support\Facades\Route;
 use Modules\Product\Http\Controllers\Api\V1\ProductController;
 use Modules\Product\Http\Controllers\Api\V1\CategoryController;
 use Modules\Product\Http\Controllers\Api\V1\BrandController;
+use Modules\Product\Http\Controllers\Api\V1\ProductTaxonomyController;
+use Modules\Product\Http\Controllers\Api\V1\TaxonomyController;
 use Modules\Product\Http\Controllers\TestProductController;
+use Modules\Product\Http\Controllers\Api\V1\TaxonomyTypeController;
 
 
 // 🔒 protected routes
@@ -23,6 +26,23 @@ Route::prefix('v1')
         // brands
         Route::apiResource('brands', BrandController::class)->except('index');
 
+        // taxonomy types & taxonomies
+        Route::apiResources([
+            'taxonomy-types' => TaxonomyTypeController::class,
+            'taxonomies' => TaxonomyController::class,
+        ], ['except' => ['index']]);
+
+        // product ↔ taxonomies linking
+        Route::prefix('products/{product}')->group(function () {
+            Route::get('taxonomies', [ProductTaxonomyController::class, 'index'])
+                ->name('products.taxonomies.index');
+            Route::post('taxonomies/attach', [ProductTaxonomyController::class, 'attach'])
+                ->name('products.taxonomies.attach');
+            Route::put('taxonomies/sync', [ProductTaxonomyController::class, 'sync'])
+                ->name('products.taxonomies.sync');
+            Route::delete('taxonomies/{taxonomy}', [ProductTaxonomyController::class, 'detach'])
+                ->name('products.taxonomies.detach');
+        });
     });
 
 // 🔓 public routes
@@ -38,4 +58,14 @@ Route::prefix('v1')->group(function () {
 
     // --- ⚙️ Utility ⚙️ ---
     Route::get("/product-test", [TestProductController::class, "index"]);
+
+    // index endpoints for taxonomy types & taxonomies
+    Route::apiResources([
+        'taxonomy-types' => TaxonomyTypeController::class,
+        'taxonomies' => TaxonomyController::class,
+    ], ['only' => ['index']]);
+
+    // products by taxonomy
+    Route::get('taxonomies/{taxonomy}/products', [TaxonomyController::class, 'products'])
+        ->name('taxonomies.products');
 });
