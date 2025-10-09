@@ -1,0 +1,1 @@
+import{j as i}from"./app-Cdmo_d00.js";import t from"./verify-email-X2QYFxDx.js";import"./text-link-W1mb_BmR.js";import"./button-CAcSJvLB.js";import"./auth-layout-D6yhiHc5.js";import"./app-logo-icon-10syIF7T.js";import"./card-sI32aUAp.js";function n({status:r}){return i.jsx(t,{status:r})}export{n as default};

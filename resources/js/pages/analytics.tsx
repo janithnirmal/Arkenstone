@@ -1,5 +1,5 @@
 import { AnalyticsTest } from '@/modules/analytics/page/analytics-test';
-import PageLayout from '@core/layouts/page-layout';
+import PageLayout from '@site/layouts/page-layout';
 import { Head } from '@inertiajs/react';
 
 export default function Analytics() {

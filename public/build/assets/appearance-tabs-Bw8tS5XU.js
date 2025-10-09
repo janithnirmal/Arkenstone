@@ -1,0 +1,21 @@
+import{c as y,A as j}from"./app-logo-icon-10syIF7T.js";import{r as m,j as r,e as w}from"./app-Cdmo_d00.js";import{T as N}from"./index-DSKZDLSw.js";import{c as x}from"./button-CAcSJvLB.js";/**
+ * @license lucide-react v0.475.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const A=[["rect",{width:"20",height:"14",x:"2",y:"3",rx:"2",key:"48i651"}],["line",{x1:"8",x2:"16",y1:"21",y2:"21",key:"1svkeh"}],["line",{x1:"12",x2:"12",y1:"17",y2:"21",key:"vw1qmm"}]],S=y("Monitor",A);/**
+ * @license lucide-react v0.475.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const T=[["path",{d:"M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z",key:"a7tn18"}]],_=y("Moon",T);/**
+ * @license lucide-react v0.475.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const E=[["circle",{cx:"12",cy:"12",r:"4",key:"4exip2"}],["path",{d:"M12 2v2",key:"tus03m"}],["path",{d:"M12 20v2",key:"1lh1kg"}],["path",{d:"m4.93 4.93 1.41 1.41",key:"149t6j"}],["path",{d:"m17.66 17.66 1.41 1.41",key:"ptbguv"}],["path",{d:"M2 12h2",key:"1t8f8n"}],["path",{d:"M20 12h2",key:"1q8mjw"}],["path",{d:"m6.34 17.66-1.41 1.41",key:"1m8zz5"}],["path",{d:"m19.07 4.93-1.41 1.41",key:"1shlcs"}]],L=y("Sun",E);/**
+ * @license lucide-react v0.475.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const I=[["path",{d:"M18 6 6 18",key:"1bl5f8"}],["path",{d:"m6 6 12 12",key:"d8bk6v"}]],H=y("X",I);var $=(e,t,s,o,l,a,d,i)=>{let c=document.documentElement,p=["light","dark"];function h(n){(Array.isArray(e)?e:[e]).forEach(u=>{let g=u==="class",M=g&&a?l.map(k=>a[k]||k):l;g?(c.classList.remove(...M),c.classList.add(a&&a[n]?a[n]:n)):c.setAttribute(u,n)}),v(n)}function v(n){i&&p.includes(n)&&(c.style.colorScheme=n)}function b(){return window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}if(o)h(o);else try{let n=localStorage.getItem(t)||s,u=d&&n==="system"?b():n;h(u)}catch{}},C=m.createContext(void 0),q={setTheme:e=>{},themes:[]},z=()=>{var e;return(e=m.useContext(C))!=null?e:q};m.memo(({forcedTheme:e,storageKey:t,attribute:s,enableSystem:o,enableColorScheme:l,defaultTheme:a,value:d,themes:i,nonce:c,scriptProps:p})=>{let h=JSON.stringify([s,t,a,e,i,d,o,l]).slice(1,-1);return m.createElement("script",{...p,suppressHydrationWarning:!0,nonce:typeof window>"u"?c:"",dangerouslySetInnerHTML:{__html:`(${$.toString()})(${h})`}})});const K=({...e})=>{const{theme:t="system"}=z();return r.jsx(N,{theme:t,className:"toaster group",style:{"--normal-bg":"var(--popover)","--normal-text":"var(--popover-foreground)","--normal-border":"var(--border)"},...e})},f=768;function P(){const[e,t]=m.useState();return m.useEffect(()=>{const s=window.matchMedia(`(max-width: ${f-1}px)`),o=()=>{t(window.innerWidth<f)};return s.addEventListener("change",o),t(window.innerWidth<f),()=>s.removeEventListener("change",o)},[]),!!e}function X({classNameIcon:e,classNameText:t,text:s}){return r.jsx(r.Fragment,{children:r.jsxs("div",{className:"flex items-center gap-1",children:[r.jsx("div",{className:"text-sidebar-primary-foreground flex aspect-square items-center justify-center rounded-md",children:r.jsx(j,{className:x("fill-accent dark:fill-accent",e)})}),s&&r.jsx("div",{className:"grid flex-1 text-left text-sm",children:r.jsx("span",{className:x("truncate leading-none font-semibold",t),children:"Arkenstone"})})]})})}function D({className:e="",removeSystem:t=!1,hasText:s=!0,...o}){const{appearance:l,updateAppearance:a}=w(),d=[{value:"light",icon:L,label:"Light"},{value:"dark",icon:_,label:"Dark"}];return t||d.push({value:"system",icon:S,label:"System"}),r.jsx("div",{className:x("inline-flex gap-1 rounded-lg bg-neutral-100 p-1 dark:bg-neutral-800",e),...o,children:d.map(({value:i,icon:c,label:p})=>r.jsxs("button",{onClick:()=>a(i),className:x("flex cursor-pointer items-center rounded-md px-3.5 py-1.5 transition-colors",l===i?"hidden":"text-foreground hover:text-foreground/60"),children:[r.jsx(c,{className:"-ml-1 h-4 w-4"}),s&&r.jsx("span",{className:"ml-1.5 text-sm",children:p})]},i))})}export{D as A,K as T,H as X,X as a,P as u};
