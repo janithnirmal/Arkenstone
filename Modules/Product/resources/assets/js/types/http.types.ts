@@ -14,8 +14,9 @@ export interface ProductListQuery {
     page?: number;
     limit?: number;
     search?: string;
+    name?: string;
     category?: string; // slug
-    brand?: string;    // slug
+    brand?: string; // slug
     price_min?: number;
     price_max?: number;
     in_stock?: boolean;
@@ -61,7 +62,6 @@ export interface PaginatedResponse<T> {
  * A specific implementation of PaginatedResponse for a list of Products.
  */
 export type ProductListResponse = PaginatedResponse<Product>;
-
 
 // =================================================================
 // Data Transfer Objects (DTOs) for POST/PUT Requests

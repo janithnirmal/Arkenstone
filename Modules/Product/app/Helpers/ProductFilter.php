@@ -59,7 +59,10 @@ class ProductFilter
     protected function name(string $value): void
     {
         Log::info("Applying name filter", ['value' => $value]);
-        $this->query->filterByName($value);
+
+        if (!empty($value)) {
+            $this->query->filterByName($value);
+        }
     }
 
     /**
