@@ -7,51 +7,45 @@ use Modules\Core\Contracts\TaxonomyManagerServiceInterface;
 use Modules\Product\Http\Requests\StoreTaxonomyTypeRequest;
 use Modules\Product\Http\Requests\UpdateTaxonomyTypeRequest;
 use Modules\Product\Models\TaxonomyType;
+use Modules\Product\Http\Resources\TaxonomyTypeCollection;
+use Modules\Product\Http\Resources\TaxonomyTypeResource;
 
 class TaxonomyTypeController extends Controller
 {
-    public function __construct(private TaxonomyManagerServiceInterface $service)
-    {
-    }
-    /**
-     * Display a listing of the resource.
-     */
+     public function __construct(private TaxonomyManagerServiceInterface $service) {}
+
+    // GET /taxonomy-types
     public function index()
     {
-        return response()->json($this->service->listTypes(request()->all()));
+        $types = $this->service->listTypes(request()->all());
+        return new TaxonomyTypeCollection($types);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // POST /taxonomy-types
     public function store(StoreTaxonomyTypeRequest $request)
     {
-        return response()->json($this->service->createType($request->validated()), 201);
+        $type = $this->service->createType($request->validated());
+        return (new TaxonomyTypeResource($type))->response()->setStatusCode(201);
     }
 
-    /**
-     * Show the specified resource.
-     */
+    // GET /taxonomy-types/{taxonomyType}
     public function show(TaxonomyType $taxonomyType)
     {
-        return response()->json($taxonomyType->load('taxonomies'));
+        $taxonomyType->load('taxonomies');
+        return new TaxonomyTypeResource($taxonomyType);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // PUT/PATCH /taxonomy-types/{taxonomyType}
     public function update(UpdateTaxonomyTypeRequest $request, TaxonomyType $taxonomyType)
     {
-        return response()->json($this->service->updateType($taxonomyType, $request->validated()));
+        $updated = $this->service->updateType($taxonomyType, $request->validated());
+        return new TaxonomyTypeResource($updated);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // DELETE /taxonomy-types/{taxonomyType}
     public function destroy(TaxonomyType $taxonomyType)
     {
         $this->service->deleteType($taxonomyType);
-
-        return response()->json(null, 204);
+        return response()->noContent();
     }
 }

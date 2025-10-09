@@ -6,72 +6,43 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\Core\Contracts\TaxonomyManagerServiceInterface;
 use Modules\Product\Http\Requests\AttachTaxonomiesToProductRequest;
+use Modules\Product\Http\Resources\TaxonomyResource;
+use Modules\Product\Models\Product;
+use Modules\Product\Models\Taxonomy;
 
-
-//TODO: Add Request Validation and rules where necessary
 
 class ProductTaxonomyController extends Controller
 {
 
-    public function __construct(private TaxonomyManagerServiceInterface $service)
-    {
-    }
+ public function __construct(private TaxonomyManagerServiceInterface $service) {}
 
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        return response()->json($this->service->listTaxonomies(request()->all()));
-    }
-
-    /**
-     * Attach taxonomies to a product.
-     */
-    public function attach(AttachTaxonomiesToProductRequest $request, $productId)
-    {
-        $this->service->attachToProduct($productId, $request->validated()['taxonomy_ids']);
-        return response()->json(null, 204);
-
-    }
-
-    /**
-     * Sync taxonomies for a product.
-     */
-    public function sync(AttachTaxonomiesToProductRequest $request, $productId)
-    {
-        $this->service->syncForProduct($productId, $request->validated()['taxonomy_ids']);
-        return response()->json(null, 204);
-    }
-
-    /**
-     * Detach a taxonomy from a product.
-     */
-    public function detach(Request $request, $productId, $taxonomyId)
-    {
-        $this->service->detachFromProduct($productId, $taxonomyId);
-        return response()->json(null, 204);
-    }
-
-    /**
-     * Get taxonomies for a product.
-     */
-    public function productTaxonomies(Request $request, $productId)
+    // GET /products/{product}/taxonomies
+    public function index(Request $request, Product $product)
     {
         $typeId = $request->query('type_id');
-        $taxonomies = $this->service->getProductTaxonomies($productId, $typeId);
-        return response()->json($taxonomies);
-
+        $taxonomies = $this->service->getProductTaxonomies($product, $typeId); // expect Collection
+        return TaxonomyResource::collection($taxonomies);
     }
 
-    /**
-     * Get products for a taxonomy.
-     */
-    public function taxonomyProducts(Request $request, $taxonomyId)
+    // POST /products/{product}/taxonomies/attach
+    public function attach(AttachTaxonomiesToProductRequest $request, Product $product)
     {
-        $with = $request->query('with', []);
-        $products = $this->service->getProductsByTaxonomy($taxonomyId, $with);
-        return response()->json($products);
+        $this->service->attachToProduct($product, $request->validated()['taxonomy_ids']);
+        return response()->noContent();
+    }
+
+    // PUT /products/{product}/taxonomies/sync
+    public function sync(AttachTaxonomiesToProductRequest $request, Product $product)
+    {
+        $this->service->syncForProduct($product, $request->validated()['taxonomy_ids']);
+        return response()->noContent();
+    }
+
+    // DELETE /products/{product}/taxonomies/{taxonomy}
+    public function detach(Product $product, Taxonomy $taxonomy)
+    {
+        $this->service->detachFromProduct($product, $taxonomy->id);
+        return response()->noContent();
     }
 
 }

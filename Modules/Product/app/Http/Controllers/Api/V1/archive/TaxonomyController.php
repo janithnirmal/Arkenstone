@@ -3,58 +3,60 @@
 namespace Modules\Product\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Modules\Core\Contracts\TaxonomyManagerServiceInterface;
 use Modules\Product\Http\Requests\StoreTaxonomyRequest;
 use Modules\Product\Http\Requests\UpdateTaxonomyRequest;
+use Modules\Product\Http\Resources\ProductResource;
+use Modules\Product\Http\Resources\TaxonomyCollection;
+use Modules\Product\Http\Resources\TaxonomyResource;
 use Modules\Product\Models\Taxonomy;
 
 class TaxonomyController extends Controller
 {
 
-    public function __construct(private TaxonomyManagerServiceInterface $service)
-    {
-    }
+public function __construct(private TaxonomyManagerServiceInterface $service) {}
 
-    /**
-     * Display a listing of the resource.
-     */
+    // GET /taxonomies
     public function index()
     {
-        return response()->json($this->service->listTaxonomies(request()->all()));
+        $taxonomies = $this->service->listTaxonomies(request()->all());
+        return new TaxonomyCollection($taxonomies);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // POST /taxonomies
     public function store(StoreTaxonomyRequest $request)
     {
         $taxonomy = $this->service->createTaxonomy($request->validated());
-        return response()->json($taxonomy, 201);
+        return (new TaxonomyResource($taxonomy))->response()->setStatusCode(201);
     }
 
-    /**
-     * Show the specified resource.
-     */
+    // GET /taxonomies/{taxonomy}
     public function show(Taxonomy $taxonomy)
     {
-        return response()->json($taxonomy->load(['type','parent','children']));
+        $taxonomy->load(['type','parent','children']);
+        return new TaxonomyResource($taxonomy);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateTaxonomyRequest $request, Taxonomy $taxonomy)  
+    // PUT/PATCH /taxonomies/{taxonomy}
+    public function update(UpdateTaxonomyRequest $request, Taxonomy $taxonomy)
     {
-        return response()->json($this->service->updateTaxonomy($taxonomy, $request->validated()));
+        $updated = $this->service->updateTaxonomy($taxonomy, $request->validated());
+        return new TaxonomyResource($updated);
     }
-   
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // DELETE /taxonomies/{taxonomy}
     public function destroy(Taxonomy $taxonomy)
     {
         $this->service->deleteTaxonomy($taxonomy);
-        return response()->json(null, 204);
+        return response()->noContent();
+    }
+
+    // GET /taxonomies/{taxonomy}/products
+    public function products(Request $request, Taxonomy $taxonomy)
+    {
+        $with = (array) $request->query('with', []);
+        $products = $this->service->getProductsByTaxonomy($taxonomy, $with);
+        return ProductResource::collection($products);
     }
 }
