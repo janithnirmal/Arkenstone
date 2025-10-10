@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 
-import DefaultTable, { SearchComponent } from '@/components/custom/tables/default-table';
+import DefaultTable, { SearchComponent } from '@core/components/tables/default-table';
 import { Checkbox } from '@/components/ui/checkbox';
 import { apiGet } from '@core/lib/api';
 import { Role, User } from '@/types';

@@ -1,12 +1,13 @@
-import DynamicFormGenerator from '@site/components/form-generator/dynamic-form-generator';
+import DataManager from '@core/components/data-manager/data-manager';
 import PageLayout from '@site/layouts/page-layout';
-import userRegistrationFormOptions from './forms/example-form';
+import { productsConfig } from './test/example-data-manager';
 
 export default function Test() {
     return (
         <PageLayout>
-            <section className="py-5">
-                <DynamicFormGenerator options={userRegistrationFormOptions} />
+            <section className="container mx-auto py-5">
+                {/* <DynamicFormGenerator options={userRegistrationFormOptions} /> */}
+                <DataManager config={productsConfig} />
             </section>
         </PageLayout>
     );

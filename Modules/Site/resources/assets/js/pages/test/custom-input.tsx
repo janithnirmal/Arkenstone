@@ -1,4 +1,4 @@
-import { FieldConfig } from '@site/components/form-generator/types';
+import { FieldConfig } from '@core/components/form-generator/types';
 import { ReactNode } from 'react';
 import { useFormContext } from 'react-hook-form';
 

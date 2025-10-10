@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 
-import DefaultTable, { SearchComponent } from '@/components/custom/tables/default-table';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select';
 import { Role, User } from '@/types';
@@ -8,7 +7,8 @@ import { Roles } from '@core/enum/Roles';
 import { apiGet, apiPut } from '@core/lib/api';
 import { ColumnDef } from '@tanstack/react-table';
 import { useState } from 'react';
-import SingleAdminDialog from '../dialogs/single-admin-dialog';
+import SingleAdminDialog from '../../../../../../Core/resources/assets/js/components/dialogs/single-admin-dialog';
+import DefaultTable, { SearchComponent } from '@core/components/tables/default-table';
 
 export default function AdminTable({ children, isRefreshing }: { children?: React.ReactNode; isRefreshing: boolean }) {
     const [admins, setAdmins] = useState<User[]>([]);

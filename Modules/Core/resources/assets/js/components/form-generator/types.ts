@@ -15,6 +15,7 @@ export interface FieldConfig {
     className?: string;
     wrapperClassName?: string;
     fileConfig?: FileUploadConfig;
+    onInteraction?: (fieldName: string, eventType: 'click' | 'change', value: any) => void;
 }
 
 export interface FileUploadConfig {

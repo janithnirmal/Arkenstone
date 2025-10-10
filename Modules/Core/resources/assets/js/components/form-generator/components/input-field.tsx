@@ -20,6 +20,10 @@ const InputField: React.FC<InputFieldProps> = ({ fieldConfig, onInteraction }) =
         if (onInteraction) {
             onInteraction(name, eventType, value);
         }
+
+        if (fieldConfig.onInteraction) {
+            fieldConfig.onInteraction(name, eventType, value);
+        }
     };
 
     const commonProps = {

@@ -1,4 +1,4 @@
-import { DynamicFormGeneratorOptions } from '../../components/form-generator/types';
+import { DynamicFormGeneratorOptions } from '@core/components/form-generator/types';
 import CustomStyledInput from './custom-input';
 
 const userRegistrationFormOptions: DynamicFormGeneratorOptions = {
