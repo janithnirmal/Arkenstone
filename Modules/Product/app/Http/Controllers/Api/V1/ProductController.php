@@ -6,6 +6,7 @@ use App\Helpers\ResponseProtocol;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
+use Modules\Product\Http\Requests\QueryProductRequest;
 use Modules\Product\Models\Product;
 use Modules\Product\Models\ProductImage;
 use Modules\Core\Contracts\ProductManagerServiceInterface;
@@ -15,7 +16,6 @@ use Modules\Product\Http\Resources\ProductCollection;
 use Modules\Product\Http\Resources\ProductResource;
 use Modules\Product\Http\Requests\UploadProductImagesRequest;
 use Modules\Product\Http\Resources\ProductImageResource;
-use Modules\Product\App\Http\Requests\QueryProductRequest;
 use Modules\Product\Http\Resources\ProductResourceCollection;
 
 class ProductController extends Controller
@@ -29,7 +29,6 @@ class ProductController extends Controller
 
     /**
      * Fetch product(s) based on query parameters.
-     * @param \Modules\Product\App\Http\Requests\QueryProductRequest $request
      * @return JsonResponse
      */
     public function index(QueryProductRequest $request): JsonResponse

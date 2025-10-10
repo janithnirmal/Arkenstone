@@ -5,7 +5,7 @@ namespace Modules\Product\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Modules\Product\App\Enum\DiscountType;
+use Modules\Product\Enum\DiscountType;
 
 class ProductResource extends JsonResource
 {
