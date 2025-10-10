@@ -2,8 +2,10 @@
 
 namespace Modules\Site\Http\Controllers;
 
+use App\Helpers\ResponseProtocol;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class SiteController extends Controller
 {
@@ -26,7 +28,9 @@ class SiteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {}
+    public function store(Request $request)
+    {
+    }
 
     /**
      * Show the specified resource.
@@ -47,10 +51,20 @@ class SiteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id) {}
+    public function update(Request $request, $id)
+    {
+    }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id) {}
+    public function destroy($id)
+    {
+    }
+
+    public function test(Request $request)
+    {
+        Log::info("Form Submitted", [$request->all()]);
+        return ResponseProtocol::success(null, "all works well");
+    }
 }
