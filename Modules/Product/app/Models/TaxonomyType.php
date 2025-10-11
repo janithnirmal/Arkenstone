@@ -19,8 +19,8 @@ class TaxonomyType extends Model
     // {
     //     // return TaxonomyTypeFactory::new();
     // }
-    protected function taxonomies()
+    public function taxonomies()
     {
-        return $this->hasMany(Taxonomy::class);
+        return $this->hasMany(Taxonomy::class, 'taxonomy_type_id');
     }
 }

@@ -32,14 +32,24 @@ Route::prefix('v1')
             'taxonomies' => TaxonomyController::class,
         ], ['except' => ['index']]);
 
+
         // product ↔ taxonomies linking
+        // These routes manage the many-to-many relationship between a specific Product and its Taxonomies.
+        // They are nested under `/products/{product}` to follow RESTful principles, ensuring that every
+        // action (attaching, syncing, detaching) is performed in the context of a clearly identified product.
+        // This makes the API logical and predictable.
+        //
+        // POST   /products/{product}/taxonomies/attach : Adds one or more taxonomies to the product.
+        // PUT    /products/{product}/taxonomies/sync   : Replaces all of the product's taxonomies with a new set.
+        // DELETE /products/{product}/taxonomies/{taxonomy} : Removes a single, specific taxonomy from the product.
         Route::prefix('products/{product}')->group(function () {
-            Route::get('taxonomies', [ProductTaxonomyController::class, 'index'])
-                ->name('products.taxonomies.index');
             Route::post('taxonomies/attach', [ProductTaxonomyController::class, 'attach'])
                 ->name('products.taxonomies.attach');
+
             Route::put('taxonomies/sync', [ProductTaxonomyController::class, 'sync'])
                 ->name('products.taxonomies.sync');
+
+            // The taxonomy to detach is now also part of the URL
             Route::delete('taxonomies/{taxonomy}', [ProductTaxonomyController::class, 'detach'])
                 ->name('products.taxonomies.detach');
         });
@@ -64,8 +74,4 @@ Route::prefix('v1')->group(function () {
         'taxonomy-types' => TaxonomyTypeController::class,
         'taxonomies' => TaxonomyController::class,
     ], ['only' => ['index']]);
-
-    // products by taxonomy
-    Route::get('taxonomies/{taxonomy}/products', [TaxonomyController::class, 'products'])
-        ->name('taxonomies.products');
 });

@@ -2,6 +2,5 @@
     "Core": true,
     "Product": true,
     "Analytics": true,
-    "Site": true,
-    "Taxonomy": true
+    "Site": true
 }

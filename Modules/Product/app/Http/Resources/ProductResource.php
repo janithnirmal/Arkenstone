@@ -41,6 +41,9 @@ class ProductResource extends JsonResource
             'discount_value' => (float) $this->discount_value,
             'quantity' => (int) $this->stock,
 
+            'taxonomies' => TaxonomyResource::collection($this->whenLoaded('taxonomies')),
+            
+
             'final_price' => $this->discount_type === DiscountType::PERCENTAGE->value ? round(((float) $this->price / 100) * (float) $this->discount_value, 2) : (float) $this->price - (float) $this->discount_value,
         ];
     }

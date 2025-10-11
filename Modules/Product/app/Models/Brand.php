@@ -32,7 +32,7 @@ class Brand extends Model implements BrandContract
     public function promotions(): HasMany
     {
         return $this->hasMany(Promotion::class, 'entity_id')
-                    ->where('type', 'brand')
-                    ->whereColumn('entity_id', 'brands.id');
+            ->where('type', 'brand')
+            ->whereColumn('entity_id', 'brands.id');
     }
 }

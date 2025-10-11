@@ -42,4 +42,6 @@ class Taxonomy extends Model
     {
         return $this->belongsToMany(\Modules\Product\Models\Product::class, 'product_taxonomy')->withTimestamps();
     }
+
+    
 }

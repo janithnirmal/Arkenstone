@@ -4,6 +4,9 @@ namespace Modules\Product\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Summary of UpdateTaxonomyRequest
+ */
 class UpdateTaxonomyRequest extends FormRequest
 {
     /**
@@ -17,11 +20,12 @@ class UpdateTaxonomyRequest extends FormRequest
                 'integer',
                 'exists:taxonomies,id'
             ],
+            'taxonomy_type_id'=>'sometimes|required|integer|exists:taxonomy_types,id',
             'name'=>'sometimes|required|string|max:255',
             'slug'=>'sometimes|required|string|max:255',
             'description'=>'nullable|string',
             'sort_order'=>'nullable|integer|min:0',
-            'metadata'=>'nullable|array'
+            'meta'=>'nullable|array'
         ];
     }
 

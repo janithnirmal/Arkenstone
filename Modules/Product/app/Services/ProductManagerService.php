@@ -29,7 +29,7 @@ class ProductManagerService implements ProductManagerServiceInterface
      * A whitelist of relations that are safe to be eager-loaded.
      * @var array
      */
-    protected array $allowedRelations = ['categories', 'brand', 'images'];
+    protected array $allowedRelations = ['categories', 'brand', 'images','taxonomies','taxonomies.type'];
 
     public function find(int $id, array $with = []): ?ProductContract
     {

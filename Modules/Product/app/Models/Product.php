@@ -123,6 +123,11 @@ class Product extends Model implements ProductContract
 
     public function taxonomies(): BelongsToMany
     {
-        return $this->belongsToMany(Taxonomy::class, 'product_taxonomies');
+        return $this->belongsToMany(Taxonomy::class, 'product_taxonomies')->withTimestamps();
+    }
+
+    public function productTaxonomies()
+    {
+        return $this->hasMany(ProductTaxonomy::class);
     }
 }
