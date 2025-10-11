@@ -60,6 +60,10 @@ export default function DefaultTable({
         onColumnVisibilityChange: setColumnVisibility,
         onRowSelectionChange: setRowSelection,
         state: {
+            pagination: {
+                pageIndex: 0, // current page
+                pageSize: 7, // ✅ this controls the limit
+            },
             sorting,
             columnFilters,
             columnVisibility,

@@ -46,3 +46,9 @@ Route::get('/return-policy', function () {
 Route::get('/terms-and-conditions', function () {
     return Inertia::render('Site::policies/terms-and-conditions');
 })->name('terms-and-conditions');
+
+
+// utility
+Route::get("/site/test", function () {
+    return Inertia::render('Site::test');
+})->name('site.test');

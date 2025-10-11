@@ -3,7 +3,7 @@ import { Head, Link, usePage } from '@inertiajs/react';
 
 import { cn } from '@/lib/utils';
 import { BreadcrumbItem } from '@/types';
-import AdminTable from '@core/components/tables/admin-table';
+import AdminTable from '@site/components/tables/admin-table';
 import Config from '../../config';
 
 const breadcrumbs: BreadcrumbItem[] = [

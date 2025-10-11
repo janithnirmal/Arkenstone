@@ -1,6 +1,6 @@
 import { BreadcrumbItem } from '@/types';
 import CreateAdminDialog from '@core/components/dialogs/create-admin-dialog';
-import AdminTable from '@core/components/tables/admin-table';
+import AdminTable from '@site/components/tables/admin-table';
 import AppLayout from '@core/layouts/app-layout';
 import { Head } from '@inertiajs/react';
 import { useState } from 'react';
