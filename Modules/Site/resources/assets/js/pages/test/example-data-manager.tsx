@@ -219,8 +219,7 @@ export const productsConfig: DataManagerConfig = {
                             accept: 'image/png, image/jpeg, image/webp',
                             preview: true,
                             async: true, // Set to true if you have a separate upload endpoint
-                            uploadUrl: '/products/images',
-                            deleteUrl: () => '/products/images',
+                            url: '/products/images',
                             formKey: 'image',
                         },
                     },

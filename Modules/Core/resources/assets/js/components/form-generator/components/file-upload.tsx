@@ -36,7 +36,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ fieldConfig, onFileChange, onIn
                     const response = await apiPost(fileConfig.uploadUrl, { data: formData, isMultipart: true });
                     uploadedUrls.push(response.url); // Assuming API returns { url: '...' }
                     console.log(response);
-                    
+
                     setPreviews((prev) => [
                         ...prev,
                         {
@@ -74,7 +74,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ fieldConfig, onFileChange, onIn
 
         if (fileToRemove.isUploaded && fileConfig?.async && fileConfig.deleteUrl) {
             try {
-                await apiDelete(fileConfig.deleteUrl(fileToRemove.id));
+                await apiDelete(fileConfig.deleteUrl);
             } catch (error) {
                 console.error('Failed to delete remote file', error);
             }
@@ -106,7 +106,9 @@ const FileUpload: React.FC<FileUploadProps> = ({ fieldConfig, onFileChange, onIn
                 <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-4">
                     {previews.map((p) => (
                         <div key={p.id} className="group relative">
-                            {p.type === 'image' && <img src={p.url} alt={p.name} className="h-24 w-full rounded-md object-cover" />}
+                            {p.type === 'image' && (
+                                <img src={p.url} alt={p.name} className="bg-background/50 h-64 w-full rounded-md object-contain shadow-lg" />
+                            )}
                             {p.type === 'video' && <video src={p.url} className="h-24 w-full rounded-md object-cover" controls />}
                             {p.type === 'other' && (
                                 <div className="flex h-24 w-full items-center justify-center rounded-md bg-gray-100 p-2">
@@ -116,7 +118,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ fieldConfig, onFileChange, onIn
                             <button
                                 type="button"
                                 onClick={() => handleRemove(p.id)}
-                                className="absolute top-1 right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100"
+                                className="absolute top-1 right-1 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full bg-red-500 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100"
                             >
                                 X
                             </button>

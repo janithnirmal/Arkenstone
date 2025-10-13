@@ -31,7 +31,7 @@ class ProductManagerService implements ProductManagerServiceInterface
      * A whitelist of relations that are safe to be eager-loaded.
      * @var array
      */
-    protected array $allowedRelations = ['categories', 'brand', 'images','taxonomies','taxonomies.type'];
+    protected array $allowedRelations = ['categories', 'brand', 'images', 'taxonomies', 'taxonomies.type'];
 
     public function find(int $id, array $with = []): ?ProductContract
     {
@@ -50,9 +50,9 @@ class ProductManagerService implements ProductManagerServiceInterface
     public function search(array $filters): LengthAwarePaginator
     {
         $relationsToLoad = isset($filters['with']) & !empty($filters['with']) ? $filters['with'] : $this->allowedRelations;
-        Log::info("Relations", [$relationsToLoad]);
 
         $query = Product::query()->with($relationsToLoad);
+        Log::info("Test Data", [$query->toSql()]);
 
         $filter = new ProductFilter($query, $filters); // filter the query based on the provided filters
         $filteredQuery = $filter->apply();
@@ -125,15 +125,40 @@ class ProductManagerService implements ProductManagerServiceInterface
     }
 
 
-    // TODO: to be updated
     public function delete(ProductContract|Product $product): bool
     {
-        $result = $product->delete();
+        DB::beginTransaction();
 
-        if ($result) {
-            ProductDeleted::dispatch($product);
+        try {
+            // Delete all product images (DB + disk)
+            foreach ($product->images as $image) {
+                try {
+                    Storage::disk('products')->delete($image->url);
+                } catch (\Throwable $e) {
+                    Log::warning("Failed to delete image file: {$image->url}");
+                }
+            }
+            $product->images()->delete();
+
+            // Detach pivot table relations (not delete related models!)
+            $product->categories()->detach();
+            $product->taxonomies()->detach();
+
+            // Finally delete product itself
+            $result = $product->delete();
+
+            DB::commit();
+
+            if ($result) {
+                ProductDeleted::dispatch($product);
+            }
+
+            return $result;
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            Log::error("Product deletion failed: " . $th->getMessage());
+            return false;
         }
-        return $result;
     }
 
     public function addImages(array $images): Collection

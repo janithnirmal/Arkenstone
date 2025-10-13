@@ -20,6 +20,11 @@ interface ProductContract
      * Get the categories that belong to the product.
      */
     public function categories(): BelongsToMany;
+    
+    /**
+     * Get the taxonomies that belong to the product.
+     */
+    public function taxonomies(): BelongsToMany;
 
 
     /**

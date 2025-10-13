@@ -16,11 +16,10 @@ import DefaultTable from '../tables/default-table';
 import { DataManagerConfig } from './types';
 
 export default function DataManager({ config }: { config: DataManagerConfig }) {
-    const { apiBaseUrl, dataName, tableConfig, formConfig, addConfig, editConfig, viewConfig, layoutConfig } = config;
+    const { apiBaseUrl, dataName, tableConfig, formConfig, addConfig, editConfig, viewConfig, layoutConfig } = config; // configurations
 
     // Zustand store hooks
-    const { data, loading, isModalOpen, modalMode, selectedItem, fetchData, openModal, closeModal } = useDataManagerStore();
-
+    const { data, loading, isModalOpen, modalMode, selectedItem, fetchData, openModal, closeModal } = useDataManagerStore(); // states
 
     // Initial data fetch
     useEffect(() => {
@@ -36,7 +35,10 @@ export default function DataManager({ config }: { config: DataManagerConfig }) {
 
     const handleDelete = async (id: string | number) => {
         toast.promise(
-            apiDelete(`${apiBaseUrl}/${id}`, {
+            apiDelete(`${apiBaseUrl}`, {
+                data: {
+                    id,
+                },
                 displayError: false, // handled by promise catch
                 displaySuccess: false, // handled by promise then
             }),

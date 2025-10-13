@@ -13,7 +13,7 @@ const api = axios.create({
     withCredentials: true,
 });
 
-interface ApiOptions {
+export interface ApiOptions {
     data?: any;
     params?: any;
     headers?: any;

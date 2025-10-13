@@ -36,7 +36,7 @@ class ProductSeeder extends Seeder
         // 2. DATA DEFINITION: LOAD FROM JSON FILE
         // =================================================================
 
-        $jsonPath = database_path("data/products/products.json");
+        $jsonPath = database_path("data/test-data/products.json");
 
         if (!File::exists($jsonPath)) {
             $this->command->error("JSON file not found at: {$jsonPath}");

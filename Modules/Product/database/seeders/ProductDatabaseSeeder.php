@@ -19,6 +19,9 @@ class ProductDatabaseSeeder extends Seeder
             ProductSeeder::class,
             TaxonomyTypeSeeder::class,
             TaxonomySeeder::class,
+
+                // Product
+            ProductSeeder::class
         ]);
     }
 }

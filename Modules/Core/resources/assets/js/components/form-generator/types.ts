@@ -23,9 +23,12 @@ export interface FileUploadConfig {
     multiple: boolean;
     preview: boolean;
     async: boolean;
-    formKey?: string;
+    url?: string;
     uploadUrl?: string;
-    deleteUrl?: (fileIdentifier: string) => string;
+    deleteUrl?: string;
+    formKey?: string;
+    formUploadKey?: string;
+    formDeleteKey?: string;
 }
 
 export interface GroupConfig {

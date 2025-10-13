@@ -16,6 +16,8 @@ Route::prefix('v1')
     ->group(function () {
         // products
         Route::apiResource('products', ProductController::class)->except('index');
+        Route::delete('products', [ProductController::class, "destroy"]);
+
         // product images
         Route::post('/products/images', [ProductController::class, 'uploadImages'])->name('products.images.store');
         Route::delete('/products/images', [ProductController::class, 'destroyImage'])->name('products.images.destroy');

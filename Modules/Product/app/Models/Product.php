@@ -71,6 +71,16 @@ class Product extends Model implements ProductContract
         return $this->hasOne(ProductImage::class)->where('is_primary', true)->orderBy('id');
     }
 
+    public function taxonomies(): BelongsToMany
+    {
+        return $this->belongsToMany(Taxonomy::class, 'product_taxonomies')->withTimestamps();
+    }
+
+    public function productTaxonomies()
+    {
+        return $this->hasMany(ProductTaxonomy::class);
+    }
+
 
     // filters
 
@@ -121,13 +131,5 @@ class Product extends Model implements ProductContract
         return $query->where('brand_id', $ud);
     }
 
-    public function taxonomies(): BelongsToMany
-    {
-        return $this->belongsToMany(Taxonomy::class, 'product_taxonomies')->withTimestamps();
-    }
 
-    public function productTaxonomies()
-    {
-        return $this->hasMany(ProductTaxonomy::class);
-    }
 }

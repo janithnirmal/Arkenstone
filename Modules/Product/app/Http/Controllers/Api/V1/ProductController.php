@@ -11,6 +11,7 @@ use Modules\Product\Models\Product;
 use Modules\Product\Models\ProductImage;
 use Modules\Core\Contracts\ProductManagerServiceInterface;
 use Modules\Product\Http\Requests\DeleteProductImagesRequest;
+use Modules\Product\Http\Requests\DestoryProductRequest;
 use Modules\Product\Http\Requests\StoreProductRequest;
 use Modules\Product\Http\Requests\UpdateProductRequest;
 use Modules\Product\Http\Resources\ProductCollection;
@@ -39,6 +40,7 @@ class ProductController extends Controller
             return ResponseProtocol::success(new ProductResource($product));
         } else {
             $products = $this->productService->search($request->validated());
+            Log::info("Fetched Product", [$products]);
             return ResponseProtocol::success(new ProductResourceCollection($products));
         }
     }
@@ -64,10 +66,11 @@ class ProductController extends Controller
         return new ProductResource($updatedProduct);
     }
 
-    public function destroy(Product $product): JsonResponse
+    public function destroy(DestoryProductRequest $request): JsonResponse
     {
-        $this->productService->delete($product);
-        return response()->json(null, 204);
+        $product = Product::withTrashed()->find($request->id);
+        $deletedProduct = $this->productService->delete($product);
+        return ResponseProtocol::success($deletedProduct, "Product Deleted SuccessFully!");
     }
 
     /**

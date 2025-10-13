@@ -5,7 +5,7 @@ namespace Modules\Product\Events;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
-use Modules\Core\Contracts\ProductContract;
+use Modules\Core\Contracts\Products\ProductContract;
 
 class ProductDeleted
 {

@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { apiGet } from '../../../lib/api';
+import { apiGet, ApiOptions } from '../../../lib/api';
 import { ModalTypes } from '../types';
 
 export interface DataManagerStore {
@@ -9,7 +9,7 @@ export interface DataManagerStore {
     isModalOpen: boolean;
     modalMode: ModalTypes;
     selectedItem: any | null;
-    fetchData: (url: string) => Promise<void>;
+    fetchData: (url: string, options?: ApiOptions) => Promise<void>;
     openModal: (mode: ModalTypes, item?: any) => void;
     closeModal: () => void;
 }
@@ -21,10 +21,13 @@ const useDataManagerStore = create<DataManagerStore>((set, get) => ({
     isModalOpen: false,
     modalMode: null,
     selectedItem: null,
-    fetchData: async (url: string) => {
+    fetchData: async (url: string, options?: ApiOptions) => {
         set({ loading: true, error: null });
         try {
-            const result = await apiGet(url);
+            const result = await apiGet(url, {
+                displayError: true,
+                ...options,
+            });
             set({ data: result.data || [], loading: false });
         } catch (e: any) {
             set({ error: e.message || 'Failed to fetch data', loading: false });
