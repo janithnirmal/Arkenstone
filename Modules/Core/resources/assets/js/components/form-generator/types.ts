@@ -23,6 +23,7 @@ export interface FileUploadConfig {
     multiple: boolean;
     preview: boolean;
     async: boolean;
+    formKey?: string;
     uploadUrl?: string;
     deleteUrl?: (fileIdentifier: string) => string;
 }

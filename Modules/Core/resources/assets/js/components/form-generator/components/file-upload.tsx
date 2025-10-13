@@ -31,10 +31,12 @@ const FileUpload: React.FC<FileUploadProps> = ({ fieldConfig, onFileChange, onIn
             const uploadedUrls: string[] = [];
             for (const file of files) {
                 const formData = new FormData();
-                formData.append('file', file);
+                formData.append(fileConfig.formKey ?? 'file', file);
                 try {
                     const response = await apiPost(fileConfig.uploadUrl, { data: formData, isMultipart: true });
                     uploadedUrls.push(response.url); // Assuming API returns { url: '...' }
+                    console.log(response);
+                    
                     setPreviews((prev) => [
                         ...prev,
                         {

@@ -17,10 +17,11 @@ const formatCurrency = (amount: number) => {
 // Define the columns for the products table.
 const productTableColumns: ColumnDef<any>[] = [
     {
-        accessorKey: 'primary_image_url',
+        id: 'primary_image', // give a unique column ID
+        accessorFn: (row) => row.images?.[0]?.url ?? '',
         header: 'Image',
         cell: ({ row }) => {
-            const imageUrl = row.getValue('primary_image_url') as string;
+            const imageUrl = row.getValue<string>('primary_image'); // pass the column ID
             const productName = row.original.name as string;
             return <img src={imageUrl} alt={productName} className="h-16 w-16 rounded-md object-cover" />;
         },
@@ -217,7 +218,10 @@ export const productsConfig: DataManagerConfig = {
                             multiple: true,
                             accept: 'image/png, image/jpeg, image/webp',
                             preview: true,
-                            async: false, // Set to true if you have a separate upload endpoint
+                            async: true, // Set to true if you have a separate upload endpoint
+                            uploadUrl: '/products/images',
+                            deleteUrl: () => '/products/images',
+                            formKey: 'image',
                         },
                     },
                 ],

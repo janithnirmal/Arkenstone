@@ -8,9 +8,11 @@ use App\Http\Middleware\ResponseHandler;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 use Spatie\Permission\Middleware\PermissionMiddleware;
 use Spatie\Permission\Middleware\RoleMiddleware;
@@ -50,7 +52,12 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        $exceptions->respond(function (Response $response, Throwable $exception, Request $request) {
+        $exceptions->respond(function (Response|JsonResponse $response, Throwable $exception, Request $request) {
+            Log::info("Test Log 1");
+            if ($request->expectsJson()) {
+                return $response;
+            }
+
             if ($response->getStatusCode() >= 400 && $response->getStatusCode() < 600) {
                 return Inertia::render('Site::errors/error-pages', ['status' => $response->getStatusCode()])
                     ->toResponse($request)

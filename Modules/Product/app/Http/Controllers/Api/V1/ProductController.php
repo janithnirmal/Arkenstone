@@ -10,6 +10,7 @@ use Modules\Product\Http\Requests\QueryProductRequest;
 use Modules\Product\Models\Product;
 use Modules\Product\Models\ProductImage;
 use Modules\Core\Contracts\ProductManagerServiceInterface;
+use Modules\Product\Http\Requests\DeleteProductImagesRequest;
 use Modules\Product\Http\Requests\StoreProductRequest;
 use Modules\Product\Http\Requests\UpdateProductRequest;
 use Modules\Product\Http\Resources\ProductCollection;
@@ -72,24 +73,16 @@ class ProductController extends Controller
     /**
      * Handle file uploads for a specific product.
      */
-    public function uploadImages(UploadProductImagesRequest $request, Product $product): JsonResponse
+    public function uploadImages(UploadProductImagesRequest $request): JsonResponse
     {
-        $newImages = $this->productService->addImages(
-            $product,
-            $request->validated()['images']
-        );
-
-        return ProductImageResource::collection($newImages)
-            ->additional(['message' => 'Images uploaded successfully.'])
-            ->response()
-            ->setStatusCode(201);
+        $newImages = $this->productService->addImages([$request->validated()['image']]);
+        return ResponseProtocol::success(new ProductImageResource($newImages[0]), "Images uploaded successfully.");
     }
 
-    public function destroyImage(ProductImage $product_image): JsonResponse
+    public function destroyImage(DeleteProductImagesRequest $request): JsonResponse
     {
-        // Add authorization check here to ensure user can delete this image.
-        $this->productService->deleteImage($product_image);
-        return response()->json(null, 204);
+        $this->productService->deleteImage($request->validated());
+        return ResponseProtocol::success(null, 'Image Removed Successfully');
     }
 
 }

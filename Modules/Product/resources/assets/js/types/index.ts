@@ -45,7 +45,6 @@ export interface Product {
     categories?: Category[];
     brand?: Brand;
     images?: ProductImage[];
-    primary_image_url?: string | null;
     price: number;
     discount_type?: number;
     discount_value?: number;

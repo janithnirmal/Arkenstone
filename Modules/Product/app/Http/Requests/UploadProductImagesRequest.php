@@ -22,8 +22,7 @@ class UploadProductImagesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'images' => ['required', 'array', 'min:1'],
-            'images.*' => [
+            'image' => [
                 'required',
                 'image', // Ensures the file is an image (e.g., jpg, png, bmp, gif, svg, or webp)
                 'mimes:jpg,jpeg,png,gif,webp', // Explicitly define allowed extensions

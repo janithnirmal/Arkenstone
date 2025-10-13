@@ -32,20 +32,6 @@ class ProductSeeder extends Seeder
         $brands = Brand::all()->keyBy('name');
         $categories = Category::all()->keyBy('slug');
 
-        // More robustly fetch all attributes and their values
-        $attributes = Attribute::with('values')->get()->keyBy('name');
-
-        if ($brands->isEmpty() || $categories->isEmpty() || $attributes->isEmpty()) {
-            $this->command->error('Brands, Categories, or Attributes not found. Please run their seeders first!');
-            return;
-        }
-
-        // Create a lookup map for all attribute values for faster access
-        $attributeValues = $attributes->flatMap(fn($attr) => $attr->values)->keyBy(function ($value) {
-            // Create a unique key like 'Color:Red' or 'Size:Medium'
-            return $value->attribute->name . ':' . $value->value;
-        });
-
         // =================================================================
         // 2. DATA DEFINITION: LOAD FROM JSON FILE
         // =================================================================

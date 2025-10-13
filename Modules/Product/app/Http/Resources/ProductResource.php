@@ -34,7 +34,6 @@ class ProductResource extends JsonResource
             'brand' => new BrandResource($this->whenLoaded('brand')),
 
             'images' => ProductImageResource::collection($this->whenLoaded('images')),
-            'primary_image_url' => $this->primaryImage?->url,
 
             'price' => (float) $this->price,
             'discount_type' => (float) $this->discount_type,

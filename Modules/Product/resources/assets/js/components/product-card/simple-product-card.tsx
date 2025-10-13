@@ -4,7 +4,7 @@ import React from 'react';
 
 const SimpleProductCard: React.FC<ProductCardProps> = ({ data }) => {
     // Gracefully handle potentially missing data to prevent UI breakage
-    const { name = 'Untitled Product', brand, primary_image_url, price = 0, final_price = 0, discount_value = 0, categories } = data || {};
+    const { name = 'Untitled Product', brand, images, price = 0, final_price = 0, discount_value = 0, categories } = data || {};
 
     const hasDiscount = final_price > 0 && final_price < price;
     const displayPrice = hasDiscount ? final_price : price;
@@ -12,7 +12,7 @@ const SimpleProductCard: React.FC<ProductCardProps> = ({ data }) => {
 
     const primaryCategory = categories && categories.length > 0 ? categories[0].name : 'Uncategorized';
     const brandName = brand?.name || 'Generic Brand';
-    const imageUrl = primary_image_url || 'https://via.placeholder.com/800x800/f0f0f0/333333?text=No+Image';
+    const imageUrl = images?.[0].url || 'https://via.placeholder.com/800x800/f0f0f0/333333?text=No+Image';
     const altText = data?.images?.[0]?.alt_text || `Image of ${name}`;
 
     return (

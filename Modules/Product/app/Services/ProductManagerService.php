@@ -3,9 +3,11 @@
 namespace Modules\Product\Services;
 
 
+use Faker\Provider\Image;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 
+use Illuminate\Support\Str;
 use Modules\Core\Contracts\ProductManagerServiceInterface;
 use Modules\Product\Events\ProductCreated;
 use Modules\Product\Events\ProductDeleted;
@@ -58,10 +60,10 @@ class ProductManagerService implements ProductManagerServiceInterface
         return $filteredQuery->paginate($filters['per_page'] ?? 15);
     }
 
-    // TODO: to be updated
     public function create(array $data): ProductContract
     {
         return DB::transaction(function () use ($data) {
+            $data["slug"] = Str::slug($data["name"]); // create a slug
             $product = Product::create($data);
 
             if (!empty($data['category_ids'])) {
@@ -69,14 +71,14 @@ class ProductManagerService implements ProductManagerServiceInterface
             }
 
             if (!empty($data['images'])) {
-                $product->images()->createMany($data['images']);
-            }
+                Log::info("Uploaded Images", [$data['images']]);
 
-            if (!empty($data['variants'])) {
-                foreach ($data['variants'] as $variantData) {
-                    $variant = $product->variants()->create($variantData);
-                    if (!empty($variantData['attribute_value_ids'])) {
-                        $variant->attributeValues()->attach($variantData['attribute_value_ids']);
+                foreach ($data['images'] as $image) {
+                    $productImage = ProductImage::find($image["id"] ?? null);
+                    if ($productImage) {
+                        $productImage->update([
+                            'product_id' => $product->id,
+                        ]);
                     }
                 }
             }
@@ -134,21 +136,19 @@ class ProductManagerService implements ProductManagerServiceInterface
         return $result;
     }
 
-    // TODO: lets work on media later
-    public function addImages(ProductContract|Product $product, array $images): Collection
+    public function addImages(array $images): Collection
     {
         $createdImages = new Collection();
 
-        DB::transaction(function () use ($product, $images, &$createdImages) {
+        DB::transaction(function () use ($images, &$createdImages) {
             foreach ($images as $imageFile) {
                 if ($imageFile instanceof UploadedFile) {
                     // Store the file and get its relative path. This is what we save.
                     $path = $imageFile->store('products', 'public');
 
                     // Create the database record for the image.
-                    $newImage = $product->images()->create([
+                    $newImage = ProductImage::create([
                         'url' => $path, // <-- STORE THE RELATIVE PATH, NOT THE FULL URL
-                        'alt_text' => $product->name,
                         'is_primary' => false,
                     ]);
 
@@ -158,15 +158,17 @@ class ProductManagerService implements ProductManagerServiceInterface
         });
 
         if ($createdImages->isNotEmpty()) {
-            ProductImagesUploaded::dispatch($product, $createdImages);
+            ProductImagesUploaded::dispatch($createdImages);
         }
 
         return $createdImages;
     }
 
-    // TODO: lets work on media later
-    public function deleteImage(ProductImageContract|ProductImage $image): bool
+    public function deleteImage($image_id): bool
     {
+
+        $image = ProductImage::find($image_id);
+
         // The relative path is now stored directly in the 'url' property.
         $path = $image->getUrl(); // This returns the relative path
 
@@ -184,6 +186,12 @@ class ProductManagerService implements ProductManagerServiceInterface
         }
 
         return $result;
+    }
+
+
+    public function deleteImageByUrl(string $image_url): bool
+    {
+        return true;
     }
 
 }

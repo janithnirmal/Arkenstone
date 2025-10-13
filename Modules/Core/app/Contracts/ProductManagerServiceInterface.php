@@ -59,15 +59,24 @@ interface ProductManagerServiceInterface
      * @param array $images Array of UploadedFile objects.
      * @return Collection A collection of the newly created ProductImage models.
      */
-    public function addImages(ProductContract $product, array $images): Collection;
+    public function addImages(array $images): Collection;
 
     /**
      * Delete a single product image.
      *
-     * @param ProductImageContract $image The image instance to delete.
+     * @param int $image_id The image instance to delete.
      * @return bool
      */
-    public function deleteImage(ProductImageContract $image): bool;
+    public function deleteImage(int $image_id): bool;
+
+
+    /**
+     * Delete a single product image.
+     *
+     * @param string $image_url The image instance to delete.
+     * @return bool
+     */
+    public function deleteImageByUrl(string $image_url): bool;
 
 
 }
