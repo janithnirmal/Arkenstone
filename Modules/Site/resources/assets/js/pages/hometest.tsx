@@ -1,16 +1,12 @@
-import Config from '@core/config';
 import { Head } from '@inertiajs/react';
-import Search from '@site/components/search/search';
-import TextAdvantPro from '@site/components/text/text-AdvantPro';
 import PageLayout from '@site/layouts/page-layout';
-import { Button } from '@site/components/button/default-button';
-import { ArrowRight } from 'lucide-react';
-import HeroImgContainer from '@site/components/heroImgContainter/hero-img-container';
+import HeroSection from './home/hero-section';
 
 export default function Home() {
     return (
         <PageLayout>
             <Head title="Home" />
+<<<<<<< HEAD
             <div className="container mx-auto flex min-h-[80vh] flex-col px-5 py-5 bg-background">
                 <div className='flex w-full'>
                     <div className='w-1/2 flex-1 h-full min-h-[80vh] px-10 space-y-10 flex flex-col'>
@@ -31,6 +27,9 @@ export default function Home() {
                     </div>
                 </div>
             </div>
+=======
+            <HeroSection />
+>>>>>>> d6bc4c01937cdf45a638acd8326780a29529c909
         </PageLayout>
     );
 }
