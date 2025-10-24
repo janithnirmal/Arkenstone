@@ -96,8 +96,8 @@
     }
 }
 :root {
-    --background: #f4f8f5;
-    --foreground: #2c2f2a;
+    --background: white;
+    --foreground: black;
 
     --card: #e7edea;
     --card-foreground: #2c2f2a;
@@ -145,8 +145,8 @@
 }
 
 .dark {
-    --background: #131915;
-    --foreground: #d6dfd9;
+    --background: white;
+    --foreground: black;
 
     --card: #1b1f1c;
     --card-foreground: #d6dfd9;

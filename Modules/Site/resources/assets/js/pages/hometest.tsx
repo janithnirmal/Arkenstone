@@ -11,7 +11,7 @@ export default function Home() {
     return (
         <PageLayout>
             <Head title="Home" />
-            <div className="container mx-auto flex min-h-[80vh] flex-col px-5 py-5 bg-white">
+            <div className="container mx-auto flex min-h-[80vh] flex-col px-5 py-5 bg-background">
                 <div className='flex w-full'>
                     <div className='w-1/2 flex-1 h-full min-h-[80vh] px-10 space-y-10 flex flex-col'>
                         <Search />
