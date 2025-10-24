@@ -6,7 +6,29 @@ import HeroImgContainer from '@site/components/heroImgContainter/hero-img-contai
 
 export default function HeroSection() {
     return (
-        <div className="container mx-auto flex lg:min-h-[80vh] flex-col px-5 py-5 bg-white">
+        <div className="container mx-auto flex flex-col lg:flex-row  h-[93vh] max-h-[1080px]">
+            <div className="flex-1 flex flex-col justify-between py-10">
+                <Search />
+
+                <div className='flex flex-col items-center text-center lg:items-start lg:text-start gap-20'>
+                    <h1 className='font-semibold text-2xl lg:text-6xl'>NEW <br /> COLLECTION</h1>
+                    <div className='flex gap-1 flex-col gap-5'>
+                        <span className='text-6xl lg:text-9xl'>MOM TEX</span>
+                        <span className='uppercase text-4xl'>Mom makes your life wow</span>
+                    </div>
+                </div>
+
+                <Button className='w-max' size={'large'}>Shop Now</Button>
+            </div>
+            <div className="flex-1 w-full ">
+                <HeroImgContainer imagePath="/storage/hero/new_collection/photo.svg" />
+            </div>
+        </div>
+    );
+}
+
+
+{/* <div className="container mx-auto flex lg:min-h-[80vh] flex-col px-5 py-5 bg-white">
             <div className='flex w-full'>
                 <div className='lg:w-1/2 flex-1 h-full lg:min-h-[80vh] px-10 space-y-10 flex flex-col'>
                     <Search />
@@ -25,6 +47,4 @@ export default function HeroSection() {
                     <HeroImgContainer imagePath="/storage/hero/new_collection/photo.svg" />
                 </div>
             </div>
-        </div>
-    );
-}
+        </div> */}

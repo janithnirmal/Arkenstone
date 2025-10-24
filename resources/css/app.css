@@ -145,8 +145,8 @@
 }
 
 .dark {
-    --background: white;
-    --foreground: black;
+    --background: #fff;
+    --foreground: #000;
 
     --card: #1b1f1c;
     --card-foreground: #d6dfd9;
@@ -157,8 +157,8 @@
     --primary: #a3cfa1;
     --primary-foreground: #0e1a12;
 
-    --secondary: #2e3a30;
-    --secondary-foreground: #d6dfd9;
+    --secondary: #dfdfdf;
+    --secondary-foreground: #1e1e1e;
 
     --muted: #3e4a41;
     --muted-foreground: #8e998e;
