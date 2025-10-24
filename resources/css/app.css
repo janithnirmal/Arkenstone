@@ -7,6 +7,25 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@layer base {
+    @font-face {
+        font-family: 'AdventPro';
+        src: url('/database/data/fonts/AdventPro-VariableFont_wdth,wght.ttf') format('truetype');
+        font-weight: 100 900;
+        font-stretch: 75% 125%;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'BeatriceDeckTRIAL';
+        src: url('/database/data/fonts/BeatriceDisplayTRIAL-Regular-BF64829e90aea53.ttf') format('opentype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+}
+
 @theme {
     --font-sans:
         'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';

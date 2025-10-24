@@ -30,8 +30,10 @@ Route::get("/contact", function () {
     return Inertia::render('Site::contact');
 })->name('contact');
 
-
-
+//Home Test Route
+Route::get("/", function () {
+    return Inertia::render('Site::hometest');
+})->name('hometest');
 
 
 // Policies
