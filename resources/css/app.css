@@ -224,3 +224,18 @@
 ::-webkit-scrollbar-thumb:active {
     background: var(--accent);
 }
+/* 
+@layer base {
+    @keyframes rotateGallery {
+        0%, 3% { transform: perspective(280px) rotateX(-90deg) rotate(0deg); }
+        20%, 25% { transform: perspective(280px) rotateX(-90deg) rotate(-72deg); }
+        40%, 45% { transform: perspective(280px) rotateX(-90deg) rotate(-144deg); }
+        60%, 65% { transform: perspective(280px) rotateX(-90deg) rotate(-216deg); }
+        80%, 85% { transform: perspective(280px) rotateX(-90deg) rotate(-288deg); }
+        98%, 100% { transform: perspective(280px) rotateX(-90deg) rotate(-360deg); }
+    }
+
+    .animate-rotate-gallery {
+        animation: rotateGallery 12s cubic-bezier(.5, -0.2, .5, 1.2) infinite;
+    }
+} */
