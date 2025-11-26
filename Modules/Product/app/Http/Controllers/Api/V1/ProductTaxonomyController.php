@@ -25,28 +25,40 @@ class ProductTaxonomyController extends Controller
     {
         $typeId = $request->query('type_id');
         $taxonomies = $this->service->getProductTaxonomies($product, $typeId); // expect Collection
-        return TaxonomyResource::collection($taxonomies);
+        return ResponseProtocol::success(
+            TaxonomyResource::collection($taxonomies),
+            "Product taxonomies retrieved successfully."
+        );
     }
 
     // The attach method needs the product from the URL
     public function attach(AttachTaxonomiesToProductRequest $request, Product $product)
     {
         $this->service->attachToProduct($product, $request->validated()['taxonomy_ids']);
-        return ResponseProtocol::success(null, 'Taxonomies attached to product successfully.');
+        return ResponseProtocol::success(
+            null,
+            'Taxonomies attached to product successfully.'
+        );
     }
 
     // The sync method needs the product from the URL
     public function sync(SyncProductTaxonomyRequest $request, Product $product)
     {
         $this->service->syncForProduct($product, $request->validated()['taxonomy_ids']);
-        return ResponseProtocol::success(null, 'Product taxonomies synced successfully.');
+        return ResponseProtocol::success(
+            null,
+            'Product taxonomies synced successfully.'
+        );
     }
 
     // The detach method now gets both the product and the taxonomy to detach
     public function detach(Product $product, Taxonomy $taxonomy)
     {
         $this->service->detachFromProduct($product, $taxonomy);
-        return ResponseProtocol::success(null, 'Taxonomy detached from product successfully.');
+        return ResponseProtocol::success(
+            null,
+            'Taxonomy detached from product successfully.'
+        );
     }
 
 }

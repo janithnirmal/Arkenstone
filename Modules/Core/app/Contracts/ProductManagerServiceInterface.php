@@ -8,8 +8,6 @@ use Modules\Core\Contracts\Products\ProductContract;
 
 interface ProductManagerServiceInterface
 {
-
-
     /**
      * Find a single product by its ID.
      *

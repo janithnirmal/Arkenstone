@@ -90,7 +90,7 @@ class ProductManagerService implements ProductManagerServiceInterface
     }
 
 
-    // TODO: to be updated
+    
     public function update(ProductContract|Product $product, array $data): ProductContract
     {
         return DB::transaction(function () use ($product, $data) {
