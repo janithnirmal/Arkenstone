@@ -41,41 +41,11 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL') . '/storage',
+            'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
             'report' => false,
         ],
-
-        'data' => [
-            'driver' => 'local',
-            'root' => database_path('data'),
-            'visibility' => 'public',
-            'throw' => false,
-            'report' => false,
-        ],
-
-        'categories' => [
-            'driver' => 'local',
-            'root' => storage_path('app/public/images/categories'),
-            'url' => env('APP_URL') . '/storage/images/categories',
-            'visibility' => 'public',
-            'throw' => false,
-            'report' => false,
-        ],
-
-        'products' => [
-            'driver' => 'local',
-            'root' => storage_path('app/public/images/products'),
-            'url' => env('APP_URL') . '/storage/images/products',
-            'visibility' => 'public',
-            'throw' => false,
-            'report' => false,
-        ],
-
-
-
-
 
         's3' => [
             'driver' => 's3',
@@ -88,27 +58,6 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
             'report' => false,
-        ],
-
-        'backups' => [
-            'driver' => 'local',
-            'root' => storage_path('app/backups'),
-            'throw' => false,
-            'report' => false,
-        ],
-
-        'google_drive' => [
-            'driver' => 'google',
-            'clientId' => env('GOOGLE_DRIVE_CLIENT_ID'),
-            'clientSecret' => env('GOOGLE_DRIVE_CLIENT_SECRET'),
-            'refreshToken' => env('GOOGLE_DRIVE_REFRESH_TOKEN'),
-            'folderId' => env('GOOGLE_DRIVE_FOLDER_ID', null),
-            'teamDriveId' => env('GOOGLE_DRIVE_TEAM_DRIVE_ID', null),
-            // Add this configuration block
-            'guzzle' => [
-                'verify' => false,
-            ],
-
         ],
 
     ],
