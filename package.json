@@ -22,11 +22,11 @@
         "postcss": "^8.4.31",
         "react": "^19.2.0",
         "react-dom": "^19.2.0",
-        "tailwindcss": "^3.2.1",
+        "tailwindcss": "^4.1.17",
         "typescript": "^5.0.2",
         "vite": "^7.0.7"
     },
     "dependencies": {
-        "arkenstone-ui": "^0.0.18"
+        "arkenstone-ui": "^0.0.21"
     }
 }
