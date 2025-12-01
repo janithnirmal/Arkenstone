@@ -18,6 +18,7 @@ import {
     CategoriesBadgeList,
     PriceCard,
     ViewDetailsButton,
+    // Search,
 } from "arkenstone-ui";
 // import Filter from "arkenstone-ui";
 import { Head } from "@inertiajs/react";
@@ -230,7 +231,7 @@ export default function Welcome() {
 
     const topPlaceholder = (
         <div>
-            <WishlistButton />
+            <WishlistButton className={{button:'bg-black', icon:'h-30'}}/>
             <DiscountBadge
                 discount={product.discount_value}
                 discountType={product.discount_type as DiscountType}
@@ -257,6 +258,18 @@ export default function Welcome() {
                     />
                 </div>
             </div>
+
+            <AddToCart onAddToCart={()=>{}} />
+            <CategoriesBadgeList categories={product.categories} />
+            <PriceCard
+                price={product.price}
+                salePrice={product.sale_price}
+                discountType={product.discount_type as DiscountType}
+                discountValue={product.discount_value}
+                currency="USD"
+                className={{wrapper:''}}
+            />
+            <ViewDetailsButton />
         </>
     );
 }
