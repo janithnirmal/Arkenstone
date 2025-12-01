@@ -24,4 +24,79 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
+
+
+// test
+Route::get('/solar-system', function () {
+    return response()->json([
+        'status' => "success",
+        'message' => "Solar System Data",
+        'data' => [
+            [
+                'id' => 1,
+                'name' => 'Mercury',
+                'radius' => 2440,
+                'habitable' => false,
+                'moons' => 0,
+                'planetHash' => 'mercury',
+            ],
+            [
+                'id' => 2,
+                'name' => 'Venus',
+                'radius' => 6052,
+                'habitable' => false,
+                'moons' => 0,
+                'planetHash' => 'venus',
+            ],
+            [
+                'id' => 3,
+                'name' => 'Earth',
+                'radius' => 6371,
+                'habitable' => true,
+                'moons' => 1,
+                'planetHash' => 'earth',
+            ],
+            [
+                'id' => 4,
+                'name' => 'Mars',
+                'radius' => 3396,
+                'habitable' => false,
+                'moons' => 2,
+                'planetHash' => 'mars',
+            ],
+            [
+                'id' => 5,
+                'name' => 'Jupiter',
+                'radius' => 69911,
+                'habitable' => false,
+                'moons' => 79,
+                'planetHash' => 'jupiter',
+            ],
+            [
+                'id' => 6,
+                'name' => 'Saturn',
+                'radius' => 58232,
+                'habitable' => false,
+                'moons' => 62,
+                'planetHash' => 'saturn',
+            ],
+            [
+                'id' => 7,
+                'name' => 'Uranus',
+                'radius' => 25362,
+                'habitable' => false,
+                'moons' => 27,
+                'planetHash' => 'uranus',
+            ],
+            [
+                'id' => 8,
+                'name' => 'Neptune',
+                'radius' => 24764,
+                'habitable' => false,
+                'moons' => 14,
+                'planetHash' => 'neptune',
+            ],
+        ]
+    ]);
+});
