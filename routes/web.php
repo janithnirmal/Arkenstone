@@ -100,3 +100,7 @@ Route::get('/solar-system', function () {
         ]
     ]);
 });
+
+Route::get('/test-ui/lead-generation', function () {
+    return Inertia::render('LeadGenerationTest');
+});
