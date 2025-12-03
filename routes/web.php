@@ -112,3 +112,7 @@ Route::get('/test-ui/product', function () {
 Route::get('/test-ui/service-factory', function () {
     return Inertia::render('ServiceFactoryTest');
 });
+
+Route::get('/test-ui/data-manager', function () {
+    return Inertia::render('DataManagerTest');
+});

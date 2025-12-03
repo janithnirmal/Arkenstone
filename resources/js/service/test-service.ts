@@ -1,6 +1,7 @@
 import { ServiceFactory } from "arkenstone-ui";
 
 export interface MockData {
+    id: number,
     name: string;
     description: string;
 }

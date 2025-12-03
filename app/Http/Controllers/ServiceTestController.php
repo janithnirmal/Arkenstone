@@ -10,14 +10,17 @@ class ServiceTestController extends Controller
 
     protected $mockData = [
         [
+            "id" => 1,
             "name" => "Service Test",
             "description" => "A test service for testing purposes.",
         ],
         [
+            "id" => 2,
             "name" => "Service Test",
             "description" => "A test service for testing purposes.",
         ],
         [
+            "id" => 3,
             "name" => "Service Test",
             "description" => "A test service for testing purposes.",
         ],
