@@ -1,1 +1,5 @@
 @import 'tailwindcss';
+
+@import "arkenstone-ui/theme.css"; 
+
+@source "../../node_modules/arkenstone-ui/dist";
