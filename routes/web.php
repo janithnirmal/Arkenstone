@@ -108,3 +108,11 @@ Route::get('/test-ui/lead-generation', function () {
 Route::get('/test-ui/product', function () {
     return Inertia::render('ProductTest');
 });
+
+Route::get('/test-ui/service-factory', function () {
+    return Inertia::render('ServiceFactoryTest');
+});
+
+Route::get('/test-ui/data-manager', function () {
+    return Inertia::render('DataManagerTest');
+});

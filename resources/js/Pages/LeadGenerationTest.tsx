@@ -10,16 +10,7 @@ export default function LeadGenerationTest() {
 
     return (
         <TestLayout config={config}>
-            <DiscountBadge
-                discount={10}
-                discountType={"fixed"}
-                className="bg-red-500"
-                currency="LKR"
-            />
-
-            <hr className="my-4 border-slate-600" />
-
-            <PriceCard price={300} salePrice={200} currency="LKR"  />
+           Lead
         </TestLayout>
     );
 }

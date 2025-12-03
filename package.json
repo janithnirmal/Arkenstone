@@ -25,5 +25,9 @@
         "tailwindcss": "^4.1.17",
         "typescript": "^5.0.2",
         "vite": "^7.0.7"
+    },
+    "dependencies": {
+        "@tanstack/react-table": "^8.21.3",
+        "arkenstone-ui": "^0.0.25"
     }
 }
