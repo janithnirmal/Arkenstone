@@ -2,11 +2,8 @@ import { useEffect, useState } from "react";
 import TestLayout, { TestLayoutConfig } from "../Layouts/test-layout";
 import { MockData, MockDataService } from "@/service/test-service";
 import { Arkenstone, DataManager } from "arkenstone-ui";
-import { ColumnDef } from "@tanstack/react-table";
 
 export default function DataManagerTest() {
-    const localMockData = MockDataService.useStore((state) => state.mockData);
-    const [localMockDataState, setLocalMockDataState] = useState(localMockData);
 
     const config: TestLayoutConfig = {
         title: "Data Manager Test",
@@ -15,7 +12,7 @@ export default function DataManagerTest() {
     };
 
     // 3. Configuration
-const mockDataConlumnConfig: ColumnDef<MockData>[] = [
+const mockDataConlumnConfig = [
     { accessorKey: 'id', header: 'ID' },
     { accessorKey: 'name', header: 'Full Name' },
     { accessorKey: 'description', header: 'Description' },
